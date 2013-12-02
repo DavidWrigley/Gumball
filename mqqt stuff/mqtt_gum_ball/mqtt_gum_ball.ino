@@ -51,6 +51,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
         Serial.print("of length: ");
         Serial.println(length);
 
+        // dont let mark get any
 	if((strPayload.equals("2:1:0:0:4:ed:99:ba:49"))) {
 		// if it matches a certain thing, do not dispense
 		randNumber = 0;
