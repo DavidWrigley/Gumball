@@ -1,0 +1,68 @@
+#h1 {
+	font-family: times, Times New Roman, times-roman, georgia, serif;
+	font-size: 48px;
+	line-height: 40px;
+	letter-spacing: -1px;
+	color: white;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	font-weight: 100;
+}
+
+h1 {
+	text-align: center;
+}
+
+body {
+	background-image:url('./background5.png');
+	font-family: times, Times New Roman, times-roman, georgia, serif;
+	font-size: 24px;
+	line-height: 20px;
+	/*text-transform: uppercase;*/
+	color: #292933;
+}
+
+#submit {
+	font-family: times, Times New Roman, times-roman, georgia, serif;
+	font-size: 24px;
+	line-height: 30px;
+	text-transform: uppercase;
+	color: #444;
+}
+
+.container {
+    width: 500px;
+    clear: both;
+}
+.container input {
+    width: 100%;
+    clear: both;
+}
+
+div{
+	width: 800px;
+	margin: 0 auto;
+}
+
+input[type = "button"] {
+	font-family: times, Times New Roman, times-roman, georgia, serif;
+	font-size: 24px;
+	line-height: 30px;
+	width: auto;
+	text-transform: uppercase;
+	color: #444;
+}
+
+input[type = "submit"] {
+	font-family: times, Times New Roman, times-roman, georgia, serif;
+	width: auto;
+	font-size: 24px;
+	line-height: 30px;
+	text-transform: uppercase;
+	color: #444;
+}
+
+input[type="text"]
+{
+    font-size:24px;
+}

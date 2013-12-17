@@ -1,0 +1,656 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"try",
+				"try	Try/Except"
+			],
+			[
+				"data",
+				"dataIn"
+			],
+			[
+				"pr",
+				"print"
+			],
+			[
+				"con",
+				"contents"
+			],
+			[
+				"Re",
+				"Result"
+			],
+			[
+				"Reg",
+				"Registered"
+			],
+			[
+				"obj",
+				"obj"
+			],
+			[
+				"hash",
+				"getFromHash"
+			],
+			[
+				"chec",
+				"checkName"
+			],
+			[
+				"get",
+				"getFromHash"
+			],
+			[
+				"j",
+				"javascript"
+			],
+			[
+				"che",
+				"checkName"
+			],
+			[
+				"in",
+				"input	Tag"
+			],
+			[
+				"lo",
+				"lollies"
+			],
+			[
+				"file",
+				"fileName"
+			],
+			[
+				"ser",
+				"servPage"
+			],
+			[
+				"cont",
+				"contents"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"to",
+				"toString"
+			],
+			[
+				"cur",
+				"current_number	Default"
+			],
+			[
+				"cu",
+				"current_number	Default"
+			],
+			[
+				"rfi",
+				"rfidTag"
+			],
+			[
+				"rfid",
+				"rfidTag"
+			],
+			[
+				"las",
+				"lastName"
+			],
+			[
+				"re",
+				"registerSubmit"
+			],
+			[
+				"hex",
+				"hexstring	Default"
+			],
+			[
+				"inp",
+				"inputThread"
+			],
+			[
+				"user",
+				"userInput"
+			],
+			[
+				"User",
+				"userInput"
+			],
+			[
+				"hea",
+				"heartbeatThread"
+			],
+			[
+				"de",
+				"debug"
+			],
+			[
+				"thread",
+				"threading"
+			],
+			[
+				"heat",
+				"heartbeat"
+			],
+			[
+				"my",
+				"myhex"
+			],
+			[
+				"NODE",
+				"NODE_PATH"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/Users/davidwrigley/Dropbox/Summer/Mirror USB/shell/Python side/mqqt.py",
+			"settings":
+			{
+				"buffer_size": 4543,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/davidwrigley/Dropbox/Summer/nodestuff/public/check.html",
+			"settings":
+			{
+				"buffer_size": 526,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/davidwrigley/Dropbox/Summer/nodestuff/app.js",
+			"settings":
+			{
+				"buffer_size": 13645,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/davidwrigley/Dropbox/Summer/nodestuff/public/error.html",
+			"settings":
+			{
+				"buffer_size": 288,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/davidwrigley/Dropbox/Summer/nodestuff/public/css.css",
+			"settings":
+			{
+				"buffer_size": 1171,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/davidwrigley/Dropbox/Summer/nodestuff/public/form.html",
+			"settings":
+			{
+				"buffer_size": 850,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/davidwrigley/Dropbox/Summer/nodestuff/public/test.html",
+			"settings":
+			{
+				"buffer_size": 495,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/davidwrigley/Dropbox/Summer/nodestuff/public/registerSubmit.html",
+			"settings":
+			{
+				"buffer_size": 324,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/davidwrigley/Dropbox/Summer/nodestuff/public/index.html",
+			"settings":
+			{
+				"buffer_size": 622,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"sy ht",
+				"Set Syntax: HTML"
+			],
+			[
+				"pack",
+				"Package Control: List Packages"
+			],
+			[
+				"syn css",
+				"Set Syntax: CSS"
+			],
+			[
+				"syn js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"syn pyt",
+				"Set Syntax: Python"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 167.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/private/var/folders/rj/b7nh7hf51csdkkj0b1jtqg680000gn/T/4c72c897-6e47-4720-b140-6e081a3a28a2/home/pi/Desktop/shell/Python side/mqqt.py",
+		"/Users/davidwrigley/Dropbox/Summer/Mirror USB/shell/mirror_osx.sh",
+		"/Users/davidwrigley/Desktop/houses",
+		"/Users/davidwrigley/Dropbox/Summer/nodestuff/package.json",
+		"/Users/davidwrigley/Dropbox/Summer/nodestuff/index.html",
+		"/Users/davidwrigley/Dropbox/Summer/Mirror USB/shell/mod_osx.sh",
+		"/Users/davidwrigley/Dropbox/Summer/Mirror USB/shell/Python side/mqqt.py"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"msg",
+			"toString",
+			"obj3",
+			"colour",
+			"run",
+			"the end",
+			"id = ",
+			"id = data",
+			"id =",
+			"id -",
+			"id ",
+			"HID",
+			"KERNEL-OS"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/Users/davidwrigley/Dropbox/Summer/Mirror USB/shell/Python side/mqqt.py",
+					"settings":
+					{
+						"buffer_size": 4543,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								325,
+								325
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 163.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/Users/davidwrigley/Dropbox/Summer/nodestuff/public/check.html",
+					"settings":
+					{
+						"buffer_size": 526,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								518,
+								518
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/Users/davidwrigley/Dropbox/Summer/nodestuff/app.js",
+					"settings":
+					{
+						"buffer_size": 13645,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4386,
+								4386
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 37.0,
+						"translation.y": 1894.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/Users/davidwrigley/Dropbox/Summer/nodestuff/public/error.html",
+					"settings":
+					{
+						"buffer_size": 288,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								181,
+								181
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/Users/davidwrigley/Dropbox/Summer/nodestuff/public/css.css",
+					"settings":
+					{
+						"buffer_size": 1171,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								440,
+								440
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 26.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/Users/davidwrigley/Dropbox/Summer/nodestuff/public/form.html",
+					"settings":
+					{
+						"buffer_size": 850,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								250,
+								266
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/Users/davidwrigley/Dropbox/Summer/nodestuff/public/test.html",
+					"settings":
+					{
+						"buffer_size": 495,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								297,
+								272
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/Users/davidwrigley/Dropbox/Summer/nodestuff/public/registerSubmit.html",
+					"settings":
+					{
+						"buffer_size": 324,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								185,
+								298
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/Users/davidwrigley/Dropbox/Summer/nodestuff/public/index.html",
+					"settings":
+					{
+						"buffer_size": 622,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								109,
+								109
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 136.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"inde",
+				"nodestuff/public/index.html"
+			],
+			[
+				"py",
+				"Mirror USB/shell/Python side/mqqt.py"
+			],
+			[
+				"mirr",
+				"mirror_osx.sh"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel = "stylesheet" type = "text/css" href = "css.css">
+	</head>
+
+	<h1>
+		CEIT RFID Card System
+	</h1>
+	<br>
+	<body>
+		<div id = "questionDiv"> 
+			<form action='check.html' method='post' target = "_self">
+				Do you want to register a card? 
+				<input type="button" id = "register" value = "Register" onClick = "window.location.href='./form.html'">
+				<br>
+				<br>
+				Or check your details<br><br>
+				<label>First Name: </label>
+				<input name="checkName" type="text" id = "checkName">
+				<input type="submit" id = "submit" value ="Check">
+			</form>
+		</div>
+	</body>
+</html>

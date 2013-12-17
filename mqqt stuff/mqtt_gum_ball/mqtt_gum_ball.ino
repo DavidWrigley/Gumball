@@ -48,10 +48,6 @@ void callback(char* topic, byte* payload, unsigned int length) {
 	String strPayload = String((char*)payload);
 	Serial.println(strPayload);
 
-        Serial.print("of length: ");
-        Serial.println(length);
-
-        // dont let mark get any
 	if((strPayload.equals("2:1:0:0:4:ed:99:ba:49"))) {
 		// if it matches a certain thing, do not dispense
 		randNumber = 0;
@@ -109,10 +105,13 @@ void loop()
 {
 	// check that connection to the mqqt server is live
 	if(!client.connected()) {
-		if(!client.connect("arduinoClient1234")) {
+		if(!client.connect("GumBall")) {
 			delay(1000);
 			return;
 		}
+                // reconnect
+                client.publish("gumballlog","GumBall Reconnected");
+		client.subscribe("ait");
 	}
 
 	// loop mqtt

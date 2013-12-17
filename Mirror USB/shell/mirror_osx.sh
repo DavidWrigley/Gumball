@@ -156,6 +156,8 @@ try {
 var HID = require('node-hid');
 var hexy = require('hexy');
 var mqtt = require('mqtt');
+var crypto = require('crypto');
+var shasum = crypto.createHash('sha1');
 
 client = mqtt.createClient(1883, 'winter.ceit.uq.edu.au');
 
@@ -176,6 +178,11 @@ console.log("Again")
 }
 
 var data;
+
+function hashIt(dataIn, callback) {
+    var hash = crypto.createHash('md5').update(dataIn).digest('hex');
+    callback(hash);
+}
 
 function onRead(error, data) {
   var size;
@@ -206,8 +213,10 @@ function onRead(error, data) {
 
       switch (data[1]) {
       case 1:
-        console.log("Tag On");
-        client.publish('gumballrfid', data);
+        hashIt(data.toString(), function(Result) {
+            console.log("Tag On Hash: " + Result);
+            client.publish('gumballrfid', Result);
+        });
         break;
       case 2:
         console.log("Tag OFF");
