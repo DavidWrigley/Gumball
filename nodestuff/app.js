@@ -113,9 +113,9 @@ function servPage(pageaddr, req, res, decode, rfidTag) {
 
                                     getFromHash(obj[i], "Lollies", function(Result){
                                         if(Result == "1") {
-                                            final = final.replace("%LOLLIES%", "yes, Party Time!!!");
+                                            final = final.replace("%LOLLIES%", "Yes, Party Time!!!");
                                         } else {
-                                            final = final.replace("%LOLLIES%", "no, sad Panda!");
+                                            final = final.replace("%LOLLIES%", "No, Sad Panda!");
                                         }
                                         res.end(final);
                                         return;
@@ -127,21 +127,7 @@ function servPage(pageaddr, req, res, decode, rfidTag) {
                         // res.end("Name Not Registered");
                     }
                 });
-            } else if(fileName == "manage.html") {
-                // fiddle the data
-                var final = '';
-                final = contents.toString(); 
-
-                // check all registered cards
-                client.lrange("Registered", 0, -1, function(err,obj) {
-                    if(obj != null) {
-                        for(var j = 0; j < obj.length; j++) {
-                            console.log("Registered Users[" + j +"]: " + obj[j]);
-                            // use this data to construct a table full of user data
-                        }
-                    }
-                });
-                res.end(final);
+            // will be used for managment of the system.
             } else {
                 res.end(contents);
             }
@@ -180,6 +166,45 @@ function requestHandler(req, res) {
                 if(!err){
                     // send the data
                     res.end(contents);
+                } else {
+                    //otherwise, let us inspect the eror
+                    //in the console
+                    console.dir(err);
+                };
+            });
+        } else if(fileName == "manage.html") {
+            content = localFolder + fileName;
+            fs.readFile(content,function(err,contents){
+                //if the fileRead was successful...
+                if(!err){
+                    // send the data
+                    // fiddle the data
+                    var final = '';
+                    var managedata = "";
+                    final = contents.toString(); 
+                    console.log("entering managemode!");
+
+                    // check all registered cards
+                    client.lrange("Registered", 0, -1, function(err,obj) {
+                        if(obj != null) {
+                            for(var j = 0; j < obj.length; j++) {
+                                console.log("Registered Users[" + j +"]: " + obj[j]);
+                                // add number
+                                managedata = managedata.concat(obj[j]);
+                                // get there first name
+                                getFromHash(obj[i], "First", function(Result){
+                                    managedata = managedata.concat(Result);
+                                    managedata = managedata.concat("\n");
+                                    if(j == (obj.length)) {
+                                        console.log(managedata);
+                                        final = final.replace("%REGISTEREDUSER%", managedata);
+                                    }
+                                });
+                            }
+                        }
+                    });
+                    res.end(final);
+
                 } else {
                     //otherwise, let us inspect the eror
                     //in the console
