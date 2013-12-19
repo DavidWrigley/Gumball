@@ -51,39 +51,10 @@ function getFullList(list, callback) {
     });
 }
 
-function servError(req, res, thing, errorMessage, advice) {
-    var content = '';
-    var fileName = "/error.html"; //the file that was requested
-    var localFolder = __dirname + '/public';//where our public files are located
-
-    // the rfid tag does not exist.
-    res.writeHead(200, "OK", {'Content-Type': 'text/html'});
-
-    content = localFolder + fileName;
-
-    fs.readFile(content,function(err,contents){
-        if(!err){
-            // fiddle the data
-            var final = '';
-            final = contents.toString()
-
-            // replace data
-            final = final.replace("%THING%", thing);
-            final = final.replace("%ERRORMESSAGE%", errorMessage);
-            final = final.replace("%ADVICE%", advice);
-            
-            // send the data
-            res.end(final);
-        } else {
-            console.log("Something went wrong serving error page");
-        }
-    });
-}
-
 function servPage(pageaddr, req, res, decode, rfidTag) {
     var content = '';
     var fileName = pageaddr; //the file that was requested
-    var localFolder = __dirname + '/public';//where our public files are located
+    var localFolder = __dirname + '/public/';//where our public files are located
 
     // the rfid tag does not exist.
     res.writeHead(200, "OK", {'Content-Type': 'text/html'});
@@ -92,7 +63,36 @@ function servPage(pageaddr, req, res, decode, rfidTag) {
 
     fs.readFile(content,function(err,contents){
         if(!err){
-            if(fileName == "/userdata.html") {
+            // send the data
+            if(fileName == "error.html") {
+                // fiddle the data
+                var final = '';
+                final = contents.toString()
+
+                // replace data
+                final = final.replace("%CARDCODE%", decode.key);
+
+                // see if the card is registered
+                client.lrange("Registered", 0, -1, function(err,obj) {
+                    if(obj != null) {
+                        for(i = 0; i < obj.length; i++) {
+                            console.log("Registered Users[" + i +"]: " + obj[i]);
+                            if(obj[i] == rfidTag) {
+                                final = final.replace("%ERRORMESSAGE%", "has already been registered");
+                                final = final.replace("%ADVICE%", "When you scan the system should recognise you");
+                                final = final.replace("%ACTION%", "");
+                            }
+                        }
+                    }
+                }); 
+
+                final = final.replace("%ERRORMESSAGE%", "does not exist in Unregistered Cards");
+                final = final.replace("%ADVICE%", "Scan again to check your Card Code, You may also already be Registered");
+                final = final.replace("%ACTION%", "Go Back to Form?<input type=\"button\" id = \"form\" value = \"Yes\" onClick = \"window.location.href='./form.html'\">");
+
+                // send the data
+                res.end(final);
+            } else if(fileName == "check.html") {
                 // fiddle the data
                 var final = '';
                 final = contents.toString(); 
@@ -100,8 +100,7 @@ function servPage(pageaddr, req, res, decode, rfidTag) {
                 // check all registered cards
                 getFullList("Registered", function(listArray){
                     if(listArray == "0") {
-                        // serveerror page
-                        servError(req, res, "The List returned was:", "NULL ", "This could be a redis issue or there are no registered users");
+                        // throw error
                     } else {
                         // nothing wrong
                         for(var l = 0; l < listArray.length; l++) {
@@ -172,17 +171,14 @@ function servPage(pageaddr, req, res, decode, rfidTag) {
 //a helper function to handle HTTP requests
 function requestHandler(req, res) {
     var content = '';
-    //var fileName = path.basename(req.url); //the file that was requested
-    var fileName = path.normalize(req.url); //the file that was requested
-    //var localFolder = __dirname + '/public/';//where our public files are located
-    var localFolder = __dirname + '/public';//where our public files are located
-
-
+    var fileName = path.basename(req.url); //the file that was requested
+    var localFolder = __dirname + '/public/';//where our public files are located
+ 
     //NOTE: __dirname returns the root folder that
     //this javascript file is in.
     if(req.method == "GET") {
         console.log("GET request for: " + req.url);
-        if(fileName === '/form.html') {
+        if(fileName === 'form.html') {
             content = localFolder + fileName;//setup the file name to be returned
      
             //reads the file referenced by 'content'
@@ -198,7 +194,7 @@ function requestHandler(req, res) {
                     console.dir(err);
                 };
             });
-        } else if(fileName == "/manage.html") {
+        } else if(fileName == "manage.html") {
             content = localFolder + fileName;
             fs.readFile(content,function(err,contents){
                 //if the fileRead was successful...
@@ -246,8 +242,8 @@ function requestHandler(req, res) {
                     console.dir(err);
                 };
             });
-        } else if(fileName == "/reset.html") {
-            fileName = "/index.html";
+        } else if(fileName == "reset.html") {
+            fileName = "index.html";
             content = localFolder + fileName;//setup the file name to be returned
 
             client.del("Unregistered", redis.print);
@@ -359,16 +355,14 @@ function requestHandler(req, res) {
                         client.lpush("Registered", rfidTag, redis.print);
 
                         // serve up the completion page
-                        servPage("/registerSubmit.html", req, res, decode, rfidTag);
+                        servPage("registerSubmit.html", req, res, decode, rfidTag);
                     }
                     else {
-                        var thing = "";
-                        thing = thing + "The Card Code: \"" + decode.key + "\": "
-                        servError(req, res, thing, "Does not exist in \"Unregistered\" Cards", "Scan again to check your Card Code, You may also already be Registered");
+                        servPage("error.html", req, res, decode, rfidTag);
                     }
                 });
             });
-        } else if(req.url == "/userdata.html") {
+        } else if(req.url == "/check.html") {
             var fullBody = '';
 
             req.on('data', function(data) {
@@ -383,7 +377,7 @@ function requestHandler(req, res) {
                 var decode = querystring.parse(fullBody);
 
                 // serv responce
-                servPage("/userdata.html", req, res, decode, rfidTag)
+                servPage("check.html", req, res, decode, rfidTag)
             });
         }
     };
@@ -394,6 +388,6 @@ console.log("starting server on 3000");
 http.createServer(requestHandler)
  
 //step 3) listen for an HTTP request on port 3000
-.listen(55671);
+.listen(3000);
 
 console.log("started");

@@ -1,25 +1,64 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<link rel = "stylesheet" type = "text/css" href = "css.css">
-	</head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen,projection" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="generator" content="Ben O'Neill - http://www.benedictoneill.com/" />
+    <title>Website Title</title>
+</head>
+<body>
 
-	<h1>
-		CEIT RFID Card System
-	</h1>
-	<br>
-	<body>
-		<div id = "questionDiv"> 
-			<form action='check.html' method='post' target = "_self">
-				Do you want to register a card? 
-				<input type="button" id = "register" value = "Register" onClick = "window.location.href='./form.html'">
-				<br>
-				<br>
-				Or check your details<br><br>
-				<label>First Name: </label>
-				<input name="checkName" type="text" id = "checkName">
-				<input type="submit" id = "submit" value ="Check">
-			</form>
+	<div id="container">
+
+		<div id="header">
+			<h1>CEIT RFID System</h1>
+			A Simple University of Queensland RFID card System.
 		</div>
-	</body>
+
+		<div id="subheader">
+
+			<ul id="navigation">
+				<li class="active">Information</li>
+				<li> <a href="form.html">Register Card</a></li>
+				<li> <a href="check.html">Check User</a></li>
+				<li> <a href="index.html">Manage System</a></li>
+				<li> <a href="index.html">About Me!</a></li>
+			</ul>
+
+		</div>
+
+		<div id="content">
+
+			<h3>Welcome</h3>
+
+			This Webpage has been developed to provide a simple Web Interface that allows a user to register there University of Queensland Student or Staff Card. And provide a full feature set of tools for managment to manage mentioned registered cards<br><br>
+
+			The system could potentialy have many uses including.
+
+			<ul>
+				<li>Tracking Sign-In or Sign-Out times</li>
+				<li>Assignment Submission</li>
+				<li>Card Localisation</li>
+				<li>And many many more</li>
+			</ul>
+
+			I hope you enjoy your free lollies.
+
+		</div>
+
+		<div id="subcontent">
+
+			<IMG HEIGHT="80" WIDTH="240" SRC="/images/ceitlogo.png" ALT="image">
+
+		</div>
+
+		<div id="footer">
+
+			By David Wrigley, CEIT 2013 Summer Project.
+
+		</div>
+
+	</div>
+
+</body>
 </html>
