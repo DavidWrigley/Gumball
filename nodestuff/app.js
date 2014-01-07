@@ -12,6 +12,7 @@ var Result = "hue";
 var ready = 0;
 var port = 55671;
 var userFound = 0;
+var finishedString = "";
 
 // connect to db 10
 client.select(10, function() {
@@ -28,6 +29,7 @@ client.on("error", function(err) {
 **********/
 function huntForUser(list, checkName, callback) {
     //console.log("list length: " + list.length);
+    var array = [];
     for(var l = 0; l < list.length; l++) {
         moreDamnFunctions(l,list[l], function(Result,tempid,currentl) {
             //  check that the name is the same as the name entered
@@ -38,21 +40,19 @@ function huntForUser(list, checkName, callback) {
                 // do something with appending data
                 console.log("User Found, Callback");
                 userFound = 1;
-                callback(Result,tempid);
-                // array.push(Result);
+                // callback(Result,tempid);
+                array.push(tempid);
             }
             if((currentl == (list.length - 1))&(userFound == 0)) {
                 // at the end of the list,
                 // nothing left to check, not found
                 console.log("Not found, returning NULL");
                 callback(null,null);
-            }
-            /* 
-            else if((currentl == (list.length - 1))&(userFound == 1)) {
+            } else if((currentl == (list.length - 1))&(userFound  == 1)) {
                 // return an array, then add multi users to that array
                 callback(array,tempid);
+                console.log("Array Result: " + array);
             }
-            */
         });
     }
 }
@@ -93,9 +93,9 @@ function authoriseUser2(array, username, password, callback) {
     finished
 **********/
 function check(current, full, callback) {
-    //console.log("cheking current: " + current + " vs Full: " + full);
+    console.log("cheking current: " + current + " vs Full: " + full);
     if(current == full) {
-        callback(1)
+        callback()
     }
 }
 
@@ -165,6 +165,41 @@ function servError(req, res, thing, errorMessage, advice) {
 }
 
 /***********
+    function to build user page
+***********/
+function buildUser(Hash, buildString, runs, callback) {
+    getFromHash(Hash, "First", function(Result) {
+        buildString = buildString.replace("%FIRSTNAME%", Result);
+    });
+    
+    getFromHash(Hash, "Last", function(Result) {
+        buildString = buildString.replace("%LASTNAME%", Result);
+    });
+    
+    getFromHash(Hash, "Email", function(Result) {
+        buildString = buildString.replace("%EMAIL%", Result);
+    });
+
+    getFromHash(Hash, "RFID", function(Result) {
+        buildString = buildString.replace("%CARDRFID%", Result); 
+    });
+
+    getFromHash(Hash, "Human Time", function(Result) {
+        buildString = buildString.replace("%TIME%", Result);
+    });
+
+    getFromHash(Hash, "Lollies", function(Result){
+        if(Result == "1") {
+            buildString = buildString.replace("%LOLLIES%", "Yes, Party Time!!!");
+        } else {
+            buildString = buildString.replace("%LOLLIES%", "No, Sad Panda!");
+        }
+        console.log(buildString);
+        callback(buildString,runs);
+    });
+}
+
+/***********
     function to serve a page to the user, this is called from
     a GET request usually, as it abstracts away the json decoding
 ***********/
@@ -192,48 +227,41 @@ function servPage(pageaddr, req, res, decode, rfidTag) {
                         servError(req, res, "The List returned was:", "NULL ", "This could be a redis issue or there are no registered users");
                     } else {
                         // nothing wrong
+                        var runs = 0;
                         var finalResult;
                         var hashvalue = "";
+                        var fixedString =  "<br>\
+                                            Card RFID Hash: %CARDRFID%<br>\
+                                            First Name: %FIRSTNAME%<br>\
+                                            Last Name: %LASTNAME%<br>\
+                                            Email: %EMAIL%<br>\
+                                            Last Scan: %TIME%<br>\
+                                            Lollies: %LOLLIES%<br>\
+                                            "
+                        
+                        // reset
                         userFound = 0;
-                        huntForUser(listArray, decode.checkName, function(finalResult,hashvalue) {
-                            // final result may be an array. so TODO
+                        finishedString = "";
+                        // begin
+                        huntForUser(listArray, decode.checkName, function(finalResult) {
                             if(finalResult == null) {
                                 console.log("No User with that name found");
                                 // serveerror page
                                 servError(req, res, "There is no User: ", "\"" + (decode.checkName + "\""), "Make sure this is the correct First Name (It is Case Sensative).");
                             } else {
-                                console.log("User with that name found");
-
+                                console.log("Users with that name found");
+                                // TODO: switch this to just replace one keyword and then just append
                                 // set all the user entered data into the details page
-                                getFromHash(hashvalue, "First", function(Result) {
-                                    final = final.replace("%FIRSTNAME%", Result);
-                                });
-                                
-                                getFromHash(hashvalue, "Last", function(Result) {
-                                    final = final.replace("%LASTNAME%", Result);
-                                });
-                                
-                                getFromHash(hashvalue, "Email", function(Result) {
-                                    final = final.replace("%EMAIL%", Result);
-                                });
-
-                                getFromHash(hashvalue, "RFID", function(Result) {
-                                    final = final.replace("%CARDRFID%", Result); 
-                                });
-
-                                getFromHash(hashvalue, "Human Time", function(Result) {
-                                    final = final.replace("%TIME%", Result);
-                                });
-
-                                getFromHash(hashvalue, "Lollies", function(Result){
-                                    if(Result == "1") {
-                                        final = final.replace("%LOLLIES%", "Yes, Party Time!!!");
-                                    } else {
-                                        final = final.replace("%LOLLIES%", "No, Sad Panda!");
-                                    }
-                                    res.end(final);
-                                    return;
-                                });
+                                for(var i = 0; i < finalResult.length; i++) {
+                                    buildUser(finalResult[i], fixedString, i, function(Result, runs) {
+                                        finishedString += Result;
+                                        check(runs, (finalResult.length-1), function() {
+                                            // serv page
+                                            final = final.replace("%REPLACE%", finishedString);
+                                            res.end(final);
+                                        });
+                                    });
+                                }
                             }
                         });
                     }

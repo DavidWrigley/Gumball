@@ -4,6 +4,66 @@
 		"selected_items":
 		[
 			[
+				"lis",
+				"list"
+			],
+			[
+				"fou",
+				"foundUsers"
+			],
+			[
+				"user",
+				"userFound"
+			],
+			[
+				"currentl",
+				"currentl"
+			],
+			[
+				"mo",
+				"moreDamnFunctions"
+			],
+			[
+				"hs",
+				"hashvalue"
+			],
+			[
+				"ret",
+				"return"
+			],
+			[
+				"has",
+				"hashvalue"
+			],
+			[
+				"fin",
+				"finalResult"
+			],
+			[
+				"chek",
+				"checkName"
+			],
+			[
+				"list",
+				"listArray"
+			],
+			[
+				"temp",
+				"tempid"
+			],
+			[
+				"Re",
+				"Result"
+			],
+			[
+				"chec",
+				"checkName"
+			],
+			[
+				"auth",
+				"authoriseUser2"
+			],
+			[
 				"che",
 				"checkPassword"
 			],
@@ -14,10 +74,6 @@
 			[
 				"pass",
 				"password"
-			],
-			[
-				"user",
-				"username"
 			],
 			[
 				"author",
@@ -42,10 +98,6 @@
 			[
 				"cont",
 				"content"
-			],
-			[
-				"Re",
-				"Registered"
 			],
 			[
 				"ser",
@@ -80,10 +132,6 @@
 				"managedata"
 			],
 			[
-				"chec",
-				"checkReady"
-			],
-			[
 				"retur",
 				"return"
 			],
@@ -98,10 +146,6 @@
 			[
 				"hash",
 				"hash"
-			],
-			[
-				"lis",
-				"listArray"
 			],
 			[
 				"li",
@@ -240,7 +284,7 @@
 			"file": "/Users/davidwrigley/Gumball/nodestuff/app.js",
 			"settings":
 			{
-				"buffer_size": 18585,
+				"buffer_size": 20489,
 				"line_ending": "Unix"
 			}
 		},
@@ -355,6 +399,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"tempid",
 			"autherised",
 			"manage.html",
 			".html",
@@ -485,15 +530,15 @@
 					"file": "/Users/davidwrigley/Gumball/nodestuff/app.js",
 					"settings":
 					{
-						"buffer_size": 18585,
+						"buffer_size": 20489,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								18275,
-								18275
+								1868,
+								1868
 							]
 						],
 						"settings":
@@ -503,7 +548,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 9381.0,
+						"translation.y": 672.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
