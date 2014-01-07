@@ -121,7 +121,11 @@ if [ -s $voice ]; then voice=${dvoice}; fi
 #echo "$tag $mode"
 if [ "$mode" = "IN" ]; then
 # hash here
-mosquitto_pub -h "winter.ceit.uq.edu.au" -t gumballrfid -m $name
+aaa=`echo $name | md5sum | sed -e "s/ -//"`
+temp=`echo $aaa | tr -d ' '`
+send="{\"id\":\"1.1.0\", \"value\":\"$temp\"}" 
+echo $send
+mosquitto_pub -h "winter.ceit.uq.edu.au" -t gumballrfid -m "$send"
 message=$(echo ${inmsg} | sed -e "s;<name>;$name;")
 saymessage=$(echo ${insmsg} | sed -e "s;<sname>;$sname;")
 elif [ "$mode" = "OUT" ]; then
