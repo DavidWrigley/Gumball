@@ -1,7 +1,6 @@
-//step 1) require the modules we need
-var http = require('http'); //helps with http methods
-var path = require('path'); //helps with file paths
-var fs = require('fs'); //helps with file system tasks
+var http = require('http');
+var path = require('path');
+var fs = require('fs');
 var querystring = require('querystring');
 var redis = require('redis');
 var client = redis.createClient(null,"winter.ceit.uq.edu.au");
@@ -40,6 +39,7 @@ function huntForUser(list, checkName, callback) {
                 console.log("User Found, Callback");
                 userFound = 1;
                 callback(Result,tempid);
+                // array.push(Result);
             }
             if((currentl == (list.length - 1))&(userFound == 0)) {
                 // at the end of the list,
@@ -50,11 +50,13 @@ function huntForUser(list, checkName, callback) {
             /* 
             else if((currentl == (list.length - 1))&(userFound == 1)) {
                 // return an array, then add multi users to that array
+                callback(array,tempid);
             }
             */
         });
     }
 }
+
 /**********
     function to fasilitate the bitchiness of javascript
 **********/
@@ -65,6 +67,11 @@ function moreDamnFunctions(currentLength, hash, callback) {
     });
 }
 
+/**********
+    function to read the authorisedusers.txt file located
+    in private folder, then check that the entered data
+    matches
+**********/
 function authoriseUser2(array, username, password, callback) {
     var found = 0; 
     for(var i = 0; i < array.length; i += 2) {
@@ -81,6 +88,10 @@ function authoriseUser2(array, username, password, callback) {
     }
 }
 
+/**********
+    function to pritty much make sure that a for loop is
+    finished
+**********/
 function check(current, full, callback) {
     //console.log("cheking current: " + current + " vs Full: " + full);
     if(current == full) {
@@ -88,6 +99,10 @@ function check(current, full, callback) {
     }
 }
 
+/**********
+    function to get a subhash from a hash from a redis database
+    it returns the object it gets from the subhash
+**********/
 function getFromHash(hash, subhash, callback) {
     client.hget(hash, subhash, function(err,obj2) {
         if(obj2 != null) {
@@ -99,6 +114,11 @@ function getFromHash(hash, subhash, callback) {
     });
 }
 
+/**********
+    function to get a list from the redis database. it then
+    returns the object, which is an array of strings(can be used
+    as hashes)
+**********/
 function getFullList(list, callback) {
     client.lrange(list, 0, -1, function(err,obj) {
         if(obj != null) {
@@ -110,6 +130,11 @@ function getFullList(list, callback) {
     });
 }
 
+/***********
+    function to serv an error page to the users browser
+    the page can be eddited acording to where it fails
+    using "thing" "error message" and "advice"
+***********/
 function servError(req, res, thing, errorMessage, advice) {
     var content = '';
     var fileName = "/error.html"; //the file that was requested
@@ -139,6 +164,10 @@ function servError(req, res, thing, errorMessage, advice) {
     });
 }
 
+/***********
+    function to serve a page to the user, this is called from
+    a GET request usually, as it abstracts away the json decoding
+***********/
 function servPage(pageaddr, req, res, decode, rfidTag) {
     var content = '';
     var fileName = pageaddr; //the file that was requested
@@ -167,12 +196,14 @@ function servPage(pageaddr, req, res, decode, rfidTag) {
                         var hashvalue = "";
                         userFound = 0;
                         huntForUser(listArray, decode.checkName, function(finalResult,hashvalue) {
+                            // final result may be an array. so TODO
                             if(finalResult == null) {
                                 console.log("No User with that name found");
                                 // serveerror page
                                 servError(req, res, "There is no User: ", "\"" + (decode.checkName + "\""), "Make sure this is the correct First Name (It is Case Sensative).");
                             } else {
                                 console.log("User with that name found");
+
                                 // set all the user entered data into the details page
                                 getFromHash(hashvalue, "First", function(Result) {
                                     final = final.replace("%FIRSTNAME%", Result);
@@ -220,7 +251,11 @@ function servPage(pageaddr, req, res, decode, rfidTag) {
     });
 }
  
-//a helper function to handle HTTP requests
+/***********
+    function that is the main html page server
+    it also deals with get and post requests and
+    calls the functions above, when needed
+***********/
 function requestHandler(req, res) {
     var content = '';
     var fileName = path.normalize(req.url); //the file that was requested
@@ -236,15 +271,12 @@ function requestHandler(req, res) {
             content = localFolder + fileName;
      
             //reads the file referenced by 'content'
-            //and then calls the anonymous function we pass in
             fs.readFile(content,function(err,contents){
-                //if the fileRead was successful...
                 if(!err){
                     // send the data
                     res.end(contents);
                 } else {
                     //otherwise, let us inspect the eror
-                    //in the console
                     console.dir(err);
                 };
             });
@@ -268,33 +300,21 @@ function requestHandler(req, res) {
             client.set("Number", 0, redis.print);
 
             //reads the file referenced by 'content'
-            //and then calls the anonymous function we pass in
             fs.readFile(content,function(err,contents){
-                //if the fileRead was successful...
                 if(!err){
                     // send the data
                     res.end(contents);
                 } else {
-                    //otherwise, let us inspect the eror
-                    //in the console
                     console.dir(err);
                 };
             });
         } else {
             // any other file
             content = localFolder + fileName;//setup the file name to be returned
-     
-            //reads the file referenced by 'content'
-            //and then calls the anonymous function we pass in
             fs.readFile(content,function(err,contents){
-                //if the fileRead was successful...
                 if(!err){
-                    //send the contents of index.html
-                    //and then close the request
                     res.end(contents);
                 } else {
-                    //otherwise, let us inspect the eror
-                    //in the console
                     console.dir(err);
 
                     //if the file was not found, set a 404 header...
@@ -320,10 +340,8 @@ function requestHandler(req, res) {
             req.on('end', function() {
                 // node side
                 //console.log(fullBody + "<--- post data");
-
                 // decode
                 var decode = querystring.parse(fullBody);
-
                 // check the data
                 console.log(decode.key + "<=== Key");
                 console.log(decode.firstName + "<--- First Name");
@@ -444,6 +462,7 @@ function requestHandler(req, res) {
                                                 // get there first name
                                                 getFromHash(listArray[l], "First", function(Result,tempid){
                                                     // add number
+                                                    // TODO: Need to add a form to this data so it can be edited.
                                                     var datstring = ""
                                                     datstring = ("" + tempid.toString() + " : " + Result.toString());
                                                     managedata = managedata += datstring;
