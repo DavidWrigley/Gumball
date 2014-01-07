@@ -4,8 +4,56 @@
 		"selected_items":
 		[
 			[
+				"che",
+				"checkPassword"
+			],
+			[
+				"ent",
+				"enteredPassword"
+			],
+			[
+				"pass",
+				"password"
+			],
+			[
+				"user",
+				"username"
+			],
+			[
+				"author",
+				"authoriseUser"
+			],
+			[
+				"a",
+				"authorisedusers"
+			],
+			[
 				"con",
+				"console"
+			],
+			[
+				"check",
+				"checkUsername"
+			],
+			[
+				"priv",
+				"privfileName"
+			],
+			[
+				"cont",
 				"content"
+			],
+			[
+				"Re",
+				"Registered"
+			],
+			[
+				"ser",
+				"servError"
+			],
+			[
+				"co",
+				"console"
 			],
 			[
 				"err",
@@ -42,10 +90,6 @@
 			[
 				"read",
 				"ready"
-			],
-			[
-				"Re",
-				"Result"
 			],
 			[
 				"re",
@@ -92,24 +136,12 @@
 				"javascript"
 			],
 			[
-				"che",
-				"checkName"
-			],
-			[
 				"in",
 				"input	Tag"
 			],
 			[
 				"file",
 				"fileName"
-			],
-			[
-				"ser",
-				"servPage"
-			],
-			[
-				"cont",
-				"contents"
 			],
 			[
 				"fun",
@@ -148,10 +180,6 @@
 				"inputThread"
 			],
 			[
-				"user",
-				"userInput"
-			],
-			[
 				"User",
 				"userInput"
 			],
@@ -187,7 +215,7 @@
 			"file": "/Users/davidwrigley/Gumball/nodestuff/public/manage.html",
 			"settings":
 			{
-				"buffer_size": 343,
+				"buffer_size": 1623,
 				"line_ending": "Unix",
 				"name": "manage.html"
 			}
@@ -196,7 +224,7 @@
 			"file": "/Users/davidwrigley/Gumball/nodestuff/public/form.html",
 			"settings":
 			{
-				"buffer_size": 1919,
+				"buffer_size": 1923,
 				"line_ending": "Unix"
 			}
 		},
@@ -204,7 +232,7 @@
 			"file": "/Users/davidwrigley/Gumball/nodestuff/public/index.html",
 			"settings":
 			{
-				"buffer_size": 1701,
+				"buffer_size": 1705,
 				"line_ending": "Unix"
 			}
 		},
@@ -212,7 +240,7 @@
 			"file": "/Users/davidwrigley/Gumball/nodestuff/app.js",
 			"settings":
 			{
-				"buffer_size": 15943,
+				"buffer_size": 18585,
 				"line_ending": "Unix"
 			}
 		},
@@ -236,7 +264,7 @@
 			"file": "/Users/davidwrigley/Gumball/nodestuff/public/check.html",
 			"settings":
 			{
-				"buffer_size": 1537,
+				"buffer_size": 1541,
 				"line_ending": "Unix"
 			}
 		}
@@ -293,6 +321,8 @@
 	},
 	"file_history":
 	[
+		"/Users/davidwrigley/Gumball/nodestuff/private/authorisedusers.txt",
+		"/Users/davidwrigley/Gumball/nodestuff/manageusers.html",
 		"/Users/davidwrigley/Gumball/nodestuff/public/check.html",
 		"/Users/davidwrigley/Gumball/nodestuff/public/userdata.html",
 		"/Users/davidwrigley/Gumball/nodestuff/public/registerSubmit.html",
@@ -325,6 +355,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"autherised",
+			"manage.html",
 			".html",
 			"reset",
 			"check.html",
@@ -371,15 +403,15 @@
 					"file": "/Users/davidwrigley/Gumball/nodestuff/public/manage.html",
 					"settings":
 					{
-						"buffer_size": 343,
+						"buffer_size": 1623,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								189,
-								189
+								458,
+								458
 							]
 						],
 						"settings":
@@ -399,15 +431,15 @@
 					"file": "/Users/davidwrigley/Gumball/nodestuff/public/form.html",
 					"settings":
 					{
-						"buffer_size": 1919,
+						"buffer_size": 1923,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								675,
-								675
+								458,
+								458
 							]
 						],
 						"settings":
@@ -416,7 +448,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 134.0,
+						"translation.y": 21.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -426,15 +458,15 @@
 					"file": "/Users/davidwrigley/Gumball/nodestuff/public/index.html",
 					"settings":
 					{
-						"buffer_size": 1701,
+						"buffer_size": 1705,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1586,
-								1586
+								458,
+								427
 							]
 						],
 						"settings":
@@ -443,7 +475,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 484.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -453,15 +485,15 @@
 					"file": "/Users/davidwrigley/Gumball/nodestuff/app.js",
 					"settings":
 					{
-						"buffer_size": 15943,
+						"buffer_size": 18585,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								15851,
-								15851
+								18275,
+								18275
 							]
 						],
 						"settings":
@@ -471,7 +503,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 8289.0,
+						"translation.y": 9381.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -498,7 +530,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 370.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -535,15 +567,15 @@
 					"file": "/Users/davidwrigley/Gumball/nodestuff/public/check.html",
 					"settings":
 					{
-						"buffer_size": 1537,
+						"buffer_size": 1541,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								565,
+								565
 							]
 						],
 						"settings":
@@ -552,7 +584,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 295.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -636,6 +668,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 198.0,
 	"status_bar_visible": true
 }

@@ -1,17 +1,62 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<link rel = "stylesheet" type = "text/css" href = "css.css">
-	</head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen,projection" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="generator" content="Ben O'Neill - http://www.benedictoneill.com/" />
+    <title>CEIT RFID System</title>
+</head>
+<body>
 
-	<h1>
-		CEIT RFID Card System
-	</h1>
-	<br>
-	<body>
-		<div id = "manageDiv"> 
-			%REGISTEREDUSER%
-			<input type="button" align = "middle" id = "Home" value = "Home" onClick = "window.location.href='./index.html'">
+	<div id="container">
+
+		<div id="header">
+			<h1>CEIT RFID System</h1>
+			A Simple University of Queensland RFID card System.
 		</div>
-	</body>
+
+		<div id="subheader">
+
+			<ul id="navigation">
+				<li> <a href="index.html">Information</a></li>
+				<li> <a href="form.html">Register Card</a></li>
+				<li> <a href="check.html">Check User</a></li>
+				<li class="active">Manage System</li>
+				<li> <a href="index.html">About Me!</a></li>
+			</ul>
+
+		</div>
+
+		<div id="content">
+
+			<h3>Autherised Users Login!</h3>
+
+			<form action='/manageusers.html' method='post' target = "frame_a">
+				<label>Username: </label>
+				<input name="username" type="text" id = "username"><br>
+				<label>Password: </label>
+				<input name = "password" type="password" id = "password"><br>
+				<input type = "submit">
+			</form>
+			<br>
+			<span id="iframeslot" height="500" frameBorder="0">
+				<iframe name="frame_a" id="frame_a"></iframe>
+			</span>
+		</div>
+
+		<div id="subcontent">
+
+			<IMG HEIGHT="80" WIDTH="240" SRC="/images/ceitlogo.png" ALT="image">
+
+		</div>
+
+		<div id="footer">
+
+			By David Wrigley, CEIT 2013 Summer Project.
+
+		</div>
+
+	</div>
+
+</body>
 </html>
