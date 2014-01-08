@@ -25,7 +25,9 @@ client.on("error", function(err) {
 });
 
 /**********
-    function that hunts for the users in the registered redis datahash
+    function that hunts for the users in the registered redis datadase
+    returns an array, that can hold more then one user, this needs
+    to be looped over 
 **********/
 function huntForUser(list, checkName, callback) {
     //console.log("list length: " + list.length);
@@ -35,21 +37,22 @@ function huntForUser(list, checkName, callback) {
             //  check that the name is the same as the name entered
             console.log("return from hash: " + tempid + ": " + Result + " for number: " + currentl);
             if(Result == checkName) {
-                // found the name entered
-                // callback with the object, to do further processing on
-                // do something with appending data
-                console.log("User Found, Callback");
+                // found the name appending
+                console.log("User Found APPEND");
                 userFound = 1;
-                // callback(Result,tempid);
                 array.push(tempid);
             }
+            // if the loop is finished
+            // and a users is not found
             if((currentl == (list.length - 1))&(userFound == 0)) {
                 // at the end of the list,
                 // nothing left to check, not found
                 console.log("Not found, returning NULL");
                 callback(null,null);
-            } else if((currentl == (list.length - 1))&(userFound  == 1)) {
-                // return an array, then add multi users to that array
+            }
+            // and atleast one user is found 
+            else if((currentl == (list.length - 1))&(userFound  == 1)) {
+                // return the array
                 callback(array,tempid);
                 console.log("Array Result: " + array);
             }
@@ -165,9 +168,11 @@ function servError(req, res, thing, errorMessage, advice) {
 }
 
 /***********
-    function to build user page
+    function to replace and return user data in buildstring
 ***********/
 function buildUser(Hash, buildString, runs, callback) {
+    // get from redis, then replace the "keyword" in the
+    // build string
     getFromHash(Hash, "First", function(Result) {
         buildString = buildString.replace("%FIRSTNAME%", Result);
     });
@@ -181,7 +186,7 @@ function buildUser(Hash, buildString, runs, callback) {
     });
 
     getFromHash(Hash, "RFID", function(Result) {
-        buildString = buildString.replace("%CARDRFID%", Result); 
+        buildString = buildString.replace(/%CARDRFID%/g, Result); 
     });
 
     getFromHash(Hash, "Human Time", function(Result) {
@@ -190,13 +195,16 @@ function buildUser(Hash, buildString, runs, callback) {
 
     getFromHash(Hash, "Lollies", function(Result){
         if(Result == "1") {
-            buildString = buildString.replace("%LOLLIES%", "Yes, Party Time!!!");
+            buildString = buildString.replace("%LOLLIES%", "checked");
         } else {
-            buildString = buildString.replace("%LOLLIES%", "No, Sad Panda!");
+            buildString = buildString.replace("%LOLLIES%", "");
         }
         console.log(buildString);
         callback(buildString,runs);
     });
+
+    // need to add for coffee and door
+    // extra permissions go here
 }
 
 /***********
@@ -237,24 +245,27 @@ function servPage(pageaddr, req, res, decode, rfidTag) {
                                             Email: %EMAIL%<br>\
                                             Last Scan: %TIME%<br>\
                                             Lollies: %LOLLIES%<br>\
-                                            "
+                                            ";
                         
                         // reset
                         userFound = 0;
                         finishedString = "";
-                        // begin
+                        // begin hunting for users, returns an array of users.
                         huntForUser(listArray, decode.checkName, function(finalResult) {
+                            // if there is no user with that name
                             if(finalResult == null) {
                                 console.log("No User with that name found");
                                 // serveerror page
                                 servError(req, res, "There is no User: ", "\"" + (decode.checkName + "\""), "Make sure this is the correct First Name (It is Case Sensative).");
                             } else {
                                 console.log("Users with that name found");
-                                // TODO: switch this to just replace one keyword and then just append
                                 // set all the user entered data into the details page
                                 for(var i = 0; i < finalResult.length; i++) {
+                                    // fill the fixed string data with the users data
                                     buildUser(finalResult[i], fixedString, i, function(Result, runs) {
+                                        // then add it to the finished string
                                         finishedString += Result;
+                                        // at the end of the length of the array, replace and serv.
                                         check(runs, (finalResult.length-1), function() {
                                             // serv page
                                             final = final.replace("%REPLACE%", finishedString);
@@ -470,6 +481,23 @@ function requestHandler(req, res) {
                             fs.readFile(content,function(err,contents){
                                 //if the fileRead was successful...
                                 if(!err){
+                                    // will fill with user data
+                                    var fixedUserForm = "\
+                                                        <form id='%CARDRFID%_form' action='/manageSubmit.html' method='post' target = '_self'>\
+                                                        <label>RFID Hash: <u>%CARDRFID%</u></label><br>\
+                                                        <input name='%CARDRFID%_first' type='text' value='%FIRSTNAME%' id = '%CARDRFID%_first'>\
+                                                        <input name='%CARDRFID%_last' type='text' value='%LASTNAME%' id = '%CARDRFID%_first'>\
+                                                        <input name='%CARDRFID%_email' type='text' value='%EMAIL%' id = '%CARDRFID%_first'><br>\
+                                                        <label>Permissions: </label>\
+                                                        <label>L</label>\
+                                                        <input name='%CARDRFID%_Lollies' type='checkbox' value='%CARDRFID%_lollies' id = '%CARDRFID%_lollies' %LOLLIES%>\
+                                                        <label>C</label>\
+                                                        <input name='%CARDRFID%_Coffee' type='checkbox' value='%CARDRFID%_Coffee' id = '%CARDRFID%_Coffee' %COFFEE%>\
+                                                        <label>D</label>\
+                                                        <input name='%CARDRFID%_Door' type='checkbox' value='%CARDRFID%_Door' id = '%CARDRFID%_Door' %DOOR%>\
+                                                        <input type='submit' value='Change' id = '%CARDRFID%_submit'>\
+                                                        </form>\
+                                                        ";
                                     var final = '';
                                     var managedata = "";
                                     var listArray = [];
@@ -487,19 +515,14 @@ function requestHandler(req, res) {
                                             var datcheck = 0;
                                             for(var l = 0; l < listArray.length; l++) {
                                                 console.log("Registered User[" + l +"]: " +listArray[l]);
-                                                // get there first name
-                                                getFromHash(listArray[l], "First", function(Result,tempid){
-                                                    // add number
-                                                    // TODO: Need to add a form to this data so it can be edited.
-                                                    var datstring = ""
-                                                    datstring = ("" + tempid.toString() + " : " + Result.toString());
-                                                    managedata = managedata += datstring;
-                                                    managedata = managedata += "<br>";
-                                                    datcheck += 1;
-                                                    // wait till editing the html is complete
-                                                    check(datcheck,listArray.length,function(Hue) {
+                                                // send to builduserstring here
+                                                buildUser(listArray[l],fixedUserForm,l,function(Result,runs) {
+                                                    managedata += Result;
+                                                    managedata += "<br>";
+
+                                                    check(runs, (listArray.length-1), function() {
+                                                        // serv page
                                                         console.log(managedata);
-                                                        // replace the html keyword here, then serv
                                                         final = final.replace("%REGISTEREDUSER%", managedata);
                                                         res.end(final);
                                                     });

@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"fin",
+				"finalResult"
+			],
+			[
+				"che",
+				"check"
+			],
+			[
+				"final",
+				"finalResult"
+			],
+			[
+				"run",
+				"runs"
+			],
+			[
+				"build",
+				"buildString"
+			],
+			[
+				"fi",
+				"finishedString"
+			],
+			[
+				"fini",
+				"finishedString"
+			],
+			[
+				"fina",
+				"finalResult"
+			],
+			[
 				"lis",
 				"list"
 			],
@@ -36,10 +68,6 @@
 				"hashvalue"
 			],
 			[
-				"fin",
-				"finalResult"
-			],
-			[
 				"chek",
 				"checkName"
 			],
@@ -62,10 +90,6 @@
 			[
 				"auth",
 				"authoriseUser2"
-			],
-			[
-				"che",
-				"checkPassword"
 			],
 			[
 				"ent",
@@ -284,7 +308,7 @@
 			"file": "/Users/davidwrigley/Gumball/nodestuff/app.js",
 			"settings":
 			{
-				"buffer_size": 20489,
+				"buffer_size": 21797,
 				"line_ending": "Unix"
 			}
 		},
@@ -311,6 +335,14 @@
 				"buffer_size": 1541,
 				"line_ending": "Unix"
 			}
+		},
+		{
+			"file": "/Users/davidwrigley/Gumball/nodestuff/public/userdata.html",
+			"settings":
+			{
+				"buffer_size": 357,
+				"line_ending": "Unix"
+			}
 		}
 	],
 	"build_system": "",
@@ -319,6 +351,22 @@
 		"height": 392.0,
 		"selected_items":
 		[
+			[
+				"insta ",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
 			[
 				"sy ht",
 				"Set Syntax: HTML"
@@ -334,10 +382,6 @@
 			[
 				"syn js",
 				"Set Syntax: JavaScript"
-			],
-			[
-				"insta",
-				"Package Control: Install Package"
 			],
 			[
 				"ins",
@@ -399,6 +443,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"lock++;",
+			"User",
+			"finalResult[i]",
+			"finishedString",
+			"check",
+			"final",
+			"hashvalue",
 			"tempid",
 			"autherised",
 			"manage.html",
@@ -430,11 +481,12 @@
 		"regex": false,
 		"replace_history":
 		[
+			"finishedString"
 		],
 		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
-		"whole_word": false,
+		"whole_word": true,
 		"wrap": true
 	},
 	"groups":
@@ -530,15 +582,15 @@
 					"file": "/Users/davidwrigley/Gumball/nodestuff/app.js",
 					"settings":
 					{
-						"buffer_size": 20489,
+						"buffer_size": 21797,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1868,
-								1868
+								4841,
+								4841
 							]
 						],
 						"settings":
@@ -548,7 +600,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 672.0,
+						"translation.y": 3446.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -633,6 +685,33 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/Users/davidwrigley/Gumball/nodestuff/public/userdata.html",
+					"settings":
+					{
+						"buffer_size": 357,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								348,
+								348
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
 				}
 			]
 		}
@@ -674,7 +753,7 @@
 	},
 	"replace":
 	{
-		"height": 0.0
+		"height": 72.0
 	},
 	"save_all_on_build": true,
 	"select_file":
