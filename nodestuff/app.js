@@ -54,7 +54,6 @@ function huntForUser(list, checkName, callback) {
             else if((currentl == (list.length - 1))&(userFound  == 1)) {
                 // return the array
                 callback(array,tempid);
-                console.log("Array Result: " + array);
             }
         });
     }
@@ -200,7 +199,6 @@ function buildUser(Hash, buildString, runs, callback) {
         } else {
             buildString = buildString.replace("%LOLLIES%", "");
         }
-        console.log(buildString);
         callback(buildString,runs);
     });
 
@@ -403,16 +401,8 @@ function requestHandler(req, res) {
             });
 
             req.on('end', function() {
-                // node side
-                //console.log(fullBody + "<--- post data");
                 // decode
                 var decode = querystring.parse(fullBody);
-                // check the data
-                console.log(decode.key + "<=== Key");
-                console.log(decode.firstName + "<--- First Name");
-                console.log(decode.lastName + "<--- Last Name");
-                console.log(decode.email + "<--- Email");
-                console.log(decode.lollies + "<--- Lollies");
 
                 // organise the redis data here
                 client.hget("Unregistered", decode.key.toString(), function(err,obj) {
@@ -450,8 +440,6 @@ function requestHandler(req, res) {
             });
 
             req.on('end', function() {
-                // node side
-                console.log(fullBody + "<--- post data");
                 // decode
                 var decode = querystring.parse(fullBody);
                 // serv responce
@@ -467,9 +455,6 @@ function requestHandler(req, res) {
             });
 
             req.on('end', function() {
-                // node side
-                console.log(fullBody + "<--- post data");
-
                 // decode
                 var decode = querystring.parse(fullBody);
 
@@ -479,7 +464,6 @@ function requestHandler(req, res) {
 
                 privfileName = "/authorisedusers.txt";
                 privcontent = privateFolder + privfileName;
-                console.log(privcontent);
 
                 fs.readFile(privcontent, function(err, data) {
                     if(err) {
@@ -568,17 +552,13 @@ function requestHandler(req, res) {
             });
 
             req.on('end', function() {
-                // fun here
-                console.log(fullBody + "<--- post data");
-
                 // decode
                 var decode = querystring.parse(fullBody);
                 
                 // get the RFID Tag, for redis
                 rfidTag = fileName.toString().split("/")[2];
-                //console.log("RFID: " + rfidTag);
 
-                console.log("Rfid Tage: " + rfidTag);
+                console.log("Rfid Tag: " + rfidTag);
 
                 if(rfidTag != null) {
                     if(decode.select == "Change") {
