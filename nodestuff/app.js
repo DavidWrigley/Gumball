@@ -138,7 +138,7 @@ function getFullList(list, callback) {
     the page can be eddited acording to where it fails
     using "thing" "error message" and "advice"
 ***********/
-function servError(req, res, thing, errorMessage, advice) {
+function servMessage(type, req, res, thing, errorMessage, advice) {
     var content = '';
     var fileName = "/error.html"; //the file that was requested
     var localFolder = __dirname + '/public';//where our public files are located
@@ -155,8 +155,9 @@ function servError(req, res, thing, errorMessage, advice) {
             final = contents.toString()
 
             // replace data
+            final = final.replace("%TYPE%", type);
             final = final.replace("%THING%", thing);
-            final = final.replace("%ERRORMESSAGE%", errorMessage);
+            final = final.replace("%MESSAGE%", errorMessage);
             final = final.replace("%ADVICE%", advice);
             
             // send the data
@@ -208,6 +209,31 @@ function buildUser(Hash, buildString, runs, callback) {
 }
 
 /***********
+    function to set some varables, may be adapted to follow
+    an array of varables rather than just preset ones may need
+    to incorperate number of times run also.
+***********/
+function setUser(hash, decode, callback) {
+    // set the RFID tag
+    client.hset(hash, "RFID", hash, redis.print);
+    // set the name.
+    client.hset(hash, "First", decode.firstName, redis.print);
+    // set the last name
+    client.hset(hash, "Last", decode.lastName, redis.print);
+    // set the email
+    client.hset(hash, "Email", decode.email, redis.print);
+    // set the lollies
+    if(decode.lollies == "lollies") {
+        client.hset(hash, "Lollies", "1", redis.print);
+    } else {
+        client.hset(hash, "Lollies", "0", redis.print);
+    }
+    // add coffee and door here later TODO:
+    // callback
+    callback(1);
+}
+
+/***********
     function to serve a page to the user, this is called from
     a GET request usually, as it abstracts away the json decoding
 ***********/
@@ -232,7 +258,7 @@ function servPage(pageaddr, req, res, decode, rfidTag) {
                 getFullList("Registered", function(listArray){
                     if(listArray == "0") {
                         // serveerror page
-                        servError(req, res, "The List returned was:", "NULL ", "This could be a redis issue or there are no registered users");
+                        servMessage("ERROR!", req, res, "The List returned was:", "NULL ", "This could be a redis issue or there are no registered users");
                     } else {
                         // nothing wrong
                         var runs = 0;
@@ -256,7 +282,7 @@ function servPage(pageaddr, req, res, decode, rfidTag) {
                             if(finalResult == null) {
                                 console.log("No User with that name found");
                                 // serveerror page
-                                servError(req, res, "There is no User: ", "\"" + (decode.checkName + "\""), "Make sure this is the correct First Name (It is Case Sensative).");
+                                servMessage("ERROR!", req, res, "There is no User: ", "\"" + (decode.checkName + "\""), "Make sure this is the correct First Name (It is Case Sensative).");
                             } else {
                                 console.log("Users with that name found");
                                 // set all the user entered data into the details page
@@ -392,22 +418,13 @@ function requestHandler(req, res) {
                 client.hget("Unregistered", decode.key.toString(), function(err,obj) {
                     // will get the rfid
                     rfidTag = obj;
+                    var thing = "";
                     if(rfidTag != null) {
                         console.log("Registering: " + rfidTag);
-                        // set the RFID tag
-                        client.hset(rfidTag, "RFID", rfidTag, redis.print);
-                        // set the name.
-                        client.hset(rfidTag, "First", decode.firstName, redis.print);
-                        // set the last name
-                        client.hset(rfidTag, "Last", decode.lastName, redis.print);
-                        // set the email
-                        client.hset(rfidTag, "Email", decode.email, redis.print);
-                        // set the lollies
-                        if(decode.lollies == "lollies") {
-                            client.hset(rfidTag, "Lollies", "1", redis.print);
-                        } else {
-                            client.hset(rfidTag, "Lollies", "0", redis.print);
-                        }
+
+                        setUser(rfidTag,decode, function(Hue) {
+                            console.log("user set completion with: " + Hue);
+                        });
 
                         // delete the hash key in unregistered
                         client.hdel("Unregistered", decode.key.toString(), redis.print);
@@ -416,12 +433,12 @@ function requestHandler(req, res) {
                         client.lpush("Registered", rfidTag, redis.print);
 
                         // serve up the completion page
-                        servPage("/registerSubmit.html", req, res, decode, rfidTag);
+                        // servPage("/registerSubmit.html", req, res, decode, rfidTag);
+                        servMessage("SUCCESS!", req, res, "The Card Code: ", decode.key, "Is now Registered and in the system.")
                     }
                     else {
-                        var thing = "";
                         thing = thing + "The Card Code: \"" + decode.key + "\": "
-                        servError(req, res, thing, "Does not exist in \"Unregistered\" Cards", "Scan again to check your Card Code, You may also already be Registered");
+                        servMessage("ERROR!", req, res, thing, "Does not exist in \"Unregistered\" Cards", "Scan again to check your Card Code, You may also already be Registered");
                     }
                 });
             });
@@ -466,7 +483,7 @@ function requestHandler(req, res) {
 
                 fs.readFile(privcontent, function(err, data) {
                     if(err) {
-                        servError(req, res, "Authorised Users file ", "NOT FOUND", "Add an Authorised User file.");
+                        servMessage("ERROR!", req, res, "Authorised Users file ", "NOT FOUND", "Add an Authorised User file.");
                         return;
                     } 
                     // creat the array of usernames / passowords
@@ -483,19 +500,21 @@ function requestHandler(req, res) {
                                 if(!err){
                                     // will fill with user data
                                     var fixedUserForm = "\
-                                                        <form id='%CARDRFID%_form' action='/manageSubmit.html' method='post' target = '_self'>\
+                                                        <form id='%CARDRFID%_form' action='/manageSubmit/%CARDRFID%' method='post' target = '_self'>\
                                                         <label>RFID Hash: <u>%CARDRFID%</u></label><br>\
-                                                        <input name='%CARDRFID%_first' type='text' value='%FIRSTNAME%' id = '%CARDRFID%_first'>\
-                                                        <input name='%CARDRFID%_last' type='text' value='%LASTNAME%' id = '%CARDRFID%_first'>\
-                                                        <input name='%CARDRFID%_email' type='text' value='%EMAIL%' id = '%CARDRFID%_first'><br>\
+                                                        <input name='firstName' type='text' value='%FIRSTNAME%' id = 'firstName'>\
+                                                        <input name='lastName' type='text' value='%LASTNAME%' id = 'lastName'>\
+                                                        <input name='email' type='text' value='%EMAIL%' id = 'email'><br>\
                                                         <label>Permissions: </label>\
                                                         <label>L</label>\
-                                                        <input name='%CARDRFID%_Lollies' type='checkbox' value='%CARDRFID%_lollies' id = '%CARDRFID%_lollies' %LOLLIES%>\
+                                                        <input name='lollies' type='checkbox' value='lollies' id = 'lollies' %LOLLIES%>\
                                                         <label>C</label>\
-                                                        <input name='%CARDRFID%_Coffee' type='checkbox' value='%CARDRFID%_Coffee' id = '%CARDRFID%_Coffee' %COFFEE%>\
+                                                        <input name='coffee' type='checkbox' value='coffee' id = 'coffee' %COFFEE%>\
                                                         <label>D</label>\
-                                                        <input name='%CARDRFID%_Door' type='checkbox' value='%CARDRFID%_Door' id = '%CARDRFID%_Door' %DOOR%>\
-                                                        <input type='submit' value='Change' id = '%CARDRFID%_submit'>\
+                                                        <input name='door' type='checkbox' value='door' id = 'door' %DOOR%><br>\
+                                                        <input type='radio' name='select' value='Change' checked>Change<br>\
+                                                        <input type='radio' name='select' value='Delete'>Delete<br>\
+                                                        <input type='submit' value='OK' id = 'ok'>\
                                                         </form>\
                                                         ";
                                     var final = '';
@@ -509,7 +528,7 @@ function requestHandler(req, res) {
                                         if(listArray == "0") {
                                             // throw error
                                             ready = 1;
-                                            servError(req, res, "The List returned was:", "NULL ", "This could be a redis issue or there are no registered users");
+                                            servMessage("ERROR!", req, res, "The List returned was:", "NULL ", "This could be a redis issue or there are no registered users");
                                         } else {
                                             // nothing wrong
                                             var datcheck = 0;
@@ -518,11 +537,11 @@ function requestHandler(req, res) {
                                                 // send to builduserstring here
                                                 buildUser(listArray[l],fixedUserForm,l,function(Result,runs) {
                                                     managedata += Result;
-                                                    managedata += "<br>";
+                                                    //managedata += "<br>";
 
                                                     check(runs, (listArray.length-1), function() {
                                                         // serv page
-                                                        console.log(managedata);
+                                                        // console.log(managedata);
                                                         final = final.replace("%REGISTEREDUSER%", managedata);
                                                         res.end(final);
                                                     });
@@ -536,10 +555,48 @@ function requestHandler(req, res) {
                             });
                         } else {
                             console.log("USER UN-AUTHORISED");
-                            servError(req, res, "Entered Data ", "UN-AUTHORISED ", "Make sure you have typed your credentials correctly.");
+                            servMessage("ERROR!", req, res, "Entered Data ", "UN-AUTHORISED ", "Make sure you have typed your credentials correctly.");
                         }
                     });      
                 });
+            });
+        } else if (fileName.toString().indexOf("/manageSubmit.html")) {
+            var fullBody = '';
+            var rfidTag = null;
+            req.on('data', function(data) {
+                fullBody += data.toString();
+            });
+
+            req.on('end', function() {
+                // fun here
+                console.log(fullBody + "<--- post data");
+
+                // decode
+                var decode = querystring.parse(fullBody);
+                
+                // get the RFID Tag, for redis
+                rfidTag = fileName.toString().split("/")[2];
+                //console.log("RFID: " + rfidTag);
+
+                console.log("Rfid Tage: " + rfidTag);
+
+                if(rfidTag != null) {
+                    if(decode.select == "Change") {
+                        console.log("Require Change");
+                        setUser(rfidTag, decode, function(Hue) {
+                            console.log("eddited: " + rfidTag);
+                            // give user conformation
+                            servMessage("SUCCESS!", req, res, "User Change: ", "Successful", "Click Submit Again to continue managing Users");
+                        })
+                    } else if(decode.select == "Delete") {
+                        console.log("Require Delete");
+                        // delete the hash
+                        client.del(rfidTag, redis.print);
+                        // remove from registed also
+                        client.lrem("Registered",1,rfidTag);                        
+                        servMessage("SUCCESS!", req, res, "User Delete: ", "Successful", "Click Submit Again to continue managing Users");
+                    }
+                }
             });
         }
     };
