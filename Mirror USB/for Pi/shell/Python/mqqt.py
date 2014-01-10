@@ -36,9 +36,10 @@ def connect():
 		
 		# connect to Redis
 		r_server = redis.Redis(host='winter.ceit.uq.edu.au', port=6379, db=10, password=None, socket_timeout=None, connection_pool=None, charset='utf-8', errors='strict', decode_responses=False, unix_socket_path=None)
+	
 	except:
-		print "Parser Problems, retrying"
-		time.sleep(5)
+		print "Connection Problem, Exiting"
+		sys.exit(1)
 
 # callback
 def on_message(mosq, obj, msg):
@@ -93,12 +94,21 @@ def on_message(mosq, obj, msg):
 
 		# update the time stamp
 		ts = time.time()
-		st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+		#st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+		st = datetime.datetime.fromtimestamp(ts).strftime('%d-%m-%Y %H:%M:%S')
 
+		# set users most recent sign in time
 		r_server.hset(str(hashkey), "Python Time", ts)
 		r_server.hset(str(hashkey), "Human Time", str(st))		
 
-		# is it a registered card.
+		# add this touch to a list of sign in times. allowing for some nice graphics later.
+		my_str = str(hashkey) + "_coffeeLog"
+		print my_str
+		r_server.zadd(my_str, ts, 1)
+
+		# reset the string
+		my_str = ""
+		# create string to send to screen
 		my_str += "Card: " + str(hashkey)[0:10] + "\nRegistered!\n" + "Hello: " + str(r_server.hget(str(hashkey), "First"))
 		my_str += "\nSigned In:\n" + str(r_server.hget(str(hashkey), "Human Time"))
 
@@ -111,7 +121,7 @@ def on_message(mosq, obj, msg):
 
 		my_str += "\n"
 
-		# publish here
+		# publish to screen
 		mqttc.publish("gumballscreen", my_str)
 		print my_str
 
@@ -119,25 +129,30 @@ def on_disconnect(mosq, obj, rc):
 	connect()
 	time.sleep(10)
 
-# start
-debug = 0
-run = 1
+try:
+	# wait for a little bit to not trip supervisord's fatel status
+	print "Started"
+	time.sleep(10)
 
-# generate client name and connect to mqtt
-mypid = os.getpid()
-client_uniq = "pubclient_"+str(mypid)
+	# start
+	debug = 0
+	run = 1
 
-# connect mqtt
-mqttc = mosquitto.Mosquitto(client_uniq)
-connect()
+	# generate client name and connect to mqtt
+	mypid = os.getpid()
+	client_uniq = "pubclient_"+str(mypid)
 
-print """\n############  HELLO  ############
-# ~~~~~~~ NOW RUNNING ~~~~~~~~  # 
-#################################\n"""
- 
-#remain connected and publish
-while (mqttc.loop() == 0):
-	time.sleep(1)
+	# connect mqtt
+	mqttc = mosquitto.Mosquitto(client_uniq)
+	connect()
 
-# exit with error, supervisord will restart it.
-sys.exit(1)
+	print """\n############  HELLO  ############
+	# ~~~~~~~ NOW RUNNING ~~~~~~~~  # 
+	#################################\n"""
+	 
+	#remain connected and publish
+	while (mqttc.loop() == 0):
+		time.sleep(1)
+except:
+	# exit with error, supervisord will restart it.
+	sys.exit(1)
