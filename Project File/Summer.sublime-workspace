@@ -4,6 +4,66 @@
 		"selected_items":
 		[
 			[
+				"hash",
+				"hashkey	Default"
+			],
+			[
+				"sorte",
+				"sorted_signins	Default"
+			],
+			[
+				"sore",
+				"sorted_signins	Default"
+			],
+			[
+				"cure",
+				"current_signin	Default"
+			],
+			[
+				"curren",
+				"current_number	Default"
+			],
+			[
+				"e",
+				"else	Default"
+			],
+			[
+				"sign",
+				"signOut"
+			],
+			[
+				"signIn",
+				"signIn"
+			],
+			[
+				"cur",
+				"current_signin	Default"
+			],
+			[
+				"scre",
+				"screenTopic	Default"
+			],
+			[
+				"my",
+				"my_str	Default"
+			],
+			[
+				"has",
+				"hashkey	Default"
+			],
+			[
+				"ifr",
+				"iframe_height"
+			],
+			[
+				"new",
+				"newwidth"
+			],
+			[
+				"serv",
+				"servMessage"
+			],
+			[
 				"lr",
 				"lrem"
 			],
@@ -98,10 +158,6 @@
 			[
 				"ret",
 				"return"
-			],
-			[
-				"has",
-				"hashvalue"
 			],
 			[
 				"chek",
@@ -200,10 +256,6 @@
 				"return"
 			],
 			[
-				"hash",
-				"hash"
-			],
-			[
 				"li",
 				"listArray"
 			],
@@ -252,10 +304,6 @@
 				"toString"
 			],
 			[
-				"cur",
-				"current_number	Default"
-			],
-			[
 				"cu",
 				"current_number	Default"
 			],
@@ -300,10 +348,6 @@
 				"heartbeat"
 			],
 			[
-				"my",
-				"myhex"
-			],
-			[
 				"NODE",
 				"NODE_PATH"
 			]
@@ -312,10 +356,18 @@
 	"buffers":
 	[
 		{
+			"file": "/Users/davidwrigley/Gumball/nodestuff/app.js",
+			"settings":
+			{
+				"buffer_size": 25006,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "/Users/davidwrigley/Gumball/nodestuff/public/manage.html",
 			"settings":
 			{
-				"buffer_size": 1700,
+				"buffer_size": 1708,
 				"line_ending": "Unix",
 				"name": "manage.html"
 			}
@@ -324,47 +376,7 @@
 			"file": "/Users/davidwrigley/Gumball/nodestuff/public/form.html",
 			"settings":
 			{
-				"buffer_size": 2000,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/Users/davidwrigley/Gumball/nodestuff/public/index.html",
-			"settings":
-			{
-				"buffer_size": 1782,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/Users/davidwrigley/Gumball/nodestuff/public/aboutme.html",
-			"settings":
-			{
-				"buffer_size": 2513,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/Users/davidwrigley/Gumball/nodestuff/app.js",
-			"settings":
-			{
-				"buffer_size": 25632,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/Users/davidwrigley/Gumball/nodestuff/public/style.css",
-			"settings":
-			{
-				"buffer_size": 2154,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/Users/davidwrigley/Gumball/nodestuff/public/error.html",
-			"settings":
-			{
-				"buffer_size": 387,
+				"buffer_size": 2093,
 				"line_ending": "Unix"
 			}
 		},
@@ -372,15 +384,15 @@
 			"file": "/Users/davidwrigley/Gumball/nodestuff/public/check.html",
 			"settings":
 			{
-				"buffer_size": 1618,
+				"buffer_size": 1628,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/Users/davidwrigley/Gumball/nodestuff/public/userdata.html",
+			"file": "/Users/davidwrigley/Gumball/nodestuff/public/error.html",
 			"settings":
 			{
-				"buffer_size": 357,
+				"buffer_size": 476,
 				"line_ending": "Unix"
 			}
 		},
@@ -388,7 +400,57 @@
 			"file": "/Users/davidwrigley/Gumball/nodestuff/public/manageusers.html",
 			"settings":
 			{
-				"buffer_size": 507,
+				"buffer_size": 601,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/davidwrigley/Gumball/nodestuff/public/userdata.html",
+			"settings":
+			{
+				"buffer_size": 451,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/davidwrigley/Gumball/Mirror USB/for Pi/shell/Python/gumball.py",
+			"settings":
+			{
+				"buffer_size": 4199,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/davidwrigley/Gumball/Mirror USB/for Pi/shell/Python/door.py",
+			"settings":
+			{
+				"buffer_size": 5147,
+				"line_ending": "Unix",
+				"name": "# Door Python script"
+			}
+		},
+		{
+			"file": "/Users/davidwrigley/Gumball/Autologin/auto.py",
+			"settings":
+			{
+				"buffer_size": 690,
+				"line_ending": "Unix",
+				"name": "from subprocess import Popen, PIPE"
+			}
+		},
+		{
+			"file": "/Users/davidwrigley/Gumball/Mirror USB/for Pi/shell/mirror_osx.sh",
+			"settings":
+			{
+				"buffer_size": 5661,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/davidwrigley/Gumball/Autologin/login.applescript",
+			"settings":
+			{
+				"buffer_size": 95,
 				"line_ending": "Unix"
 			}
 		}
@@ -396,9 +458,25 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 87.0,
 		"selected_items":
 		[
+			[
+				"pyt",
+				"Set Syntax: Python"
+			],
+			[
+				"apple",
+				"Set Syntax: AppleScript"
+			],
+			[
+				"syn ja",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"syn java",
+				"Set Syntax: JavaScript"
+			],
 			[
 				"inst",
 				"Package Control: Install Package"
@@ -444,7 +522,7 @@
 				"Set Syntax: Python"
 			]
 		],
-		"width": 575.0
+		"width": 449.0
 	},
 	"console":
 	{
@@ -461,12 +539,19 @@
 	},
 	"file_history":
 	[
+		"/Users/davidwrigley/Gumball/Autologin/login.applescript",
+		"/Users/davidwrigley/Gumball/nodestuff/public/aboutme.html",
+		"/Users/davidwrigley/Gumball/nodestuff/public/index.html",
+		"/Users/davidwrigley/Gumball/nodestuff/public/autoResize.js",
+		"/Users/davidwrigley/Gumball/nodestuff/public/style.css",
+		"/Users/davidwrigley/Gumball/nodestuff/public/IframeFunction.js",
+		"/Users/davidwrigley/Gumball/nodestuff/public/userdata.html",
+		"/Users/davidwrigley/Gumball/nodestuff/public/manageusers.html",
 		"/Users/davidwrigley/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
 		"/Users/davidwrigley/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/davidwrigley/Gumball/nodestuff/private/authorisedusers.txt",
 		"/Users/davidwrigley/Gumball/nodestuff/manageusers.html",
 		"/Users/davidwrigley/Gumball/nodestuff/public/check.html",
-		"/Users/davidwrigley/Gumball/nodestuff/public/userdata.html",
 		"/Users/davidwrigley/Gumball/nodestuff/public/registerSubmit.html",
 		"/Users/davidwrigley/Gumball/nodestuff/public/style2.css",
 		"/Users/davidwrigley/Gumball/nodestuff/public/reset.html",
@@ -497,6 +582,16 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"eof",
+			"tab",
+			"buildUser",
+			"console.",
+			"consol.log",
+			"}\n",
+			"register",
+			"user",
+			"servMessage",
+			"servError",
 			"rfidTag",
 			"%CARDRFID%_",
 			"%CARDRFID%",
@@ -552,132 +647,23 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 9,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/Users/davidwrigley/Gumball/nodestuff/public/manage.html",
-					"settings":
-					{
-						"buffer_size": 1700,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								880,
-								880
-							]
-						],
-						"settings":
-						{
-							"auto_name": "manage.html",
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 403.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/Users/davidwrigley/Gumball/nodestuff/public/form.html",
-					"settings":
-					{
-						"buffer_size": 2000,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								882,
-								882
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/Users/davidwrigley/Gumball/nodestuff/public/index.html",
-					"settings":
-					{
-						"buffer_size": 1782,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								881,
-								881
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/Users/davidwrigley/Gumball/nodestuff/public/aboutme.html",
-					"settings":
-					{
-						"buffer_size": 2513,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2226,
-								2226
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 612.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "/Users/davidwrigley/Gumball/nodestuff/app.js",
 					"settings":
 					{
-						"buffer_size": 25632,
+						"buffer_size": 25006,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10248,
-								10248
+								7414,
+								7414
 							]
 						],
 						"settings":
@@ -687,52 +673,80 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 6017.0,
+						"translation.y": 5082.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "/Users/davidwrigley/Gumball/nodestuff/public/style.css",
+					"buffer": 1,
+					"file": "/Users/davidwrigley/Gumball/nodestuff/public/manage.html",
 					"settings":
 					{
-						"buffer_size": 2154,
+						"buffer_size": 1708,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1580,
-								1580
+								559,
+								559
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"auto_name": "manage.html",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2735.0,
+						"translation.y": 140.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "/Users/davidwrigley/Gumball/nodestuff/public/error.html",
+					"buffer": 2,
+					"file": "/Users/davidwrigley/Gumball/nodestuff/public/form.html",
 					"settings":
 					{
-						"buffer_size": 387,
+						"buffer_size": 2093,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								307,
-								307
+								1656,
+								1656
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 66.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/Users/davidwrigley/Gumball/nodestuff/public/check.html",
+					"settings":
+					{
+						"buffer_size": 1628,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								205,
+								205
 							]
 						],
 						"settings":
@@ -747,19 +761,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "/Users/davidwrigley/Gumball/nodestuff/public/check.html",
+					"buffer": 4,
+					"file": "/Users/davidwrigley/Gumball/nodestuff/public/error.html",
 					"settings":
 					{
-						"buffer_size": 1618,
+						"buffer_size": 476,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								881,
-								881
+								95,
+								95
 							]
 						],
 						"settings":
@@ -768,30 +782,110 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 429.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "/Users/davidwrigley/Gumball/nodestuff/public/userdata.html",
+					"buffer": 5,
+					"file": "/Users/davidwrigley/Gumball/nodestuff/public/manageusers.html",
 					"settings":
 					{
-						"buffer_size": 357,
+						"buffer_size": 601,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								348,
-								348
+								94,
+								94
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/Users/davidwrigley/Gumball/nodestuff/public/userdata.html",
+					"settings":
+					{
+						"buffer_size": 451,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								94,
+								94
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/Users/davidwrigley/Gumball/Mirror USB/for Pi/shell/Python/gumball.py",
+					"settings":
+					{
+						"buffer_size": 4199,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2514,
+								2514
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1654.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/Users/davidwrigley/Gumball/Mirror USB/for Pi/shell/Python/door.py",
+					"settings":
+					{
+						"buffer_size": 5147,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								381,
+								381
+							]
+						],
+						"settings":
+						{
+							"auto_name": "# Door Python script",
+							"syntax": "Packages/Python/Python.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -802,23 +896,81 @@
 				},
 				{
 					"buffer": 9,
-					"file": "/Users/davidwrigley/Gumball/nodestuff/public/manageusers.html",
+					"file": "/Users/davidwrigley/Gumball/Autologin/auto.py",
 					"settings":
 					{
-						"buffer_size": 507,
+						"buffer_size": 690,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								379,
-								379
+								167,
+								167
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
+							"auto_name": "from subprocess import Popen, PIPE",
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "/Users/davidwrigley/Gumball/Mirror USB/for Pi/shell/mirror_osx.sh",
+					"settings":
+					{
+						"buffer_size": 5661,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2927,
+								2927
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3079.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "/Users/davidwrigley/Gumball/Autologin/login.applescript",
+					"settings":
+					{
+						"buffer_size": 95,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/AppleScript/AppleScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -831,7 +983,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 0.0
+		"height": 39.0
 	},
 	"input":
 	{
@@ -862,7 +1014,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 136.0
+		"height": 400.0
 	},
 	"replace":
 	{

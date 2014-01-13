@@ -125,7 +125,7 @@ aaa=`echo $name | md5sum | sed -e "s/ -//"`
 temp=`echo $aaa | tr -d ' '`
 send="{\"id\":\"1.1.0\", \"value\":\"$temp\"}" 
 echo $send
-mosquitto_pub -h "winter.ceit.uq.edu.au" -t gumballrfid -m "$send"
+mosquitto_pub -h "winter.ceit.uq.edu.au" -t rfid -m "$send"
 message=$(echo ${inmsg} | sed -e "s;<name>;$name;")
 saymessage=$(echo ${insmsg} | sed -e "s;<sname>;$sname;")
 elif [ "$mode" = "OUT" ]; then

@@ -199,8 +199,17 @@ function buildUser(Hash, buildString, runs, callback) {
         } else {
             buildString = buildString.replace("%LOLLIES%", "");
         }
+    });
+
+    getFromHash(Hash, "Door", function(Result){
+        if(Result == "1") {
+            buildString = buildString.replace("%DOOR%", "checked");
+        } else {
+            buildString = buildString.replace("%DOOR%", "");
+        }
         callback(buildString,runs);
     });
+
 
     // need to add for coffee and door
     // extra permissions go here
@@ -226,8 +235,13 @@ function setUser(hash, decode, callback) {
     } else {
         client.hset(hash, "Lollies", "0", redis.print);
     }
+    // set the door
+    if(decode.door == "door") {
+        client.hset(hash, "Door", "1", redis.print);
+    } else {
+        client.hset(hash, "Door", "0", redis.print);
+    }
     // add coffee and door here later TODO:
-    // callback
     callback(1);
 }
 
@@ -269,6 +283,7 @@ function servPage(pageaddr, req, res, decode, rfidTag) {
                                             Email: %EMAIL%<br>\
                                             Last Scan: %TIME%<br>\
                                             Lollies: %LOLLIES%<br>\
+                                            Door: %DOOR%<br>\
                                             ";
                         
                         // reset
@@ -552,6 +567,8 @@ function requestHandler(req, res) {
             });
 
             req.on('end', function() {
+                console.log(fullBody);
+
                 // decode
                 var decode = querystring.parse(fullBody);
                 
