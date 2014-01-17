@@ -11,6 +11,7 @@ import redis
 import datetime
 import textwrap
 import json
+import logging
  
 # globals  
 global debug
@@ -41,8 +42,10 @@ def connect():
 		# connect to Redis
 		r_server = redis.Redis(host='winter.ceit.uq.edu.au', port=6379, db=10, password=None, socket_timeout=None, connection_pool=None, charset='utf-8', errors='strict', decode_responses=False, unix_socket_path=None)
 	
-	except:
-		print "Connection Problem, Exiting"
+	except Exception, e:
+		print "Connection Issues"
+		# exit with error, supervisord will restart it.
+		logging.error(e)
 		sys.exit(1)
 
 # callback
@@ -87,7 +90,7 @@ def on_message(mosq, obj, msg):
 
 			my_str += "Unregistered Go to\nwinter.ceit.uq.edu.au\n:" + str(serverPort) + "/index.html\nTo Register\n"
 			my_str += "Your Key is: " + str(current_number) + "\n"
-			print my_str
+			logging.info(my_str)
 
 			# publish here
 			mqttc.publish(screenTopic, my_str)
@@ -130,11 +133,14 @@ def on_message(mosq, obj, msg):
 
 			# publish to screen
 			mqttc.publish(screenTopic, my_str)
-			print my_str
+			logging.info(my_str)
 
 def on_disconnect(mosq, obj, rc):
 	connect()
 	time.sleep(10)
+
+logging.basicConfig(filename='gumball.log',format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG)
+logging.info('Script Started!')
 
 try:
 	# wait for a little bit to not trip supervisord's fatel status
@@ -160,6 +166,7 @@ try:
 	#remain connected and publish
 	while (mqttc.loop() == 0):
 		time.sleep(1)
-except:
+except Exception, e:
 	# exit with error, supervisord will restart it.
+	logging.error(e)
 	sys.exit(1)

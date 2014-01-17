@@ -12,6 +12,7 @@ import datetime
 import textwrap
 import json
 import traceback
+import logging
  
 # globals  
 global debug
@@ -45,7 +46,7 @@ def connect():
 	except Exception, e:
 		print "Connection Issues"
 		# exit with error, supervisord will restart it.
-		print e
+		logging.error(e)
 		sys.exit(1)
 
 # callback
@@ -90,7 +91,7 @@ def on_message(mosq, obj, msg):
 
 			my_str += "Unregistered Go to\nwinter.ceit.uq.edu.au\n:" + str(serverPort) + "/index.html\nTo Register\n"
 			my_str += "Your Key is: " + str(current_number) + "\n"
-			print my_str
+			logging.info(my_str)
 
 			# publish here
 			mqttc.publish(screenTopic, my_str)
@@ -102,8 +103,8 @@ def on_message(mosq, obj, msg):
 		else:
 
 			# update the time stamp
-			ts = time.time()
-			st = datetime.datetime.fromtimestamp(ts).strftime('%d-%m-%Y %H:%M:%S')
+			ts = (time.time()*1000)
+			st = datetime.datetime.fromtimestamp(ts/1000).strftime('%d-%m-%Y %H:%M:%S')
 
 			# set users most recent sign in time
 			r_server.hset(str(hashkey), "Python Time", ts)
@@ -114,7 +115,6 @@ def on_message(mosq, obj, msg):
 			my_str = str(hashkey) + "_doorLog"
 			# need to check only for today, and the most current, if it is a one, then that
 			# was a sign in, so post a 0, likewise if it is a 0, post a 1.
-			print my_str
 			
 			current_signin = r_server.hgetall(my_str)
 			
@@ -161,38 +161,42 @@ def on_message(mosq, obj, msg):
 
 			# publish to screen
 			mqttc.publish(screenTopic, my_str)
-			print my_str
+			logging.info(my_str)
 
 def on_disconnect(mosq, obj, rc):
 	connect()
 	time.sleep(10)
 
-#try:
-# wait for a little bit to not trip supervisord's fatel status
-print "Started"
-time.sleep(10)
+logging.basicConfig(filename='door.log',format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG)
+logging.info('Script Started!')
 
-# start
-debug = 0
-run = 1
+try:
+	# wait for a little bit to not trip supervisord's fatel status
+	print "Started"
+	time.sleep(10)
 
-# generate client name and connect to mqtt
-mypid = os.getpid()
-client_uniq = "pubclient_"+str(mypid)
+	# start
+	debug = 0
+	run = 1
 
-# connect mqtt
-mqttc = mosquitto.Mosquitto(client_uniq)
-connect()
+	# generate client name and connect to mqtt
+	mypid = os.getpid()
+	client_uniq = "pubclient_"+str(mypid)
 
-print """\n############  HELLO  ############
-# ~~~~~~~ NOW RUNNING ~~~~~~~~  # 
-#################################\n"""
- 
-#remain connected and publish
-while (mqttc.loop() == 0):
-	time.sleep(1)
-#except Exception, e:
+	# connect mqtt
+	mqttc = mosquitto.Mosquitto(client_uniq)
+	connect()
+
+	print """\n############  HELLO  ############
+	# ~~~~~~~ NOW RUNNING ~~~~~~~~  # 
+	#################################\n"""
+	 
+	#remain connected and publish
+	while (mqttc.loop() == 0):
+		time.sleep(1)
+
+except Exception, e:
 	# exit with error, supervisord will restart it.
 	# print traceback.format_exc()
-#	print e
-#	sys.exit(1)
+	logging.error(e)
+	sys.exit(1)

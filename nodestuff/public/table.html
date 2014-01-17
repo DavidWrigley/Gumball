@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<button onclick="myFunction()">Try it</button>
+
+<script>
+function myFunction()
+	{
+		var da = new Date();
+		// 0 is sat, 1 is sun, 2 is monday so need to make it land on monday
+		var days = (da.getDay()-1);
+		// need milliseconds so far in the week.
+		var seconds = (days*24*60*60*1000)
+		// debug
+		console.log(seconds)
+		// get current time data
+		var CurrentYear = da.getFullYear();
+		var CurrentMonth = da.getMonth();
+		var CurrentDay = da.getUTCDate()
+		// debug
+		// console.log(CurrentYear + " " + CurrentMonth + " " + CurrentDay)
+		// convert current time data to UTC
+		var timeUTC = Date.UTC(CurrentYear,CurrentMonth,CurrentDay);
+		var x = document.getElementById("demo");
+		var y = document.getElementById("currentUTC");
+		x.innerHTML=(timeUTC-seconds);
+		y.innerHTML=(timeUTC);
+	}
+</script>
+
+<p id="currentUTC">Current UTC TIME</p>
+
+<p id="demo">Click the button to display the numbers of milliseconds between a specified date and midnight January 1, 1970.</p>
+
+<h4>Sign In Sheet</h4>
+<table border="1">
+	<tr>
+		<td>Date</td>
+		<td>Monday<br>%D%-%M%-%Y%</td>
+		<td>Tuesday<br>%D%-%M%-%Y%</td>
+		<td>Wednesday<br>%D%-%M%-%Y%</td>
+		<td>Thursday<br>%D%-%M%-%Y%</td>
+		<td>Friday<br>%D%-%M%-%Y%</td>
+	</tr>
+
+	<tr>
+		<td>AM Start</td>
+		<td>%MOAON%</td>
+		<td>%TUAON%</td>
+		<td>%WEAON%</td>
+		<td>%THAON%</td>
+		<td>%FRAON%</td>
+	</tr>
+
+	<tr>
+		<td>AM Stop</td>
+		<td>%MOAOFF%</td>
+		<td>%TUAOFF%</td>
+		<td>%WEAOFF%</td>
+		<td>%THAOFF%</td>
+		<td>%FRAOFF%</td>
+	</tr>
+
+	<tr>
+		<td>PM Start</td>
+		<td>%MOPON%</td>
+		<td>%TUPON%</td>
+		<td>%WEPON%</td>
+		<td>%THPON%</td>
+		<td>%FRPON%</td>
+	</tr>
+
+	<tr>
+		<td>PM Stop</td>
+		<td>%MOPOFF%</td>
+		<td>%TUPOFF%</td>
+		<td>%WEPOFF%</td>
+		<td>%THPOFF%</td>
+		<td>%FRPOFF%</td>
+	</tr>
+
+	<tr>
+		<td>Total</td>
+		<td>%MOTOTAL%</td>
+		<td>%TUTOTAL%</td>
+		<td>%WETOTAL%</td>
+		<td>%THTOTAL%</td>
+		<td>%FRTOTAL%</td>
+	</tr>
+
+	<tr>
+		<td><b>Running Total</b></td>
+		<td>%MORTOTAL%</td>
+		<td>%TURTOTAL%</td>
+		<td>%WERTOTAL%</td>
+		<td>%THRTOTAL%</td>
+		<td>%FRRTOTAL%</td>
+	</tr>
+</table>
+</body>
+</html>

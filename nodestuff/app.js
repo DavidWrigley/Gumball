@@ -168,6 +168,176 @@ function servMessage(type, req, res, thing, errorMessage, advice) {
 }
 
 /***********
+    function sort the dic into an array
+***********/
+function keys(obj, minimum, maximum) {
+    var keys = [];
+    for(var key in obj)
+    {
+        if(obj.hasOwnProperty(key))
+        {
+            if((parseInt(key,10) > minimum)&(parseInt(key,10) < maximum)) {
+                keys.push(key);
+            }
+        }
+    }
+    return keys.sort();
+}
+
+/***********
+    function to return all the contents of a hash
+***********/
+function getAllFromHash(Hash, minimum, maximum, callback) {
+    var sortedKeys = [];
+    console.log("Hash value: " + Hash);
+    client.hgetall(Hash, function(err,obj) {
+        console.dir(obj);
+        sortedKeys = keys(obj, minimum, maximum);
+        console.log("sorted array: " + sortedKeys);
+        if(obj != null) {
+            callback(obj, sortedKeys);
+        } else {
+            callback(null, null);
+        }
+    });
+}
+
+/***********
+    function to get the start of the day in UTC time
+***********/
+function UTCStartDay(Year, Month, Day, Current, Callback) {
+    var da = new Date();
+    // get the number of days through the week.
+    var daysthroughweek = (da.getDay()-1);
+    // get the seconds for the beginning of the required day.
+    seconds = Date.UTC(Year,Month,(Day-(daysthroughweek-Current)));
+    // debug
+    console.log(seconds)
+    // return it.
+    console.log("UTC Time for: " + Current + " :" + seconds);
+    return seconds
+}
+
+/***********
+    function to replace keys inside the table.html sign in system
+***********/
+function buildTable(Hash, buildString, callback) {
+    // alter the hash, to construct the timesheet
+    Hash = Hash + "_doorLog";
+    var da = new Date();
+    
+    var CurrentDay = 0;
+    var minimum = 0;
+    var maximum = 0;
+
+    minimum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),CurrentDay);
+    maximum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),CurrentDay+1);
+    // build for monday day 2 
+    getAllFromHash(Hash, minimum, maximum, function(Result, SortedKeys) {
+        console.log("from getAllFromHash: " + Result);
+        // remove excessive entries.
+        // and detect if the users signed off in am or no.
+        if((Result != null)&(SortedKeys != null)) {
+            for(var i = 0; i < SortedKeys.length; i++) {
+                console.log("Result of: " + SortedKeys[i] + " is: " + Result[SortedKeys[i]]);
+                if(Result[SortedKeys[i]] == 1) {
+                    // create date object
+                    var DateObj = new Date(SortedKeys[i]);
+                    // user sign in.
+                    // replace MOAON
+                    console.log(DateObj);
+                    buildString.replace("%MOAON%", DateObj.getHours());
+                }
+            }
+        }
+    });
+
+    CurrentDay++;
+    // build for tuesday day 3
+    minimum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),CurrentDay);
+    maximum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),CurrentDay+1);
+    // build for monday day 2 
+    getAllFromHash(Hash, minimum, maximum, function(Result, SortedKeys) {
+        console.log("from getAllFromHash: " + Result);
+        // use this data to then format the table.
+        // // and detect if the users signed off in am or no.
+        if((Result != null)&(SortedKeys != null)) {
+            for(var i = 0; i < SortedKeys.length; i++) {
+                console.log("Result of: " + SortedKeys[i] + " is: " + Result[SortedKeys[i]]);
+            }
+        }
+    });
+
+    CurrentDay++;
+    // build for tuesday day 3
+    minimum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),CurrentDay);
+    maximum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),CurrentDay+1);
+    // build for monday day 2 
+    getAllFromHash(Hash, minimum, maximum, function(Result, SortedKeys) {
+        console.log("from getAllFromHash: " + Result);
+        // use this data to then format the table.
+        // // and detect if the users signed off in am or no.
+        if((Result != null)&(SortedKeys != null)) {
+            if(SortedKeys.length <= 2) {
+                // create date object
+                var DateObj = new Date(parseInt(SortedKeys[0],10));
+                var TimeString = DateObj.toLocaleTimeString()
+                buildString = buildString.replace("%MOAON%", TimeString);
+                DateObj = new Date(parseInt(SortedKeys[1],10));
+                TimeString = DateObj.toLocaleTimeString()
+                buildString = buildString.replace("%MOAOFF%", TimeString);
+            }
+            for(var i = 0; i < SortedKeys.length; i++) {
+                console.log("Result of: " + SortedKeys[i] + " is: " + Result[SortedKeys[i]]);
+                if(Result[SortedKeys[i]] == 1) {
+                    // create date object
+                    var DateObj = new Date(parseInt(SortedKeys[i],10));
+                    var TimeString = DateObj.toLocaleTimeString()
+                    // user sign in.
+                    // replace MOAON
+                    console.log(DateObj.toLocaleTimeString());
+                    buildString = buildString.replace("%MOAON%", TimeString);
+                }
+
+            }
+        }
+    });
+
+    CurrentDay++;
+    // build for tuesday day 3
+    minimum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),CurrentDay);
+    maximum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),CurrentDay+1);
+    // build for monday day 2 
+    getAllFromHash(Hash, minimum, maximum, function(Result, SortedKeys) {
+        console.log("from getAllFromHash: " + Result);
+        // use this data to then format the table.
+        // and detect if the users signed off in am or no.
+        if((Result != null)&(SortedKeys != null)) {
+            for(var i = 0; i < SortedKeys.length; i++) {
+                console.log("Result of: " + SortedKeys[i] + " is: " + Result[SortedKeys[i]]);
+            }
+        }
+    });
+
+    CurrentDay++;
+    // build for tuesday day 3
+    minimum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),CurrentDay);
+    maximum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),CurrentDay+1);
+    // build for monday day 2 
+    getAllFromHash(Hash, minimum, maximum, function(Result, SortedKeys) {
+        console.log("from getAllFromHash: " + Result);
+        // use this data to then format the table.
+        // // and detect if the users signed off in am or no.
+        if((Result != null)&(SortedKeys != null)) {
+            for(var i = 0; i < SortedKeys.length; i++) {
+                console.log("Result of: " + SortedKeys[i] + " is: " + Result[SortedKeys[i]]);
+            }
+        }
+        callback(buildString);
+    });
+}
+
+/***********
     function to replace and return user data in buildstring
 ***********/
 function buildUser(Hash, buildString, runs, callback) {
@@ -346,6 +516,12 @@ function requestHandler(req, res) {
     if(req.method == "GET") {
         console.log("GET request for: " + req.url);
         if(fileName === '/form.html') {
+            
+            // test
+            buildTable("edffe939fd3d2252895737c0eb63ae27", "this is a string, that contains things %MOAON%", function(Hue) {
+                console.log("Done: " + Hue);
+            });
+
             content = localFolder + fileName;
      
             //reads the file referenced by 'content'

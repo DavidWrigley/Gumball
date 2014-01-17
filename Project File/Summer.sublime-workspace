@@ -4,6 +4,86 @@
 		"selected_items":
 		[
 			[
+				"SOr",
+				"SortedKeys"
+			],
+			[
+				"Time",
+				"TimeString"
+			],
+			[
+				"get",
+				"getHours"
+			],
+			[
+				"Da",
+				"DateObj"
+			],
+			[
+				"buil",
+				"buildString"
+			],
+			[
+				"Re",
+				"Result"
+			],
+			[
+				"Sor",
+				"SortedKeys"
+			],
+			[
+				"da",
+				"daysthroughweek"
+			],
+			[
+				"Cur",
+				"Current"
+			],
+			[
+				"ret",
+				"returnTime"
+			],
+			[
+				"retu",
+				"returnTime"
+			],
+			[
+				"UT",
+				"UTCStartDay"
+			],
+			[
+				"Curr",
+				"Current"
+			],
+			[
+				"ma",
+				"maximum"
+			],
+			[
+				"sort",
+				"sortedKeys"
+			],
+			[
+				"sor",
+				"sortedKeys"
+			],
+			[
+				"Get",
+				"getAllFromHash"
+			],
+			[
+				"cur",
+				"CurrentDay"
+			],
+			[
+				"time",
+				"timeUTC"
+			],
+			[
+				"Cu",
+				"CurrentDay"
+			],
+			[
 				"hash",
 				"hashkey	Default"
 			],
@@ -36,10 +116,6 @@
 				"signIn"
 			],
 			[
-				"cur",
-				"current_signin	Default"
-			],
-			[
 				"scre",
 				"screenTopic	Default"
 			],
@@ -66,10 +142,6 @@
 			[
 				"lr",
 				"lrem"
-			],
-			[
-				"Re",
-				"Registered"
 			],
 			[
 				"firstName",
@@ -154,10 +226,6 @@
 			[
 				"hs",
 				"hashvalue"
-			],
-			[
-				"ret",
-				"return"
 			],
 			[
 				"chek",
@@ -260,10 +328,6 @@
 				"listArray"
 			],
 			[
-				"get",
-				"getFullList"
-			],
-			[
 				"try",
 				"try	Try/Except"
 			],
@@ -359,7 +423,23 @@
 			"file": "/Users/davidwrigley/Gumball/nodestuff/app.js",
 			"settings":
 			{
-				"buffer_size": 25006,
+				"buffer_size": 31884,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/davidwrigley/Gumball/Visulisations/test.py",
+			"settings":
+			{
+				"buffer_size": 423,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/davidwrigley/Gumball/nodestuff/public/table.html",
+			"settings":
+			{
+				"buffer_size": 2085,
 				"line_ending": "Unix"
 			}
 		},
@@ -416,7 +496,7 @@
 			"file": "/Users/davidwrigley/Gumball/Mirror USB/for Pi/shell/Python/gumball.py",
 			"settings":
 			{
-				"buffer_size": 4199,
+				"buffer_size": 4496,
 				"line_ending": "Unix"
 			}
 		},
@@ -424,7 +504,7 @@
 			"file": "/Users/davidwrigley/Gumball/Mirror USB/for Pi/shell/Python/door.py",
 			"settings":
 			{
-				"buffer_size": 5147,
+				"buffer_size": 5368,
 				"line_ending": "Unix",
 				"name": "# Door Python script"
 			}
@@ -439,18 +519,10 @@
 			}
 		},
 		{
-			"file": "/Users/davidwrigley/Gumball/Mirror USB/for Pi/shell/mirror_osx.sh",
-			"settings":
-			{
-				"buffer_size": 5661,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "/Users/davidwrigley/Gumball/Autologin/login.applescript",
 			"settings":
 			{
-				"buffer_size": 95,
+				"buffer_size": 91,
 				"line_ending": "Unix"
 			}
 		}
@@ -458,9 +530,13 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 87.0,
+		"height": 67.0,
 		"selected_items":
 		[
+			[
+				"pyh",
+				"Set Syntax: Python"
+			],
 			[
 				"pyt",
 				"Set Syntax: Python"
@@ -539,6 +615,7 @@
 	},
 	"file_history":
 	[
+		"/Users/davidwrigley/Gumball/Mirror USB/for Pi/shell/mirror_osx.sh",
 		"/Users/davidwrigley/Gumball/Autologin/login.applescript",
 		"/Users/davidwrigley/Gumball/nodestuff/public/aboutme.html",
 		"/Users/davidwrigley/Gumball/nodestuff/public/index.html",
@@ -582,6 +659,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"parse",
+			"SortedKeys",
 			"eof",
 			"tab",
 			"buildUser",
@@ -647,7 +726,7 @@
 	"groups":
 	[
 		{
-			"selected": 9,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -655,15 +734,15 @@
 					"file": "/Users/davidwrigley/Gumball/nodestuff/app.js",
 					"settings":
 					{
-						"buffer_size": 25006,
+						"buffer_size": 31884,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7414,
-								7414
+								9644,
+								9644
 							]
 						],
 						"settings":
@@ -673,13 +752,66 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 5082.0,
+						"translation.y": 6069.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
+					"file": "/Users/davidwrigley/Gumball/Visulisations/test.py",
+					"settings":
+					{
+						"buffer_size": 423,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								69,
+								69
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/Users/davidwrigley/Gumball/nodestuff/public/table.html",
+					"settings":
+					{
+						"buffer_size": 2085,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								135,
+								115
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
 					"file": "/Users/davidwrigley/Gumball/nodestuff/public/manage.html",
 					"settings":
 					{
@@ -707,7 +839,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 4,
 					"file": "/Users/davidwrigley/Gumball/nodestuff/public/form.html",
 					"settings":
 					{
@@ -734,7 +866,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 5,
 					"file": "/Users/davidwrigley/Gumball/nodestuff/public/check.html",
 					"settings":
 					{
@@ -761,7 +893,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 6,
 					"file": "/Users/davidwrigley/Gumball/nodestuff/public/error.html",
 					"settings":
 					{
@@ -788,7 +920,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 7,
 					"file": "/Users/davidwrigley/Gumball/nodestuff/public/manageusers.html",
 					"settings":
 					{
@@ -814,7 +946,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 8,
 					"file": "/Users/davidwrigley/Gumball/nodestuff/public/userdata.html",
 					"settings":
 					{
@@ -840,51 +972,23 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 9,
 					"file": "/Users/davidwrigley/Gumball/Mirror USB/for Pi/shell/Python/gumball.py",
 					"settings":
 					{
-						"buffer_size": 4199,
+						"buffer_size": 4496,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2514,
-								2514
+								3695,
+								3695
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1654.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "/Users/davidwrigley/Gumball/Mirror USB/for Pi/shell/Python/door.py",
-					"settings":
-					{
-						"buffer_size": 5147,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								381,
-								381
-							]
-						],
-						"settings":
-						{
-							"auto_name": "# Door Python script",
 							"syntax": "Packages/Python/Python.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
@@ -895,7 +999,35 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 10,
+					"file": "/Users/davidwrigley/Gumball/Mirror USB/for Pi/shell/Python/door.py",
+					"settings":
+					{
+						"buffer_size": 5368,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3838,
+								3838
+							]
+						],
+						"settings":
+						{
+							"auto_name": "# Door Python script",
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2845.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
 					"file": "/Users/davidwrigley/Gumball/Autologin/auto.py",
 					"settings":
 					{
@@ -923,39 +1055,11 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
-					"file": "/Users/davidwrigley/Gumball/Mirror USB/for Pi/shell/mirror_osx.sh",
-					"settings":
-					{
-						"buffer_size": 5661,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2927,
-								2927
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3079.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 11,
+					"buffer": 12,
 					"file": "/Users/davidwrigley/Gumball/Autologin/login.applescript",
 					"settings":
 					{
-						"buffer_size": 95,
+						"buffer_size": 91,
 						"regions":
 						{
 						},
