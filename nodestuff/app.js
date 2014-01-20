@@ -13,6 +13,8 @@ var ready = 0;
 var port = 55671;
 var userFound = 0;
 var finishedString = "";
+var runningTimeTotal = [0,0,0,0,0];
+var dayArray = ["MO","TU","WE","TH","FR"];
 
 // connect to db 10
 client.select(10, function() {
@@ -187,7 +189,7 @@ function keys(obj, minimum, maximum) {
 /***********
     function to return all the contents of a hash
 ***********/
-function getAllFromHash(Hash, minimum, maximum, callback) {
+function getAllFromHash(Hash, minimum, maximum, count, callback) {
     var sortedKeys = [];
     console.log("Hash value: " + Hash);
     client.hgetall(Hash, function(err,obj) {
@@ -195,9 +197,9 @@ function getAllFromHash(Hash, minimum, maximum, callback) {
         sortedKeys = keys(obj, minimum, maximum);
         console.log("sorted array: " + sortedKeys);
         if(obj != null) {
-            callback(obj, sortedKeys);
+            callback(obj, sortedKeys, count);
         } else {
-            callback(null, null);
+            callback(null, null, count);
         }
     });
 }
@@ -219,122 +221,263 @@ function UTCStartDay(Year, Month, Day, Current, Callback) {
 }
 
 /***********
+    function to reduce code size, by altering string value
+    and calling each time
+***********/
+function fillHours(buildString, dayno, utcArray, Result, currentcount, callback) {
+    if((Result != null)&(utcArray != null)) {
+        // if the user only signed in once
+        var day = dayArray[dayno];
+
+        console.log(utcArray.length);
+        if((utcArray.length == 0)|(utcArray == null)) {
+            // user did not sign in that day
+            buildString = buildString.replace("%" + day + "AON%", "-");
+            buildString = buildString.replace("%" + day + "AOFF%", "-");
+
+            buildString = buildString.replace("%" + day + "PON%", "-");
+            buildString = buildString.replace("%" + day + "POFF%", "-");
+            buildString = buildString.replace("%" + day + "TOTAL%", "-");
+
+            // running hours total
+            var timeDiffTotal = 0;
+            for(var j = 0; j < 5; j++) {
+                timeDiffTotal += runningTimeTotal[j]
+            }
+
+            hours = Math.floor(timeDiffTotal / 36e5)
+            mins = Math.floor((timeDiffTotal % 36e5) / 6e4)
+            secs = Math.floor((timeDiffTotal % 6e4) / 1000);   
+
+            var runningTotal = (hours + ":" + mins + ":" + secs);   
+
+            buildString = buildString = buildString.replace("%" + day + "RTOTAL%", runningTotal);   
+
+            callback(buildString,currentcount);
+        }
+        else if(utcArray.length == 1) {
+            // create date object
+
+            var DateObj = new Date(parseInt(utcArray[0],10));
+            buildString = buildString.replace("%" + day + "AON%", DateObj.toLocaleTimeString());
+            buildString = buildString.replace("%" + day + "AOFF%", "-");
+
+            buildString = buildString.replace("%" + day + "PON%", "-");
+            buildString = buildString.replace("%" + day + "POFF%", "-");
+            buildString = buildString.replace("%" + day + "TOTAL%", "-"); 
+
+            buildString = buildString.replace("%" + day + "TOTAL%", "-:-:-"); 
+            
+            // running hours total
+            var timeDiffTotal = 0;
+            for(var j = 0; j < 5; j++) {
+                timeDiffTotal += runningTimeTotal[j]
+            }
+
+            hours = Math.floor(timeDiffTotal / 36e5)
+            mins = Math.floor((timeDiffTotal % 36e5) / 6e4)
+            secs = Math.floor((timeDiffTotal % 6e4) / 1000);   
+
+            var runningTotal = (hours + ":" + mins + ":" + secs);   
+
+            buildString = buildString.replace("%" + day + "RTOTAL%", runningTotal);
+
+            callback(buildString,currentcount);
+        } 
+        // they signed in then out
+        else if(utcArray.length == 2) {
+            var DateObj = new Date(parseInt(utcArray[0],10));
+            buildString = buildString.replace("%" + day + "AON%", DateObj.toLocaleTimeString());
+            buildString = buildString.replace("%" + day + "AOFF%", "-");
+
+            DateObj = new Date(parseInt(utcArray[1],10));
+            buildString = buildString.replace("%" + day + "PON%", "-");
+            buildString = buildString.replace("%" + day + "POFF%", DateObj.toLocaleTimeString()); 
+
+            var timeDiff = ( parseInt(utcArray[1],10) - (parseInt(utcArray[0],10)));
+
+            // total hours for today
+            runningTimeTotal[dayno] = timeDiff;
+
+            var hours = Math.floor(timeDiff / 36e5)
+            var mins = Math.floor((timeDiff % 36e5) / 6e4)
+            var secs = Math.floor((timeDiff % 6e4) / 1000); 
+            
+            var total = (hours + ":" + mins + ":" + secs);
+
+            buildString = buildString.replace("%" + day + "TOTAL%", total);
+
+            // running hours total
+            var timeDiffTotal = 0;
+            for(var j = 0; j < 5; j++) {
+                timeDiffTotal += runningTimeTotal[j]
+            }
+
+            hours = Math.floor(timeDiffTotal / 36e5)
+            mins = Math.floor((timeDiffTotal % 36e5) / 6e4)
+            secs = Math.floor((timeDiffTotal % 6e4) / 1000);   
+
+            var runningTotal = (hours + ":" + mins + ":" + secs);   
+
+            buildString = buildString.replace("%" + day + "RTOTAL%", runningTotal);   
+            callback(buildString,currentcount);
+        }
+        // they signed in then out then in again.
+        else if(utcArray.length == 3) {
+            var DateObj = new Date(parseInt(utcArray[0],10));
+            buildString = buildString.replace("%" + day + "AON%", DateObj.toLocaleTimeString());
+            DateObj = new Date(parseInt(utcArray[1],10));
+            buildString = buildString.replace("%" + day + "AOFF%", DateObj.toLocaleTimeString());
+
+            DateObj = new Date(parseInt(utcArray[2],10));
+            buildString = buildString.replace("%" + day + "PON%", DateObj.toLocaleTimeString());
+            buildString = buildString.replace("%" + day + "POFF%", "-"); 
+
+            var timeDiff = ( parseInt(utcArray[1],10) - (parseInt(utcArray[0],10)));
+
+            // total hours for today
+            runningTimeTotal[dayno] = timeDiff;
+
+            var hours = Math.floor(timeDiff / 36e5)
+            var mins = Math.floor((timeDiff % 36e5) / 6e4)
+            var secs = Math.floor((timeDiff % 6e4) / 1000); 
+            
+            var total = (hours + ":" + mins + ":" + secs);
+
+            buildString = buildString.replace("%" + day + "TOTAL%", total);
+
+            // running hours total
+            var timeDiffTotal = 0;
+            for(var j = 0; j < 5; j++) {
+                timeDiffTotal += runningTimeTotal[j]
+            }
+
+            hours = Math.floor(timeDiffTotal / 36e5)
+            mins = Math.floor((timeDiffTotal % 36e5) / 6e4)
+            secs = Math.floor((timeDiffTotal % 6e4) / 1000);   
+
+            var runningTotal = (hours + ":" + mins + ":" + secs);  
+
+            buildString = buildString.replace("%" + day + "RTOTAL%", runningTotal);  
+
+            callback(buildString,currentcount);
+        }
+        // they correctly sign in out in out.
+        else if(utcArray.length == 4) {
+            var DateObj = new Date(parseInt(utcArray[0],10));
+            buildString = buildString.replace("%" + day + "AON%", DateObj.toLocaleTimeString());
+            DateObj = new Date(parseInt(utcArray[1],10));
+            buildString = buildString.replace("%" + day + "AOFF%", DateObj.toLocaleTimeString());
+
+            DateObj = new Date(parseInt(utcArray[2],10));
+            buildString = buildString.replace("%" + day + "PON%", DateObj.toLocaleTimeString());
+            DateObj = new Date(parseInt(utcArray[3],10));
+            buildString = buildString.replace("%" + day + "POFF%", DateObj.toLocaleTimeString());
+            
+            var timeDiff = (( parseInt(utcArray[1],10) - parseInt(utcArray[0],10) ) + ( parseInt(utcArray[3],10) - parseInt(utcArray[2],10)));
+
+            // total hours for today
+            runningTimeTotal[dayno] = timeDiff;
+
+            var hours = Math.floor(timeDiff / 3600000)
+            var mins = Math.floor((timeDiff % 3600000) / 60000)
+            var secs = Math.floor((timeDiff % 60000) / 1000); 
+            
+            var total = (hours + ":" + mins + ":" + secs);
+
+            buildString = buildString.replace("%" + day + "TOTAL%", total);
+
+            // running hours total
+            var timeDiffTotal = 0;
+            for(var j = 0; j < 5; j++) {
+                timeDiffTotal += runningTimeTotal[j]
+            }
+
+            hours = Math.floor(timeDiffTotal / 36e5)
+            mins = Math.floor((timeDiffTotal % 36e5) / 6e4)
+            secs = Math.floor((timeDiffTotal % 6e4) / 1000);   
+
+            var runningTotal = (hours + ":" + mins + ":" + secs);   
+
+            buildString = buildString.replace("%" + day + "RTOTAL%", runningTotal);   
+
+            callback(buildString,currentcount);
+        } else if(utcArray.length > 4) {
+            // user signed in more then they should have
+            console.log("User signed in: " + utcArray.length);
+            // need to remove entries appart from the fist two and last two.
+
+            callback(null,currentcount);
+        }
+    }
+}
+
+function do_the_splice(array, index, count, callback) {
+    console.log("splicing: " + array.splice(index, 1) + " with count: " + i);
+    callback(array,count);
+}
+
+/***********
+    function to splice arrays removeing middle data
+    TODO: Make this an intelegent splice, so it keeps most relevent time slots
+***********/
+function arraySplice(array, callback) {
+    var index = 0;
+    var length = array.length;
+    for(var i = 2; i < (length - 2); i++) {
+        index = 2;
+        if (index > -1) {
+            do_the_splice(array,2,i,function(Hue, count) {
+                if(count > (array.length-2)) {
+                    callback(array);
+                }
+            });
+        }
+    }
+}
+
+/***********
     function to replace keys inside the table.html sign in system
 ***********/
-function buildTable(Hash, buildString, callback) {
+function buildTable(Hash, buildString, req, res, callback) {
     // alter the hash, to construct the timesheet
     Hash = Hash + "_doorLog";
     var da = new Date();
     
-    var CurrentDay = 0;
+    var CurrentDay = "";
     var minimum = 0;
     var maximum = 0;
+    runningTimeTotal = [0,0,0,0,0];
 
-    minimum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),CurrentDay);
-    maximum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),CurrentDay+1);
-    // build for monday day 2 
-    getAllFromHash(Hash, minimum, maximum, function(Result, SortedKeys) {
-        console.log("from getAllFromHash: " + Result);
-        // remove excessive entries.
-        // and detect if the users signed off in am or no.
-        if((Result != null)&(SortedKeys != null)) {
-            for(var i = 0; i < SortedKeys.length; i++) {
-                console.log("Result of: " + SortedKeys[i] + " is: " + Result[SortedKeys[i]]);
-                if(Result[SortedKeys[i]] == 1) {
-                    // create date object
-                    var DateObj = new Date(SortedKeys[i]);
-                    // user sign in.
-                    // replace MOAON
-                    console.log(DateObj);
-                    buildString.replace("%MOAON%", DateObj.getHours());
+    for(var i = 0; i < 5; i++) {
+        minimum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),i);
+        maximum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),i+1);
+        // build for monday day 2 
+        getAllFromHash(Hash, minimum, maximum, i, function(Result, SortedKeys, count) {
+            // remove excessive entries.
+            if(SortedKeys != null) {
+                if(SortedKeys.length > 4) {
+                    // splice the excess keys out of the way
+                    arraySplice(SortedKeys,function(hue) {
+                        console.log("Done arraySort with: " + hue);
+                    })
                 }
+                // and detect if the users signed off in am or no.
+                fillHours(buildString, count, SortedKeys, Result, count, function(Hue,currentcount) {
+                    console.log("done with val: " + Hue + "for value: " + currentcount);
+                    if(Hue != null) {
+                        buildString = Hue;
+                    }
+                    if(currentcount == 4) {
+                        // do callback
+                        callback(buildString);
+                    }
+                });
+            } else {
+                servMessage("ERROR!", req, res, "The Hash returned was:", "NULL ", "This is caused becasuse the user had not get rescanned there card after registration");
             }
-        }
-    });
-
-    CurrentDay++;
-    // build for tuesday day 3
-    minimum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),CurrentDay);
-    maximum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),CurrentDay+1);
-    // build for monday day 2 
-    getAllFromHash(Hash, minimum, maximum, function(Result, SortedKeys) {
-        console.log("from getAllFromHash: " + Result);
-        // use this data to then format the table.
-        // // and detect if the users signed off in am or no.
-        if((Result != null)&(SortedKeys != null)) {
-            for(var i = 0; i < SortedKeys.length; i++) {
-                console.log("Result of: " + SortedKeys[i] + " is: " + Result[SortedKeys[i]]);
-            }
-        }
-    });
-
-    CurrentDay++;
-    // build for tuesday day 3
-    minimum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),CurrentDay);
-    maximum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),CurrentDay+1);
-    // build for monday day 2 
-    getAllFromHash(Hash, minimum, maximum, function(Result, SortedKeys) {
-        console.log("from getAllFromHash: " + Result);
-        // use this data to then format the table.
-        // // and detect if the users signed off in am or no.
-        if((Result != null)&(SortedKeys != null)) {
-            if(SortedKeys.length <= 2) {
-                // create date object
-                var DateObj = new Date(parseInt(SortedKeys[0],10));
-                var TimeString = DateObj.toLocaleTimeString()
-                buildString = buildString.replace("%MOAON%", TimeString);
-                DateObj = new Date(parseInt(SortedKeys[1],10));
-                TimeString = DateObj.toLocaleTimeString()
-                buildString = buildString.replace("%MOAOFF%", TimeString);
-            }
-            for(var i = 0; i < SortedKeys.length; i++) {
-                console.log("Result of: " + SortedKeys[i] + " is: " + Result[SortedKeys[i]]);
-                if(Result[SortedKeys[i]] == 1) {
-                    // create date object
-                    var DateObj = new Date(parseInt(SortedKeys[i],10));
-                    var TimeString = DateObj.toLocaleTimeString()
-                    // user sign in.
-                    // replace MOAON
-                    console.log(DateObj.toLocaleTimeString());
-                    buildString = buildString.replace("%MOAON%", TimeString);
-                }
-
-            }
-        }
-    });
-
-    CurrentDay++;
-    // build for tuesday day 3
-    minimum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),CurrentDay);
-    maximum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),CurrentDay+1);
-    // build for monday day 2 
-    getAllFromHash(Hash, minimum, maximum, function(Result, SortedKeys) {
-        console.log("from getAllFromHash: " + Result);
-        // use this data to then format the table.
-        // and detect if the users signed off in am or no.
-        if((Result != null)&(SortedKeys != null)) {
-            for(var i = 0; i < SortedKeys.length; i++) {
-                console.log("Result of: " + SortedKeys[i] + " is: " + Result[SortedKeys[i]]);
-            }
-        }
-    });
-
-    CurrentDay++;
-    // build for tuesday day 3
-    minimum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),CurrentDay);
-    maximum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),CurrentDay+1);
-    // build for monday day 2 
-    getAllFromHash(Hash, minimum, maximum, function(Result, SortedKeys) {
-        console.log("from getAllFromHash: " + Result);
-        // use this data to then format the table.
-        // // and detect if the users signed off in am or no.
-        if((Result != null)&(SortedKeys != null)) {
-            for(var i = 0; i < SortedKeys.length; i++) {
-                console.log("Result of: " + SortedKeys[i] + " is: " + Result[SortedKeys[i]]);
-            }
-        }
-        callback(buildString);
-    });
+        });
+    }
 }
 
 /***********
@@ -516,11 +659,6 @@ function requestHandler(req, res) {
     if(req.method == "GET") {
         console.log("GET request for: " + req.url);
         if(fileName === '/form.html') {
-            
-            // test
-            buildTable("edffe939fd3d2252895737c0eb63ae27", "this is a string, that contains things %MOAON%", function(Hue) {
-                console.log("Done: " + Hue);
-            });
 
             content = localFolder + fileName;
      
@@ -560,6 +698,26 @@ function requestHandler(req, res) {
                     res.end(contents);
                 } else {
                     console.dir(err);
+                };
+            });
+        } else if(fileName == "/table_round.html") {
+            content = localFolder + fileName;//setup the file name to be returned
+            fs.readFile(content,function(err,contents){
+                if(!err){
+                    // test ddfb44754c24b05a81ee1b9d8e239f20
+                    buildTable("edffe939fd3d2252895737c0eb63ae27", contents.toString(), req, res, function(Hue) {
+                    //buildTable("ddfb44754c24b05a81ee1b9d8e239f20", contents.toString(), function(Hue) {
+                        console.log("Done: " + Hue);
+                        res.end(Hue);
+                    });
+                } else {
+                    console.dir(err);
+
+                    //if the file was not found, set a 404 header...
+                    res.writeHead(404, {'Content-Type': 'text/html'});
+                    //send a custom 'file not found' message
+                    //and then close the request
+                    res.end('<h1>Sorry, the page you are looking for cannot be found.</h1>');
                 };
             });
         } else {
