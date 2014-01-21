@@ -26,11 +26,15 @@ client.on("error", function(err) {
     console.log("Redis Error:" + err);
 });
 
-/**********
-    function that hunts for the users in the registered redis datadase
-    returns an array, that can hold more then one user, this needs
-    to be looped over 
-**********/
+/**
+ * function that hunts for the users in the registered redis datadase
+ * returns an array, that can hold more then one user, this needs
+ * to be looped over 
+ * @param  {array}   list
+ * @param  {string}   checkName
+ * @param  {Function} callback
+ * @return {null}
+ */
 function huntForUser(list, checkName, callback) {
     //console.log("list length: " + list.length);
     var array = [];
@@ -61,9 +65,13 @@ function huntForUser(list, checkName, callback) {
     }
 }
 
-/**********
-    function to fasilitate the bitchiness of javascript
-**********/
+/**
+ * function to fasilitate the bitchiness of javascript
+ * @param  {[int]}   currentLength
+ * @param  {[string]}   hash
+ * @param  {Function} callback
+ * @return {[null]}
+ */
 function moreDamnFunctions(currentLength, hash, callback) {
     // check that key code and get the first name
     getFromHash(hash, "First", function(Result,tempid){
@@ -71,11 +79,15 @@ function moreDamnFunctions(currentLength, hash, callback) {
     });
 }
 
-/**********
-    function to read the authorisedusers.txt file located
-    in private folder, then check that the entered data
-    matches
-**********/
+/**
+ * function to read the authoriseduseres.txt file located in the private
+ * folder, then check that the entered data matches
+ * @param  {array}   array
+ * @param  {string}   username
+ * @param  {string}   password
+ * @param  {Function} callback
+ * @return {null}
+ */
 function authoriseUser2(array, username, password, callback) {
     var found = 0; 
     for(var i = 0; i < array.length; i += 2) {
@@ -92,10 +104,13 @@ function authoriseUser2(array, username, password, callback) {
     }
 }
 
-/**********
-    function to pritty much make sure that a for loop is
-    finished
-**********/
+/**
+ * function to pritty much make sure that a for loop is finished
+ * @param  {int}   current
+ * @param  {int}   full
+ * @param  {Function} callback
+ * @return {null}
+ */
 function check(current, full, callback) {
     console.log("cheking current: " + current + " vs Full: " + full);
     if(current == full) {
@@ -103,10 +118,14 @@ function check(current, full, callback) {
     }
 }
 
-/**********
-    function to get a subhash from a hash from a redis database
-    it returns the object it gets from the subhash
-**********/
+/**
+ * function to get a subhash and value from a hash from the redis database
+ * it returens the object it gets from the subhash
+ * @param  {string}   hash
+ * @param  {string}   subhash
+ * @param  {Function} callback
+ * @return {null}
+ */
 function getFromHash(hash, subhash, callback) {
     client.hget(hash, subhash, function(err,obj2) {
         if(obj2 != null) {
@@ -118,11 +137,13 @@ function getFromHash(hash, subhash, callback) {
     });
 }
 
-/**********
-    function to get a list from the redis database. it then
-    returns the object, which is an array of strings(can be used
-    as hashes)
-**********/
+/**
+ * function to get a list from the redis database. it then retunrs the object,
+ * whcih is an array of strings
+ * @param  {array}   list
+ * @param  {Function} callback
+ * @return {null}
+ */
 function getFullList(list, callback) {
     client.lrange(list, 0, -1, function(err,obj) {
         if(obj != null) {
@@ -134,11 +155,17 @@ function getFullList(list, callback) {
     });
 }
 
-/***********
-    function to serv an error page to the users browser
-    the page can be eddited acording to where it fails
-    using "thing" "error message" and "advice"
-***********/
+/**
+ * function to serv a message page to the users browser the page can be eddited
+ * acording to where it fails using the varables "thing", "error message" and "advice"
+ * @param  {string} type
+ * @param  {object} req
+ * @param  {object} res
+ * @param  {string} thing
+ * @param  {string} errorMessage
+ * @param  {string} advice
+ * @return {null}
+ */
 function servMessage(type, req, res, thing, errorMessage, advice) {
     var content = '';
     var fileName = "/error.html"; //the file that was requested
@@ -169,9 +196,13 @@ function servMessage(type, req, res, thing, errorMessage, advice) {
     });
 }
 
-/***********
-    function sort the dic into an array
-***********/
+/**
+ * function to sort a dic into an array
+ * @param  {object} obj
+ * @param  {int} minimum
+ * @param  {int} maximum
+ * @return {array}
+ */
 function keys(obj, minimum, maximum) {
     var keys = [];
     for(var key in obj)
@@ -186,9 +217,16 @@ function keys(obj, minimum, maximum) {
     return keys.sort();
 }
 
-/***********
-    function to return all the contents of a hash
-***********/
+/**
+ * function to return all the contenst of a hash sorted in ascending order and between
+ * a maximum and minimum value
+ * @param  {string}   Hash
+ * @param  {int}   minimum
+ * @param  {int}   maximum
+ * @param  {int}   count
+ * @param  {Function} callback
+ * @return {null}
+ */
 function getAllFromHash(Hash, minimum, maximum, count, callback) {
     var sortedKeys = [];
     console.log("Hash value: " + Hash);
@@ -197,22 +235,30 @@ function getAllFromHash(Hash, minimum, maximum, count, callback) {
         sortedKeys = keys(obj, minimum, maximum);
         console.log("sorted array: " + sortedKeys);
         if(obj != null) {
-            callback(obj, sortedKeys, count);
+            callback(obj, sortedKeys, count, minimum);
         } else {
-            callback(null, null, count);
+            callback(null, null, count, minimum);
         }
     });
 }
 
-/***********
-    function to get the start of the day in UTC time
-***********/
+/**
+ * function to get the start of the day in UTC time
+ * @param {int} Year
+ * @param {int} Month
+ * @param {int} Day
+ * @param {int} Current
+ * @param {Function} Callback
+ * @param {int} return
+ */
 function UTCStartDay(Year, Month, Day, Current, Callback) {
     var da = new Date();
     // get the number of days through the week.
     var daysthroughweek = (da.getDay()-1);
     // get the seconds for the beginning of the required day.
     seconds = Date.UTC(Year,Month,(Day-(daysthroughweek-Current)));
+    //seconds -= (da.getTimezoneOffset()/60);
+    seconds += (da.getTimezoneOffset()*60*1000);
     // debug
     console.log(seconds)
     // return it.
@@ -220,14 +266,22 @@ function UTCStartDay(Year, Month, Day, Current, Callback) {
     return seconds
 }
 
-/***********
-    function to reduce code size, by altering string value
-    and calling each time
-***********/
+/**
+ * function to fill a string with details about the current
+ * day for the timesheet system. mainily in a function to reduce
+ * code size.
+ * @param  {string}   buildString
+ * @param  {int}   dayno
+ * @param  {array}   utcArray
+ * @param  {array}   Result
+ * @param  {int}   currentcount
+ * @param  {Function} callback
+ * @return {null}
+ */
 function fillHours(buildString, dayno, utcArray, Result, currentcount, callback) {
     if((Result != null)&(utcArray != null)) {
         // if the user only signed in once
-        var day = dayArray[dayno];
+        var day = dayArray[dayno];      
 
         console.log(utcArray.length);
         if((utcArray.length == 0)|(utcArray == null)) {
@@ -261,11 +315,9 @@ function fillHours(buildString, dayno, utcArray, Result, currentcount, callback)
             var DateObj = new Date(parseInt(utcArray[0],10));
             buildString = buildString.replace("%" + day + "AON%", DateObj.toLocaleTimeString());
             buildString = buildString.replace("%" + day + "AOFF%", "-");
-
             buildString = buildString.replace("%" + day + "PON%", "-");
             buildString = buildString.replace("%" + day + "POFF%", "-");
             buildString = buildString.replace("%" + day + "TOTAL%", "-"); 
-
             buildString = buildString.replace("%" + day + "TOTAL%", "-:-:-"); 
             
             // running hours total
@@ -279,9 +331,7 @@ function fillHours(buildString, dayno, utcArray, Result, currentcount, callback)
             secs = Math.floor((timeDiffTotal % 6e4) / 1000);   
 
             var runningTotal = (hours + ":" + mins + ":" + secs);   
-
             buildString = buildString.replace("%" + day + "RTOTAL%", runningTotal);
-
             callback(buildString,currentcount);
         } 
         // they signed in then out
@@ -289,7 +339,6 @@ function fillHours(buildString, dayno, utcArray, Result, currentcount, callback)
             var DateObj = new Date(parseInt(utcArray[0],10));
             buildString = buildString.replace("%" + day + "AON%", DateObj.toLocaleTimeString());
             buildString = buildString.replace("%" + day + "AOFF%", "-");
-
             DateObj = new Date(parseInt(utcArray[1],10));
             buildString = buildString.replace("%" + day + "PON%", "-");
             buildString = buildString.replace("%" + day + "POFF%", DateObj.toLocaleTimeString()); 
@@ -328,7 +377,6 @@ function fillHours(buildString, dayno, utcArray, Result, currentcount, callback)
             buildString = buildString.replace("%" + day + "AON%", DateObj.toLocaleTimeString());
             DateObj = new Date(parseInt(utcArray[1],10));
             buildString = buildString.replace("%" + day + "AOFF%", DateObj.toLocaleTimeString());
-
             DateObj = new Date(parseInt(utcArray[2],10));
             buildString = buildString.replace("%" + day + "PON%", DateObj.toLocaleTimeString());
             buildString = buildString.replace("%" + day + "POFF%", "-"); 
@@ -405,22 +453,113 @@ function fillHours(buildString, dayno, utcArray, Result, currentcount, callback)
         } else if(utcArray.length > 4) {
             // user signed in more then they should have
             console.log("User signed in: " + utcArray.length);
-            // need to remove entries appart from the fist two and last two.
+            var timeDiff = 0;
+            // if the entries are even
+            // that means there are even sign on / off paris. put first and last
+            // on the sheet with "~" as inbetween but add all the time togeather
+            // and put it to toal.
+            if((utcArray.length % 2) == 0) {
+                var DateObj = new Date(parseInt(utcArray[0],10));
+                buildString = buildString.replace("%" + day + "AON%", DateObj.toLocaleTimeString());
+                buildString = buildString.replace("%" + day + "AOFF%", "<...>");
+                DateObj = new Date(parseInt(utcArray[(utcArray.length)-1],10));
+                buildString = buildString.replace("%" + day + "PON%", "<...>");
+                buildString = buildString.replace("%" + day + "POFF%", DateObj.toLocaleTimeString()); 
+                
+                // sum all hours
+                for(var x = 0; x < (utcArray.length - 1); x++) {
+                    timeDiff += ( parseInt(utcArray[x+1],10) - parseInt(utcArray[x],10) )
+                }
+                console.log("total time spent in building: " + timeDiff);
+                runningTimeTotal[dayno] = timeDiff;
 
+                var hours = Math.floor(timeDiff / 3600000)
+                var mins = Math.floor((timeDiff % 3600000) / 60000)
+                var secs = Math.floor((timeDiff % 60000) / 1000); 
+                
+                var total = (hours + ":" + mins + ":" + secs);
+
+                buildString = buildString.replace("%" + day + "TOTAL%", total);
+
+                // running hours total
+                var timeDiffTotal = 0;
+                for(var j = 0; j < 5; j++) {
+                    timeDiffTotal += runningTimeTotal[j]
+                }
+
+                hours = Math.floor(timeDiffTotal / 36e5)
+                mins = Math.floor((timeDiffTotal % 36e5) / 6e4)
+                secs = Math.floor((timeDiffTotal % 6e4) / 1000);   
+
+                var runningTotal = (hours + ":" + mins + ":" + secs);   
+
+                buildString = buildString.replace("%" + day + "RTOTAL%", runningTotal); 
+                callback(buildString,currentcount);
+            }
+            // if the entrues are odd
+            // meaning the users has not yet signed out for the last time.
+            // put the first in AM start and the last in PM Start.
+            else if((utcArray.length % 2) == 1) {
+                var DateObj = new Date(parseInt(utcArray[0],10));
+                buildString = buildString.replace("%" + day + "AON%", DateObj.toLocaleTimeString());
+                buildString = buildString.replace("%" + day + "AOFF%", "<...>");
+                DateObj = new Date(parseInt(utcArray[(utcArray.length)-1],10));
+                buildString = buildString.replace("%" + day + "PON%", DateObj.toLocaleTimeString());
+                buildString = buildString.replace("%" + day + "POFF%", "<...>"); 
+
+                // sum all hours
+                for(var x = 0; x < (utcArray.length - 2); x++) {
+                    timeDiff += ( parseInt(utcArray[x+1],10) - parseInt(utcArray[x],10) )
+                }
+                console.log("total time spent in building: " + timeDiff);
+                runningTimeTotal[dayno] = timeDiff;
+
+                var hours = Math.floor(timeDiff / 3600000)
+                var mins = Math.floor((timeDiff % 3600000) / 60000)
+                var secs = Math.floor((timeDiff % 60000) / 1000); 
+                
+                var total = (hours + ":" + mins + ":" + secs);
+
+                buildString = buildString.replace("%" + day + "TOTAL%", total);
+
+                // running hours total
+                var timeDiffTotal = 0;
+                for(var j = 0; j < 5; j++) {
+                    timeDiffTotal += runningTimeTotal[j]
+                }
+
+                hours = Math.floor(timeDiffTotal / 36e5)
+                mins = Math.floor((timeDiffTotal % 36e5) / 6e4)
+                secs = Math.floor((timeDiffTotal % 6e4) / 1000);   
+
+                var runningTotal = (hours + ":" + mins + ":" + secs);   
+
+                buildString = buildString.replace("%" + day + "RTOTAL%", runningTotal); 
+                callback(buildString,currentcount);
+            }
             callback(null,currentcount);
         }
     }
 }
-
+/**
+ * splice an element from an array, then callback with the array minus the splice
+ * @param  {array}   array
+ * @param  {int}   index
+ * @param  {int}   count
+ * @param  {Function} callback
+ * @return {null}
+ */
 function do_the_splice(array, index, count, callback) {
     console.log("splicing: " + array.splice(index, 1) + " with count: " + i);
     callback(array,count);
 }
 
-/***********
-    function to splice arrays removeing middle data
-    TODO: Make this an intelegent splice, so it keeps most relevent time slots
-***********/
+/**
+ * function to loop through an array to splice out unwanted elements
+ * @param  {array}   array
+ * @param  {Function} callback
+ * @return {null}
+ */
 function arraySplice(array, callback) {
     var index = 0;
     var length = array.length;
@@ -436,9 +575,15 @@ function arraySplice(array, callback) {
     }
 }
 
-/***********
-    function to replace keys inside the table.html sign in system
-***********/
+/**
+ * build the timesheet table for the users from monday to friday
+ * @param  {string}   Hash
+ * @param  {string}   buildString
+ * @param  {object}   req
+ * @param  {object}   res
+ * @param  {Function} callback
+ * @return {null}
+ */
 function buildTable(Hash, buildString, req, res, callback) {
     // alter the hash, to construct the timesheet
     Hash = Hash + "_doorLog";
@@ -448,23 +593,25 @@ function buildTable(Hash, buildString, req, res, callback) {
     var minimum = 0;
     var maximum = 0;
     runningTimeTotal = [0,0,0,0,0];
+    var convDate;
 
     for(var i = 0; i < 5; i++) {
         minimum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),i);
         maximum = UTCStartDay(da.getFullYear(),da.getMonth(),da.getUTCDate(),i+1);
         // build for monday day 2 
-        getAllFromHash(Hash, minimum, maximum, i, function(Result, SortedKeys, count) {
+        getAllFromHash(Hash, minimum, maximum, i, function(Result, SortedKeys, count, minTime) {
             // remove excessive entries.
             if(SortedKeys != null) {
-                if(SortedKeys.length > 4) {
-                    // splice the excess keys out of the way
-                    arraySplice(SortedKeys,function(hue) {
-                        console.log("Done arraySort with: " + hue);
-                    })
-                }
+
+                console.log(convDate = new Date(minTime));
+
+                buildString = buildString.replace("%D%", (convDate.getUTCDate()+1));
+                buildString = buildString.replace("%M%", (convDate.getMonth()+1));
+                buildString = buildString.replace("%Y%", convDate.getFullYear());  
+        
                 // and detect if the users signed off in am or no.
                 fillHours(buildString, count, SortedKeys, Result, count, function(Hue,currentcount) {
-                    console.log("done with val: " + Hue + "for value: " + currentcount);
+                    //console.log("done with val: " + Hue + "for value: " + currentcount);
                     if(Hue != null) {
                         buildString = Hue;
                     }
@@ -483,6 +630,14 @@ function buildTable(Hash, buildString, req, res, callback) {
 /***********
     function to replace and return user data in buildstring
 ***********/
+/**
+ * function to replace markers in html with specific user details
+ * @param  {string}   Hash
+ * @param  {string}   buildString
+ * @param  {int}   runs
+ * @param  {Function} callback
+ * @return {null}
+ */
 function buildUser(Hash, buildString, runs, callback) {
     // get from redis, then replace the "keyword" in the
     // build string
@@ -528,11 +683,14 @@ function buildUser(Hash, buildString, runs, callback) {
     // extra permissions go here
 }
 
-/***********
-    function to set some varables, may be adapted to follow
-    an array of varables rather than just preset ones may need
-    to incorperate number of times run also.
-***********/
+/**
+ * function to set some varables, may be adapted to follow
+ * an array of varables rather than just preset ones may need
+ * to incorperate number of times run also.
+ * @param {string}   hash
+ * @param {object}   decode
+ * @param {Function} callback
+ */
 function setUser(hash, decode, callback) {
     // set the RFID tag
     client.hset(hash, "RFID", hash, redis.print);
@@ -562,6 +720,17 @@ function setUser(hash, decode, callback) {
     function to serve a page to the user, this is called from
     a GET request usually, as it abstracts away the json decoding
 ***********/
+/**
+ * function to server a select number of pages to the user, this function
+ * is probably redundant now as this could be incorperated into the main
+ * function
+ * @param  {string} pageaddr
+ * @param  {object} req
+ * @param  {object} res
+ * @param  {object} decode
+ * @param  {string} rfidTag
+ * @return {null}
+ */
 function servPage(pageaddr, req, res, decode, rfidTag) {
     var content = '';
     var fileName = pageaddr; //the file that was requested
@@ -647,6 +816,14 @@ function servPage(pageaddr, req, res, decode, rfidTag) {
     it also deals with get and post requests and
     calls the functions above, when needed
 ***********/
+/**
+ * function that is the main html page server
+ * it also deals with get and post requirest, also is the root
+ * from which all other functions are called.
+ * @param  {object} req
+ * @param  {object} res
+ * @return {null}
+ */
 function requestHandler(req, res) {
     var content = '';
     var fileName = path.normalize(req.url); //the file that was requested
@@ -706,8 +883,8 @@ function requestHandler(req, res) {
                 if(!err){
                     // test ddfb44754c24b05a81ee1b9d8e239f20
                     buildTable("edffe939fd3d2252895737c0eb63ae27", contents.toString(), req, res, function(Hue) {
-                    //buildTable("ddfb44754c24b05a81ee1b9d8e239f20", contents.toString(), function(Hue) {
-                        console.log("Done: " + Hue);
+                    //buildTable("ddfb44754c24b05a81ee1b9d8e239f20", contents.toString(), req, res, function(Hue) {
+                        //console.log("Done: " + Hue);
                         res.end(Hue);
                     });
                 } else {

@@ -3,7 +3,6 @@ body {
     margin: 40px auto;
     font-family: 'trebuchet MS', 'Lucida sans', Arial;
     font-size: 14px;
-    color: #444;
 }
 
 table {
@@ -20,6 +19,10 @@ table.bordered {
     -webkit-box-shadow: 0 1px 1px #ccc; 
     -moz-box-shadow: 0 1px 1px #ccc; 
     box-shadow: 0 1px 1px #ccc;         
+}
+
+table.bordered tr {
+    background: #FFF;
 }
 
 table.bordered tr:hover {
