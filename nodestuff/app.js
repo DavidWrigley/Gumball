@@ -1,10 +1,12 @@
+/*
+global varables
+ */
 var http = require('http');
 var path = require('path');
 var fs = require('fs');
 var querystring = require('querystring');
 var redis = require('redis');
 var client = redis.createClient(null,"winter.ceit.uq.edu.au");
-
 var rfidTag = '';
 var OK = 0;
 var i = 0;
@@ -16,12 +18,16 @@ var finishedString = "";
 var runningTimeTotal = [0,0,0,0,0];
 var dayArray = ["MO","TU","WE","TH","FR"];
 
-// connect to db 10
+/*
+initial functions
+ */
 client.select(10, function() {
     console.log("redis connected on 10");
 });
 
-// print errors if they occur
+/*
+if redis error occurs print here
+ */
 client.on("error", function(err) {
     console.log("Redis Error:" + err);
 });
@@ -541,6 +547,7 @@ function fillHours(buildString, dayno, utcArray, Result, currentcount, callback)
         }
     }
 }
+
 /**
  * splice an element from an array, then callback with the array minus the splice
  * @param  {array}   array
