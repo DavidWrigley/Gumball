@@ -773,6 +773,11 @@ function servPage(pageaddr, req, res, decode, rfidTag) {
                                             Last Scan: %TIME%<br>\
                                             Lollies: %LOLLIES%<br>\
                                             Door: %DOOR%<br>\
+                                            <form action='table_round.html/%CARDRFID%' method='post' target = '_blank'>\
+                                                <br>\
+                                                <label>Timesheet: </label><br>\
+                                                <input type='submit'>\
+                                            </form>\
                                             ";
                         
                         // reset
@@ -884,26 +889,6 @@ function requestHandler(req, res) {
                     console.dir(err);
                 };
             });
-        } else if(fileName == "/table_round.html") {
-            content = localFolder + fileName;//setup the file name to be returned
-            fs.readFile(content,function(err,contents){
-                if(!err){
-                    // test ddfb44754c24b05a81ee1b9d8e239f20
-                    buildTable("edffe939fd3d2252895737c0eb63ae27", contents.toString(), req, res, function(Hue) {
-                    //buildTable("ddfb44754c24b05a81ee1b9d8e239f20", contents.toString(), req, res, function(Hue) {
-                        //console.log("Done: " + Hue);
-                        res.end(Hue);
-                    });
-                } else {
-                    console.dir(err);
-
-                    //if the file was not found, set a 404 header...
-                    res.writeHead(404, {'Content-Type': 'text/html'});
-                    //send a custom 'file not found' message
-                    //and then close the request
-                    res.end('<h1>Sorry, the page you are looking for cannot be found.</h1>');
-                };
-            });
         } else {
             // any other file
             content = localFolder + fileName;//setup the file name to be returned
@@ -978,6 +963,33 @@ function requestHandler(req, res) {
                 // serv responce
                 servPage("/userdata.html", req, res, decode, rfidTag)
             });
+        } else if(fileName.toString().search("table_round.html") == 1) {
+            console.log("serving timesheet to user");
+            var rfidTag = null;
+            // get the RFID Tag, for redis
+            rfidTag = fileName.toString().split("/")[2];
+            fileName = "/table_round.html";
+            content = localFolder + fileName;//setup the file name to be returned
+            fs.readFile(content,function(err,contents){
+                if(!err){
+                    if(rfidTag != null) {
+                        buildTable(rfidTag, contents.toString(), req, res, function(Hue) {
+                            //console.log("Done: " + Hue);
+                            res.end(Hue);
+                        });
+                    } else {
+                        servMessage("ERROR!", req, res, "RFIDTAG was ", "NULL", "Stop trying to mess with my system!");
+                    }                  
+                } else {
+                    console.dir(err);
+
+                    //if the file was not found, set a 404 header...
+                    res.writeHead(404, {'Content-Type': 'text/html'});
+                    //send a custom 'file not found' message
+                    //and then close the request
+                    res.end('<h1>Sorry, the page you are looking for cannot be found.</h1>');
+                };
+            });
         } else if(fileName == "/manageusers.html") {
             
             var fullBody = '';
@@ -1017,7 +1029,7 @@ function requestHandler(req, res) {
                                 if(!err){
                                     // will fill with user data
                                     var fixedUserForm = "\
-                                                        <form id='%CARDRFID%_form' action='/manageSubmit/%CARDRFID%' method='post' target = '_self'>\
+                                                        <form id='%CARDRFID%_form' action='manageSubmit/%CARDRFID%' method='post' target = '_self'>\
                                                         <label>RFID Hash: <u>%CARDRFID%</u></label><br>\
                                                         <input name='firstName' type='text' value='%FIRSTNAME%' id = 'firstName'>\
                                                         <input name='lastName' type='text' value='%LASTNAME%' id = 'lastName'>\
@@ -1077,7 +1089,7 @@ function requestHandler(req, res) {
                     });      
                 });
             });
-        } else if (fileName.toString().indexOf("/manageSubmit.html")) {
+        } else if (fileName.toString().search("manageSubmit.html") == 1) {
             var fullBody = '';
             var rfidTag = null;
             req.on('data', function(data) {

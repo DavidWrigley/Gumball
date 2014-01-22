@@ -79,12 +79,17 @@ mypid = os.getpid()
 client_uniq = "pubclient_"+str(mypid)
 
 # not needed, want to start the screen black with a simple message.
-d = LCDSysInfo()
-d.clear_lines(TextLines.ALL, bg)
-d.dim_when_idle(False)
-d.set_brightness(127)
-d.save_brightness(127, 255)
-d.set_text_background_colour(bg)
+try:
+	d = LCDSysInfo()
+	d.clear_lines(TextLines.ALL, bg)
+	d.dim_when_idle(False)
+	d.set_brightness(127)
+	d.save_brightness(127, 255)
+	d.set_text_background_colour(bg)
+except:
+	print "Error"
+	time.sleep(10)
+	sys.exit(1)
 
 # connect mqtt
 mqttc = mosquitto.Mosquitto(client_uniq)

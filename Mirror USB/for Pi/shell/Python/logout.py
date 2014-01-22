@@ -76,11 +76,12 @@ if __name__ == "__main__":
 	logging.info("the current time is: " + str(current_epoch))
 	logging.info("the desired time is: " + str(set_epoch))
 
+	"""
 	while(current_epoch < set_epoch):
 		current_time = datetime.datetime.now()
 		current_epoch = (time.mktime(current_time.timetuple()))
 		time.sleep(.5)
-
+	"""
 
 	logging.info("Script now running")
 	# connect redis
