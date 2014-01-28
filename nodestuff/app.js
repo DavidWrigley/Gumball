@@ -317,14 +317,12 @@ function fillHours(buildString, dayno, utcArray, Result, currentcount, callback)
         }
         else if(utcArray.length == 1) {
             // create date object
-
             var DateObj = new Date(parseInt(utcArray[0],10));
             buildString = buildString.replace("%" + day + "AON%", DateObj.toLocaleTimeString());
             buildString = buildString.replace("%" + day + "AOFF%", "-");
             buildString = buildString.replace("%" + day + "PON%", "-");
             buildString = buildString.replace("%" + day + "POFF%", "-");
             buildString = buildString.replace("%" + day + "TOTAL%", "-"); 
-            buildString = buildString.replace("%" + day + "TOTAL%", "-:-:-"); 
             
             // running hours total
             var timeDiffTotal = 0;
@@ -615,17 +613,24 @@ function buildTable(Hash, buildString, req, res, callback) {
                 buildString = buildString.replace("%D%", (convDate.getUTCDate()+1));
                 buildString = buildString.replace("%M%", (convDate.getMonth()+1));
                 buildString = buildString.replace("%Y%", convDate.getFullYear());  
-        
-                // and detect if the users signed off in am or no.
-                fillHours(buildString, count, SortedKeys, Result, count, function(Hue,currentcount) {
-                    //console.log("done with val: " + Hue + "for value: " + currentcount);
-                    if(Hue != null) {
-                        buildString = Hue;
-                    }
-                    if(currentcount == 4) {
-                        // do callback
-                        callback(buildString);
-                    }
+
+                /*
+                get the users name and put it in there
+                */
+                var basehash = Hash.toString().split("_")[0];
+                getFromHash(basehash, "First", function(Hue,err) {
+                    buildString = buildString.replace("%NAME%", Hue);
+                    // and detect if the users signed off in am or no.
+                    fillHours(buildString, count, SortedKeys, Result, count, function(Hue,currentcount) {
+                        //console.log("done with val: " + Hue + "for value: " + currentcount);
+                        if(Hue != null) {
+                            buildString = Hue;
+                        }
+                        if(currentcount == 4) {
+                            // do callback
+                            callback(buildString);
+                        }
+                    });
                 });
             } else {
                 servMessage("ERROR!", req, res, "The Hash returned was:", "NULL ", "This is caused becasuse the user had not get rescanned there card after registration");
@@ -1029,7 +1034,7 @@ function requestHandler(req, res) {
                                 if(!err){
                                     // will fill with user data
                                     var fixedUserForm = "\
-                                                        <form id='%CARDRFID%_form' action='manageSubmit/%CARDRFID%' method='post' target = '_self'>\
+                                                        <form id='%CARDRFID%_form' action='manageSubmit.html/%CARDRFID%' method='post' target = '_self'>\
                                                         <label>RFID Hash: <u>%CARDRFID%</u></label><br>\
                                                         <input name='firstName' type='text' value='%FIRSTNAME%' id = 'firstName'>\
                                                         <input name='lastName' type='text' value='%LASTNAME%' id = 'lastName'>\

@@ -19,9 +19,10 @@ def connect():
 		r_server = redis.StrictRedis(host='winter.ceit.uq.edu.au', port=6379, db=10, password=None, socket_timeout=None, connection_pool=None, charset='utf-8', errors='strict', decode_responses=False, unix_socket_path=None)
 
 	except Exception, e:
-		logging.error("Connection Issues")
-		# need to retry this, as if it does not connect it will not run again till next morning.
+		logging.error("!#!#!#! ERROR !#!#!#!")
 		logging.error(e)
+		logging.info("Exiting!")
+		sys.exit(1)
 
 def getRegisteredUsers():
 	global r_server
@@ -56,6 +57,7 @@ if __name__ == "__main__":
 	logging.basicConfig(filename='logout.log',format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG)
 	logging.info('Script Started!')
 
+	# Run at 5:30 PM
 	hours = (12 + 5)
 	minutes = 30
 
@@ -73,15 +75,15 @@ if __name__ == "__main__":
 	current_time = datetime.datetime.now()
 	current_epoch = (time.mktime(current_time.timetuple()))
 
+	# log some info
 	logging.info("the current time is: " + str(current_epoch))
 	logging.info("the desired time is: " + str(set_epoch))
 
-	"""
+	# wait!
 	while(current_epoch < set_epoch):
 		current_time = datetime.datetime.now()
 		current_epoch = (time.mktime(current_time.timetuple()))
 		time.sleep(.5)
-	"""
 
 	logging.info("Script now running")
 	# connect redis

@@ -1,392 +1,541 @@
-01/15/2014 10:13:16 AM Script Started!
-01/15/2014 10:23:53 AM [Errno 54] Connection reset by peer
-01/15/2014 10:24:20 AM Script Started!
-01/15/2014 10:24:43 AM Card: edffe939fd
+01/23/2014 03:10:10 PM Script Started!
+01/23/2014 03:10:10 PM Checking Internet
+01/23/2014 03:10:10 PM Internet Connection Present!
+01/23/2014 03:11:10 PM Checking Internet
+01/23/2014 03:11:10 PM Internet Connection Present!
+01/23/2014 03:12:10 PM Checking Internet
+01/23/2014 03:12:10 PM Internet Connection Present!
+01/23/2014 03:13:10 PM Checking Internet
+01/23/2014 03:13:10 PM Internet Connection Present!
+01/23/2014 03:14:10 PM Checking Internet
+01/23/2014 03:14:10 PM Internet Connection Present!
+01/23/2014 03:15:10 PM Checking Internet
+01/23/2014 03:15:10 PM Internet Connection Present!
+01/23/2014 03:38:52 PM [Errno 54] Connection reset by peer
+01/23/2014 03:39:32 PM Checking Internet
+01/23/2014 03:39:32 PM Internet Connection Present!
+01/23/2014 03:40:32 PM Checking Internet
+01/23/2014 03:40:32 PM Internet Connection Present!
+01/23/2014 03:41:32 PM Checking Internet
+01/23/2014 03:41:32 PM Internet Connection Present!
+01/23/2014 03:42:32 PM Checking Internet
+01/23/2014 03:42:32 PM Internet Connection Present!
+01/23/2014 03:43:32 PM Checking Internet
+01/23/2014 03:43:32 PM Internet Connection Present!
+01/23/2014 03:44:32 PM Checking Internet
+01/23/2014 03:44:32 PM Internet Connection Present!
+01/23/2014 03:45:32 PM Checking Internet
+01/23/2014 03:45:32 PM Internet Connection Present!
+01/23/2014 03:46:32 PM Checking Internet
+01/23/2014 03:46:32 PM Internet Connection Present!
+01/23/2014 03:47:32 PM Checking Internet
+01/23/2014 03:47:32 PM Internet Connection Present!
+01/23/2014 03:48:32 PM Checking Internet
+01/23/2014 03:48:32 PM Internet Connection Present!
+01/23/2014 04:28:10 PM Checking Internet
+01/23/2014 04:28:10 PM Internet Connection Present!
+01/23/2014 04:29:10 PM Checking Internet
+01/23/2014 04:29:10 PM Internet Connection Present!
+01/23/2014 05:30:03 PM Checking Internet
+01/23/2014 05:30:03 PM No Internet Connection, Restarting
+01/24/2014 09:44:12 AM Script Started!
+01/24/2014 09:44:12 AM Checking Internet
+01/24/2014 09:44:12 AM Internet Connection Present!
+01/24/2014 09:44:25 AM Card: edffe939fd
 Registered!
 Hello: David
 Signing In
-15-01-2014 10:24:43
+24-01-2014 09:44:25
 ACCESS!
 
-01/15/2014 10:52:48 AM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing In
-15-01-2014 10:52:48
-ACCESS!
-
-01/15/2014 11:14:30 AM [Errno 54] Connection reset by peer
-01/15/2014 11:15:13 AM Script Started!
-01/15/2014 11:15:37 AM Card: ddfb44754c
+01/24/2014 09:44:37 AM Card: ddfb44754c
 Registered!
 Hello: Craig
 Signing Out
-15-01-2014 11:15:37
+24-01-2014 09:44:37
 ACCESS!
 
-01/15/2014 11:15:51 AM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing In
-15-01-2014 11:15:51
-ACCESS!
-
-01/15/2014 11:16:09 AM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing Out
-15-01-2014 11:16:09
-ACCESS!
-
-01/15/2014 11:17:32 AM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing In
-15-01-2014 11:17:32
-ACCESS!
-
-01/15/2014 11:20:40 AM [Errno 51] Network is unreachable
-01/15/2014 12:10:11 PM Script Started!
-01/15/2014 12:10:26 PM Card: edffe939fd
-Registered!
-Hello: David
-First Sign In!
-15-01-2014 12:10:26
-ACCESS!
-
-01/15/2014 12:10:46 PM Card: edffe939fd
+01/24/2014 09:48:59 AM Script Started!
+01/24/2014 09:48:59 AM Checking Internet
+01/24/2014 09:48:59 AM Internet Connection Present!
+01/24/2014 09:49:15 AM Card: edffe939fd
 Registered!
 Hello: David
 Signing Out
-15-01-2014 12:10:46
+24-01-2014 09:49:15
 ACCESS!
 
-01/15/2014 12:11:00 PM Card: edffe939fd
+01/24/2014 09:49:15 AM Card: edffe939fd
 Registered!
 Hello: David
 Signing In
-15-01-2014 12:11:00
+24-01-2014 09:49:15
 ACCESS!
 
-01/15/2014 12:32:22 PM [Errno 54] Connection reset by peer
-01/15/2014 12:47:18 PM Script Started!
-01/15/2014 12:47:37 PM Card: edffe939fd
-Registered!
-Hello: David
-First Sign In!
-15-01-2014 12:47:37
-ACCESS!
-
-01/15/2014 12:47:47 PM Card: edffe939fd
+01/24/2014 09:51:47 AM Script Started!
+01/24/2014 09:51:47 AM Checking Internet
+01/24/2014 09:51:47 AM Internet Connection Present!
+01/24/2014 09:51:58 AM Card: edffe939fd
 Registered!
 Hello: David
 Signing Out
-15-01-2014 12:47:47
+24-01-2014 09:51:58
 ACCESS!
 
-01/15/2014 12:47:56 PM Card: edffe939fd
-Registered!
-Hello: David
-Signing In
-15-01-2014 12:47:56
-ACCESS!
-
-01/15/2014 01:02:21 PM [Errno 8] nodename nor servname provided, or not known
-01/15/2014 03:04:56 PM Script Started!
-01/15/2014 03:05:12 PM Card: edffe939fd
+01/24/2014 09:51:58 AM Card: edffe939fd
 Registered!
 Hello: David
 Signing Out
-15-01-2014 15:05:12
+24-01-2014 09:51:58
 ACCESS!
 
-01/15/2014 03:05:19 PM Card: edffe939fd
+01/24/2014 09:51:58 AM Card: edffe939fd
 Registered!
 Hello: David
 Signing In
-15-01-2014 15:05:19
+24-01-2014 09:51:58
 ACCESS!
 
-01/15/2014 03:20:35 PM [Errno 54] Connection reset by peer
-01/20/2014 10:09:05 AM Script Started!
-01/20/2014 10:09:21 AM Card: edffe939fd
+01/24/2014 09:52:09 AM Card: edffe939fd
 Registered!
 Hello: David
 Signing Out
-20-01-2014 10:09:21
+24-01-2014 09:52:09
 ACCESS!
 
-01/20/2014 10:09:29 AM Card: edffe939fd
-Registered!
-Hello: David
-Signing In
-20-01-2014 10:09:29
-ACCESS!
-
-01/20/2014 10:09:39 AM Card: edffe939fd
+01/24/2014 09:52:09 AM Card: edffe939fd
 Registered!
 Hello: David
 Signing Out
-20-01-2014 10:09:39
+24-01-2014 09:52:09
 ACCESS!
 
-01/20/2014 10:09:45 AM Card: edffe939fd
-Registered!
-Hello: David
-Signing In
-20-01-2014 10:09:45
-ACCESS!
-
-01/20/2014 10:33:01 AM [Errno 54] Connection reset by peer
-01/20/2014 11:55:06 AM Script Started!
-01/20/2014 11:55:26 AM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing Out
-20-01-2014 11:55:26
-ACCESS!
-
-01/20/2014 12:00:28 PM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing In
-20-01-2014 12:00:28
-ACCESS!
-
-01/20/2014 12:00:57 PM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing Out
-20-01-2014 12:00:57
-ACCESS!
-
-01/20/2014 12:01:26 PM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing In
-20-01-2014 12:01:26
-ACCESS!
-
-01/20/2014 12:01:27 PM Card: 9e4fef4e16
-Registered!
-Hello: James
-First Sign In!
-20-01-2014 12:01:27
-ACCESS!
-
-01/20/2014 12:01:33 PM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing Out
-20-01-2014 12:01:33
-ACCESS!
-
-01/20/2014 12:01:44 PM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing In
-20-01-2014 12:01:44
-ACCESS!
-
-01/20/2014 12:01:51 PM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing Out
-20-01-2014 12:01:51
-ACCESS!
-
-01/20/2014 12:01:59 PM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing In
-20-01-2014 12:01:59
-ACCESS!
-
-01/20/2014 12:02:09 PM Card: 9e4fef4e16
-Registered!
-Hello: James
-Signing Out
-20-01-2014 12:02:09
-ACCESS!
-
-01/20/2014 12:02:18 PM Card: 9e4fef4e16
-Registered!
-Hello: James
-Signing In
-20-01-2014 12:02:18
-ACCESS!
-
-01/20/2014 12:02:38 PM Card: 9e4fef4e16
-Registered!
-Hello: James
-Signing Out
-20-01-2014 12:02:38
-ACCESS!
-
-01/20/2014 12:02:45 PM Card: 9e4fef4e16
-Registered!
-Hello: James
-Signing In
-20-01-2014 12:02:45
-ACCESS!
-
-01/20/2014 12:28:35 PM [Errno 54] Connection reset by peer
-01/20/2014 02:17:25 PM Script Started!
-01/20/2014 02:17:40 PM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing Out
-20-01-2014 14:17:40
-ACCESS!
-
-01/20/2014 02:17:44 PM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing In
-20-01-2014 14:17:44
-ACCESS!
-
-01/20/2014 02:17:57 PM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing Out
-20-01-2014 14:17:56
-ACCESS!
-
-01/20/2014 02:18:09 PM Card: 9e4fef4e16
-Registered!
-Hello: James
-Signing Out
-20-01-2014 14:18:09
-ACCESS!
-
-01/20/2014 02:18:10 PM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing In
-20-01-2014 14:18:10
-ACCESS!
-
-01/20/2014 02:18:17 PM Card: 9e4fef4e16
-Registered!
-Hello: James
-Signing In
-20-01-2014 14:18:17
-ACCESS!
-
-01/20/2014 02:18:19 PM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing Out
-20-01-2014 14:18:19
-ACCESS!
-
-01/20/2014 02:18:21 PM Card: 9e4fef4e16
-Registered!
-Hello: James
-Signing Out
-20-01-2014 14:18:21
-ACCESS!
-
-01/20/2014 02:18:24 PM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing In
-20-01-2014 14:18:24
-ACCESS!
-
-01/20/2014 02:18:26 PM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing Out
-20-01-2014 14:18:26
-ACCESS!
-
-01/20/2014 02:18:28 PM Card: 9e4fef4e16
-Registered!
-Hello: James
-Signing In
-20-01-2014 14:18:28
-ACCESS!
-
-01/20/2014 02:18:30 PM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing In
-20-01-2014 14:18:30
-ACCESS!
-
-01/20/2014 02:18:32 PM Card: 9e4fef4e16
-Registered!
-Hello: James
-Signing Out
-20-01-2014 14:18:32
-ACCESS!
-
-01/20/2014 02:18:34 PM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing Out
-20-01-2014 14:18:34
-ACCESS!
-
-01/20/2014 02:18:36 PM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing In
-20-01-2014 14:18:36
-ACCESS!
-
-01/20/2014 02:18:38 PM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing Out
-20-01-2014 14:18:38
-ACCESS!
-
-01/20/2014 02:18:40 PM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing In
-20-01-2014 14:18:40
-ACCESS!
-
-01/20/2014 02:18:42 PM Card: ddfb44754c
-Registered!
-Hello: Craig
-Signing Out
-20-01-2014 14:18:42
-ACCESS!
-
-01/20/2014 02:37:10 PM [Errno 54] Connection reset by peer
-01/20/2014 02:50:45 PM Script Started!
-01/20/2014 02:51:01 PM Card: edffe939fd
+01/24/2014 09:52:09 AM Card: edffe939fd
 Registered!
 Hello: David
 Signing Out
-20-01-2014 14:51:01
+24-01-2014 09:52:09
 ACCESS!
 
-01/20/2014 02:56:32 PM Card: edffe939fd
+01/24/2014 09:52:11 AM Card: edffe939fd
 Registered!
 Hello: David
-First Sign In!
-20-01-2014 14:56:32
+Signing In
+24-01-2014 09:52:11
 ACCESS!
 
-01/20/2014 03:00:22 PM Card: edffe939fd
+01/24/2014 09:52:11 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 09:52:11
+ACCESS!
+
+01/24/2014 09:52:11 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 09:52:11
+ACCESS!
+
+01/24/2014 09:52:12 AM Card: edffe939fd
 Registered!
 Hello: David
 Signing Out
-20-01-2014 15:00:22
+24-01-2014 09:52:12
 ACCESS!
 
-01/20/2014 03:02:04 PM Card: edffe939fd
+01/24/2014 09:52:12 AM Card: edffe939fd
 Registered!
 Hello: David
-First Sign In!
-20-01-2014 15:02:04
+Signing Out
+24-01-2014 09:52:12
 ACCESS!
 
-01/20/2014 03:12:26 PM [Errno 54] Connection reset by peer
-01/22/2014 10:28:24 AM Script Started!
+01/24/2014 09:52:12 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+24-01-2014 09:52:12
+ACCESS!
+
+01/24/2014 09:54:12 AM Checking Internet
+01/24/2014 09:54:12 AM Internet Connection Present!
+01/24/2014 09:54:41 AM Script Started!
+01/24/2014 09:54:41 AM Checking Internet
+01/24/2014 09:54:41 AM Internet Connection Present!
+01/24/2014 09:54:55 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 09:54:55
+ACCESS!
+
+01/24/2014 09:54:55 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 09:54:55
+ACCESS!
+
+01/24/2014 09:54:55 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 09:54:55
+ACCESS!
+
+01/24/2014 09:54:55 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+24-01-2014 09:54:55
+ACCESS!
+
+01/24/2014 09:55:01 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 09:55:01
+ACCESS!
+
+01/24/2014 09:55:01 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 09:55:01
+ACCESS!
+
+01/24/2014 09:55:01 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 09:55:01
+ACCESS!
+
+01/24/2014 09:56:22 AM Script Started!
+01/24/2014 09:56:22 AM Checking Internet
+01/24/2014 09:56:22 AM Internet Connection Present!
+01/24/2014 09:56:35 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+24-01-2014 09:56:35
+ACCESS!
+
+01/24/2014 09:56:35 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+24-01-2014 09:56:35
+ACCESS!
+
+01/24/2014 09:56:35 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 09:56:35
+ACCESS!
+
+01/24/2014 09:56:35 AM 'NoneType' object has no attribute 'payload'
+01/24/2014 09:56:35 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 09:56:35
+ACCESS!
+
+01/24/2014 09:57:08 AM Script Started!
+01/24/2014 09:57:08 AM Checking Internet
+01/24/2014 09:57:08 AM Internet Connection Present!
+01/24/2014 09:57:21 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+24-01-2014 09:57:21
+ACCESS!
+
+01/24/2014 09:57:21 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 09:57:21
+ACCESS!
+
+01/24/2014 09:57:21 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+24-01-2014 09:57:21
+ACCESS!
+
+01/24/2014 09:57:21 AM Mosquitto instance has no attribute 'payload'
+01/24/2014 09:58:36 AM Script Started!
+01/24/2014 09:58:36 AM Checking Internet
+01/24/2014 09:58:36 AM Internet Connection Present!
+01/24/2014 09:58:54 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 09:58:54
+ACCESS!
+
+01/24/2014 09:58:54 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 09:58:54
+ACCESS!
+
+01/24/2014 09:58:54 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+24-01-2014 09:58:54
+ACCESS!
+
+01/24/2014 09:58:59 AM Checking Internet
+01/24/2014 09:58:59 AM Internet Connection Present!
+01/24/2014 09:59:41 AM Script Started!
+01/24/2014 09:59:41 AM Checking Internet
+01/24/2014 09:59:41 AM Internet Connection Present!
+01/24/2014 10:00:25 AM Script Started!
+01/24/2014 10:00:25 AM Checking Internet
+01/24/2014 10:00:25 AM Internet Connection Present!
+01/24/2014 10:00:46 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 10:00:46
+ACCESS!
+
+01/24/2014 10:00:46 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 10:00:46
+ACCESS!
+
+01/24/2014 10:00:46 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+24-01-2014 10:00:46
+ACCESS!
+
+01/24/2014 10:00:46 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+24-01-2014 10:00:46
+ACCESS!
+
+01/24/2014 10:04:12 AM Checking Internet
+01/24/2014 10:04:12 AM Internet Connection Present!
+01/24/2014 10:05:42 AM Script Started!
+01/24/2014 10:05:42 AM Checking Internet
+01/24/2014 10:05:42 AM Internet Connection Present!
+01/24/2014 10:05:54 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 10:05:54
+ACCESS!
+
+01/24/2014 10:05:54 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 10:05:54
+ACCESS!
+
+01/24/2014 10:05:54 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 10:05:54
+ACCESS!
+
+01/24/2014 10:05:54 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+24-01-2014 10:05:54
+ACCESS!
+
+01/24/2014 10:05:57 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 10:05:57
+ACCESS!
+
+01/24/2014 10:05:57 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 10:05:57
+ACCESS!
+
+01/24/2014 10:05:57 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 10:05:57
+ACCESS!
+
+01/24/2014 10:05:59 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+24-01-2014 10:05:59
+ACCESS!
+
+01/24/2014 10:05:59 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+24-01-2014 10:05:59
+ACCESS!
+
+01/24/2014 10:05:59 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+24-01-2014 10:05:59
+ACCESS!
+
+01/24/2014 10:06:01 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 10:06:01
+ACCESS!
+
+01/24/2014 10:06:01 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 10:06:01
+ACCESS!
+
+01/24/2014 10:06:01 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 10:06:01
+ACCESS!
+
+01/24/2014 10:06:22 AM Checking Internet
+01/24/2014 10:06:22 AM Internet Connection Present!
+01/24/2014 10:07:02 AM [Errno 8] nodename nor servname provided, or not known
+01/24/2014 10:07:08 AM Checking Internet
+01/24/2014 10:07:08 AM No Internet Connection, Restarting
+01/24/2014 10:07:31 AM [Errno 60] Operation timed out
+01/24/2014 10:07:39 AM [Errno 60] Operation timed out
+01/24/2014 10:08:59 AM Checking Internet
+01/24/2014 10:08:59 AM Internet Connection Present!
+01/24/2014 10:10:47 AM Script Started!
+01/24/2014 10:10:47 AM Checking Internet
+01/24/2014 10:10:47 AM Internet Connection Present!
+01/24/2014 10:11:07 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+24-01-2014 10:11:07
+ACCESS!
+
+01/24/2014 10:12:32 AM [Errno 60] Operation timed out
+01/24/2014 10:12:32 AM Traceback (most recent call last):
+  File "/Users/davidwrigley/Dropbox/Summer/Gumball/Mirror USB/for Pi/shell/Python/door.py", line 226, in <module>
+    mqttc.loop_forever()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1115, in loop_forever
+    rc = self.loop(timeout, max_packets)
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 721, in loop
+    rc = self.loop_read(max_packets)
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 902, in loop_read
+    rc = self._packet_read()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1224, in _packet_read
+    command = self._sock.recv(1)
+error: [Errno 60] Operation timed out
+
+01/24/2014 10:14:57 AM Script Started!
+01/24/2014 10:15:42 AM Checking Internet
+01/24/2014 10:15:42 AM Internet Connection Present!
+01/24/2014 10:15:53 AM Script Started!
+01/24/2014 10:15:53 AM Script Started
+01/24/2014 10:15:58 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+24-01-2014 10:15:58
+ACCESS!
+
+01/24/2014 10:15:58 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+24-01-2014 10:15:58
+ACCESS!
+
+01/24/2014 10:16:12 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+24-01-2014 10:16:12
+ACCESS!
+
+01/24/2014 10:16:22 AM Checking Internet
+01/24/2014 10:16:22 AM Internet Connection Present!
+01/24/2014 10:16:55 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+24-01-2014 10:16:55
+ACCESS!
+
+01/24/2014 10:18:12 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 10:18:12
+ACCESS!
+
+01/24/2014 10:18:59 AM Checking Internet
+01/24/2014 10:18:59 AM Internet Connection Present!
+01/24/2014 10:19:22 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+24-01-2014 10:19:22
+ACCESS!
+
+01/24/2014 10:20:47 AM Checking Internet
+01/24/2014 10:20:47 AM Internet Connection Present!
+01/24/2014 10:23:44 AM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+24-01-2014 10:23:44
+ACCESS!
+
+01/24/2014 10:23:44 AM [Errno 32] Broken pipe
+01/24/2014 10:23:44 AM Traceback (most recent call last):
+  File "/Users/davidwrigley/Dropbox/Summer/Gumball/Mirror USB/for Pi/shell/Python/door.py", line 204, in <module>
+    mqttc.loop_forever()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1115, in loop_forever
+    rc = self.loop(timeout, max_packets)
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 726, in loop
+    rc = self.loop_write(max_packets)
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 927, in loop_write
+    rc = self._packet_write()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1334, in _packet_write
+    self.on_publish(self, self._userdata, packet.mid)
+  File "/Users/davidwrigley/Dropbox/Summer/Gumball/Mirror USB/for Pi/shell/Python/door.py", line 55, in on_publish
+    print "Message: " + str(mid) + " published"
+IOError: [Errno 32] Broken pipe
+
+01/24/2014 10:25:42 AM Checking Internet
+01/24/2014 10:25:42 AM Internet Connection Present!
+01/24/2014 10:26:22 AM Checking Internet
+01/24/2014 10:26:22 AM Internet Connection Present!

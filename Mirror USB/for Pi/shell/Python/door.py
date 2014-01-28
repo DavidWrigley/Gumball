@@ -24,7 +24,7 @@ global r_server
 broker = "winter.ceit.uq.edu.au"
 port = 1883
 serverPort = 55671
-screenTopic = "gumballscreen"
+screenTopic = "doorscreen"
 
 # connect
 def connect():
@@ -34,11 +34,11 @@ def connect():
 
 		# connect to mqtt
 		mqttc.reinitialise()
-		mqttc.connect(broker, port, 20, True)
+		mqttc.connect(broker, port)
+		mqttc.on_message = on_message
+		mqttc.on_publish = on_publish
 		mqttc.publish("rfidlog", "RFID Door Parser Re-Connected")
 		mqttc.subscribe("rfid", 0)
-		mqttc.on_message = on_message
-		mqttc.on_disconnect = on_disconnect
 		
 		# connect to Redis
 		r_server = redis.Redis(host='winter.ceit.uq.edu.au', port=6379, db=10, password=None, socket_timeout=None, connection_pool=None, charset='utf-8', errors='strict', decode_responses=False, unix_socket_path=None)
@@ -47,7 +47,12 @@ def connect():
 		print "Connection Issues"
 		# exit with error, supervisord will restart it.
 		logging.error(e)
+		logging.error(traceback.format_exc())
+		time.sleep(10)
 		sys.exit(1)
+
+def on_publish(mosq, obj, mid):
+	print "Message: " + str(mid) + " published"
 
 # callback
 def on_message(mosq, obj, msg):
@@ -65,7 +70,7 @@ def on_message(mosq, obj, msg):
 	temp_str = ""
 
 	# check that the id of the scan is correct
-	if(sourceId == "1.1.0"):
+	if(sourceId == "1.2.0"):
 		# get the current number of unregisterd cards
 		current_number = int(r_server.get("Number"));
 
@@ -81,7 +86,10 @@ def on_message(mosq, obj, msg):
 					print my_str
 
 					# publish here
-					mqttc.publish(screenTopic, my_str)
+					if(mqttc.publish(screenTopic, my_str)[0] != 0):
+						logging.error("Publish of: " + my_str + " Failed!, Exiting")
+						sys.exit(1)
+
 					print my_str
 					return
 
@@ -94,7 +102,9 @@ def on_message(mosq, obj, msg):
 			logging.info(my_str)
 
 			# publish here
-			mqttc.publish(screenTopic, my_str)
+			if(mqttc.publish(screenTopic, my_str)[0] != 0):
+				logging.error("Publish of: " + my_str + " Failed!, Exiting")
+				sys.exit(1)
 
 			# boost the number by one, so no overwrite
 			r_server.set("Number", (current_number+1))
@@ -151,7 +161,6 @@ def on_message(mosq, obj, msg):
 			# update the website to set this permission
 			if(int(r_server.hget(str(hashkey), "Door")) == 1):	
 				# open it
-				mqttc.publish("ait", str(hashkey))
 				my_str += "\nACCESS!"
 			else:
 				# no profit
@@ -160,20 +169,24 @@ def on_message(mosq, obj, msg):
 			my_str += "\n"
 
 			# publish to screen
-			mqttc.publish(screenTopic, my_str)
+			if(mqttc.publish(screenTopic, my_str)[0] != 0):
+				logging.error("Publish of: " + my_str + " Failed!, Exiting")
+				sys.exit(1)
+
 			logging.info(my_str)
 
-def on_disconnect(mosq, obj, rc):
-	connect()
-	time.sleep(10)
+def my_handler(type, value, tb):
+    logger.exception("Uncaught exception: {0}".format(str(value)))
 
 logging.basicConfig(filename='door.log',format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG)
 logging.info('Script Started!')
 
+# Install exception handler
+sys.excepthook = my_handler
+
 try:
 	# wait for a little bit to not trip supervisord's fatel status
-	print "Started"
-	time.sleep(10)
+	logging.info("Script Started")
 
 	# start
 	debug = 0
@@ -186,17 +199,17 @@ try:
 	# connect mqtt
 	mqttc = mosquitto.Mosquitto(client_uniq)
 	connect()
-
-	print """\n############  HELLO  ############
-	# ~~~~~~~ NOW RUNNING ~~~~~~~~  # 
-	#################################\n"""
 	 
 	#remain connected and publish
-	while (mqttc.loop() == 0):
-		time.sleep(1)
+	mqttc.loop_forever()
+
+	logger.info("Dropped out of the loop, Exiting")
+	sys.exit(1)
 
 except Exception, e:
 	# exit with error, supervisord will restart it.
 	# print traceback.format_exc()
 	logging.error(e)
+	logging.error(traceback.format_exc())
+	time.sleep(10)
 	sys.exit(1)
