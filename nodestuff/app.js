@@ -220,6 +220,7 @@ function keys(obj, minimum, maximum) {
             }
         }
     }
+    // sort
     return keys.sort();
 }
 
@@ -639,9 +640,6 @@ function buildTable(Hash, buildString, req, res, callback) {
     }
 }
 
-/***********
-    function to replace and return user data in buildstring
-***********/
 /**
  * function to replace markers in html with specific user details
  * @param  {string}   Hash
@@ -728,10 +726,148 @@ function setUser(hash, decode, callback) {
     callback(1);
 }
 
-/***********
-    function to serve a page to the user, this is called from
-    a GET request usually, as it abstracts away the json decoding
-***********/
+/**
+ * function to sort a dic into an array
+ * @param  {object} obj
+ * @return {array}
+ */
+function keys2(obj) {
+    var keys = [];
+    for(var key in obj)
+    {
+        if(obj.hasOwnProperty(key))
+        {
+            keys.push(key);
+        }
+    }
+    // sort
+    return keys.sort();
+}
+
+/**
+ * function to return all the contenst of a hash sorted in ascending order
+ * @param  {string}   Hash
+ * @param  {int}   count
+ * @param  {Function} callback
+ * @return {null}
+ */
+function getAllFromHash2(Hash, count, callback) {
+    var sortedKeys = [];
+    console.log("Hash value: " + Hash);
+    client.hgetall(Hash, function(err,obj) {
+        console.dir(obj);
+        sortedKeys = keys2(obj);
+        console.log("sorted array: " + sortedKeys);
+        if(obj != null) {
+            callback(obj, sortedKeys, count);
+        } else {
+            callback(null, null, count);
+        }
+    });
+}
+
+function fillEvents(buildString, count, Keys, KeysDict, callback) {
+    /*
+    {
+        title: 'Birthday Party',
+        start: new Date(y, m, d+1, 19, 0),
+        end: new Date(y, m, d+1, 22, 30),
+        allDay: false
+    }, (only when next exists) 
+     */
+    console.log("fillEvents: " + count);
+
+    // did user sign in
+    if(KeysDict[Keys[count]] == "1") {
+        console.log("is signed in!");
+
+        var DateObj = new Date(parseInt(Keys[count],10));
+
+        buildString += "{\n"
+        buildString += "\ttitle: \'Work\',\n";
+        buildString += ("\tstart: new Date(" + DateObj.getFullYear()
+                + ", " + DateObj.getMonth() + ", " + DateObj.getDate()
+                + ", " + DateObj.getHours() + ", " + DateObj.getMinutes() + "),\n");
+        try {
+            // if the next key is a sign out
+            if(KeysDict[Keys[count+1]] == "0") {
+                // matched, return a regular count
+                DateObj = new Date(parseInt(Keys[count+1],10));
+                buildString += ("\tend: new Date(" + DateObj.getFullYear() 
+                        + ", " + DateObj.getMonth() + ", " + DateObj.getDate() 
+                        + ", " + DateObj.getHours() + ", " + DateObj.getMinutes() + "),\n");
+                buildString += ("\tallDay: false\n");
+                buildString += "}"
+                callback(buildString, count, 0);
+            }
+            // the next key is a sign in
+            // meaning that they did not sign out correctly.
+            // send it to 12 PM
+            else if(KeysDict[Keys[count + 1]] == "1") {
+                // return a differnt count, so it only shifts 1
+                DateObj = new Date(parseInt(Keys[count],10));
+                buildString += ("\tend: new Date(" + DateObj.getFullYear() 
+                        + ", " + DateObj.getMonth() + ", " + DateObj.getDate() 
+                        + ", 24" + ", 0" + "),\n");
+                buildString += ("\tallDay: false\n");
+                buildString += "}"
+                callback(buildString, count, 1);
+            }
+            
+        } catch(err) {
+            console.log("Error: " + err);
+        }
+    }
+}
+
+/**
+ * Function to alter the html document of the calendar, and serv it to the user. this calendar will
+ * be interactin in the sense that the user can flick through days and all there data will be there
+ * no need to fetch later dayz
+ * @param  {string}   Hash        the users card hash
+ * @param  {string}   buildString the html document
+ * @param  {object}   req         the users request object
+ * @param  {object}   res         the users result object
+ * @param  {Function} callback    callbcak to the code
+ * @return {null}                 none
+ */
+function buildCalendar(Hash, buildString, req, res, callback) {
+    Hash += "_doorLog";
+    // get all entries from the hash log.
+    getAllFromHash2(Hash, i, function(Result, SortedKeys, count) {
+        // if successfull.
+        if(SortedKeys != null) {
+            // resolve the users name and replace the title.
+            var basehash = Hash.toString().split("_")[0];
+            getFromHash(basehash, "First", function(Hue,err) {
+                buildString = buildString.replace("%NAME%", Hue);
+                // start building the string full of events.
+                var replaceString = "";
+                for(var i = 0; i < SortedKeys.length+2; i += 2) {
+                    fillEvents(replaceString, i, SortedKeys, Result, function(Hue,currentcount,balance) {
+                        console.log("CurrentCount: " + currentcount + " vs: " + SortedKeys.length);
+                        i -= balance;
+                        if(Hue != null) {
+                            replaceString = Hue;
+                        }
+                        if(currentcount >= (SortedKeys.length - 2)) {
+                            // do callback
+                            replaceString += "\n";
+                            buildString = buildString.replace("%REPLACE%", replaceString);
+                            console.log("done with val: " + buildString);
+                            callback(buildString);
+                        } else {
+                            replaceString += ",\n";
+                        }
+                    });
+                }
+            });
+        } else {
+            servMessage("ERROR!", req, res, "The Hash returned was:", "NULL ", "This is caused becasuse the user had not get rescanned there card after registration");
+        }
+    });
+}
+
 /**
  * function to server a select number of pages to the user, this function
  * is probably redundant now as this could be incorperated into the main
@@ -778,7 +914,7 @@ function servPage(pageaddr, req, res, decode, rfidTag) {
                                             Last Scan: %TIME%<br>\
                                             Lollies: %LOLLIES%<br>\
                                             Door: %DOOR%<br>\
-                                            <form action='table_round.html/%CARDRFID%' method='post' target = '_blank'>\
+                                            <form action='fullcalendar-1.6.4/demos/agenda-views.html_%CARDRFID%' method='post' target = '_blank'>\
                                                 <br>\
                                                 <label>Timesheet: </label><br>\
                                                 <input type='submit'>\
@@ -828,11 +964,6 @@ function servPage(pageaddr, req, res, decode, rfidTag) {
     });
 }
  
-/***********
-    function that is the main html page server
-    it also deals with get and post requests and
-    calls the functions above, when needed
-***********/
 /**
  * function that is the main html page server
  * it also deals with get and post requirest, also is the root
@@ -995,7 +1126,36 @@ function requestHandler(req, res) {
                     res.end('<h1>Sorry, the page you are looking for cannot be found.</h1>');
                 };
             });
-        } else if(fileName == "/manageusers.html") {
+        } else if(fileName.toString().search("fullcalendar-1.6.4/demos/agenda-views.html") == 1) {
+            console.log("serving calendar");
+            var rfidTag = null;
+            // get the RFID Tag, for redis
+            rfidTag = fileName.toString().split("_")[1];
+            fileName = "/fullcalendar-1.6.4/demos/agenda-views.html";
+            content = localFolder + fileName;//setup the file name to be returned
+            console.log("rfidTag is: " + rfidTag);
+            fs.readFile(content,function(err,contents){
+                if(!err){
+                    if(rfidTag != null) {
+                        buildCalendar(rfidTag, contents.toString(), req, res, function(Hue) {
+                            console.log("finished with: " + Hue);
+                            res.end(Hue);
+                        }); 
+                    } else {
+                        servMessage("ERROR!", req, res, "RFIDTAG was ", "NULL", "Stop trying to mess with my system!");
+                    }                  
+                } else {
+                    console.dir(err);
+
+                    //if the file was not found, set a 404 header...
+                    res.writeHead(404, {'Content-Type': 'text/html'});
+                    //send a custom 'file not found' message
+                    //and then close the request
+                    res.end('<h1>Sorry, the page you are looking for cannot be found.</h1>');
+                };
+            });
+        } 
+        else if(fileName == "/manageusers.html") {
             
             var fullBody = '';
             var array; 

@@ -13,6 +13,7 @@ import textwrap
 import json
 import traceback
 import logging
+import threading
  
 # globals  
 global debug
@@ -30,34 +31,40 @@ screenTopic = "doorscreen"
 def connect():
 	global mqttc
 	global r_server
-	try:
 
-		# connect to mqtt
-		mqttc.reinitialise()
-		mqttc.connect(broker, port)
-		mqttc.on_message = on_message
-		mqttc.on_publish = on_publish
+	# connect to mqtt
+	mqttc = mosquitto.Mosquitto(client_uniq)
+	mqttc.on_message = on_message
+	mqttc.on_publish = on_publish
+	mqttc.on_subscribe = on_subscribe
+	mqttc.on_connect = on_connect
+	mqttc.on_disconnect = on_disconnect
+	mqttc.connect(broker, port)
+	
+	# connect to Redis
+	r_server = redis.Redis(host='winter.ceit.uq.edu.au', port=6379, db=10, password=None, socket_timeout=None, connection_pool=None, charset='utf-8', errors='strict', decode_responses=False, unix_socket_path=None)
+
+def on_disconnect(mosq, obj, rc):
+    logging.error("Disconnected From Broker.")
+
+def on_connect(mosq, obj, rc):
+    if rc == 0:
+		logging.info("Connected to Broker.")
 		mqttc.publish("rfidlog", "RFID Door Parser Re-Connected")
 		mqttc.subscribe("rfid", 0)
-		
-		# connect to Redis
-		r_server = redis.Redis(host='winter.ceit.uq.edu.au', port=6379, db=10, password=None, socket_timeout=None, connection_pool=None, charset='utf-8', errors='strict', decode_responses=False, unix_socket_path=None)
-	
-	except Exception, e:
-		print "Connection Issues"
-		# exit with error, supervisord will restart it.
-		logging.error(e)
-		logging.error(traceback.format_exc())
-		time.sleep(10)
-		sys.exit(1)
+    else:
+    	logging.error("Connection to Broker Failed.")
+
+def on_subscribe(mosq, obj, mid, qos_list):
+    logging.info("Subscribe with mid "+str(mid)+" received.")
 
 def on_publish(mosq, obj, mid):
-	print "Message: " + str(mid) + " published"
+	logging.info("Message: " + str(mid) + " published")
 
 # callback
 def on_message(mosq, obj, msg):
 
-	global mqqtc
+	global mqttc
 	global debug
 	global r_server
 
@@ -175,35 +182,26 @@ def on_message(mosq, obj, msg):
 
 			logging.info(my_str)
 
-def my_handler(type, value, tb):
-    logger.exception("Uncaught exception: {0}".format(str(value)))
-
-logging.basicConfig(filename='door.log',format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG)
-logging.info('Script Started!')
-
-# Install exception handler
-sys.excepthook = my_handler
-
 try:
-	# wait for a little bit to not trip supervisord's fatel status
-	logging.info("Script Started")
-
-	# start
-	debug = 0
-	run = 1
+	# start the logger
+	logging.basicConfig(filename='door.log',format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG)
+	logging.info('Script Started!')
 
 	# generate client name and connect to mqtt
 	mypid = os.getpid()
 	client_uniq = "pubclient_"+str(mypid)
 
 	# connect mqtt
-	mqttc = mosquitto.Mosquitto(client_uniq)
 	connect()
+
+	# start a thread to constantly subscribe to topic
 	 
-	#remain connected and publish
+	# remain connected and publish
 	mqttc.loop_forever()
 
+	# bad
 	logger.info("Dropped out of the loop, Exiting")
+	time.sleep(2)
 	sys.exit(1)
 
 except Exception, e:
