@@ -22,3 +22,240 @@ ACCESS!
 01/29/2014 10:22:28 AM Connected to Broker.
 01/29/2014 10:22:28 AM Message: 1 published
 01/29/2014 10:22:28 AM Subscribe with mid 2 received.
+01/30/2014 02:00:17 PM Script Started!
+01/30/2014 02:00:17 PM Connected to Broker.
+01/30/2014 02:00:17 PM Message: 1 published
+01/30/2014 02:00:17 PM Subscribe with mid 2 received.
+01/30/2014 02:00:43 PM 'float' object has no attribute 'tm_mday'
+01/30/2014 02:00:43 PM Traceback (most recent call last):
+  File "/Users/davidwrigley/Dropbox/Summer/Gumball/Mirror USB/for Pi/shell/Python/door.py", line 209, in <module>
+    mqttc.loop_forever()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1115, in loop_forever
+    rc = self.loop(timeout, max_packets)
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 721, in loop
+    rc = self.loop_read(max_packets)
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 902, in loop_read
+    rc = self._packet_read()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1292, in _packet_read
+    rc = self._packet_handle()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1684, in _packet_handle
+    return self._handle_publish()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1798, in _handle_publish
+    self.on_message(self, self._userdata, message)
+  File "/Users/davidwrigley/Dropbox/Summer/Gumball/Mirror USB/for Pi/shell/Python/door.py", line 151, in on_message
+    print "current Day: " + time.time().tm_mday
+AttributeError: 'float' object has no attribute 'tm_mday'
+
+01/30/2014 02:03:07 PM Script Started!
+01/30/2014 02:03:07 PM Connected to Broker.
+01/30/2014 02:03:07 PM Message: 1 published
+01/30/2014 02:03:07 PM Subscribe with mid 2 received.
+01/30/2014 02:03:10 PM 'module' object has no attribute 'tm_mday'
+01/30/2014 02:03:10 PM Traceback (most recent call last):
+  File "/Users/davidwrigley/Dropbox/Summer/Gumball/Mirror USB/for Pi/shell/Python/door.py", line 209, in <module>
+    mqttc.loop_forever()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1115, in loop_forever
+    rc = self.loop(timeout, max_packets)
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 721, in loop
+    rc = self.loop_read(max_packets)
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 902, in loop_read
+    rc = self._packet_read()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1292, in _packet_read
+    rc = self._packet_handle()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1684, in _packet_handle
+    return self._handle_publish()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1798, in _handle_publish
+    self.on_message(self, self._userdata, message)
+  File "/Users/davidwrigley/Dropbox/Summer/Gumball/Mirror USB/for Pi/shell/Python/door.py", line 151, in on_message
+    print "current Day: " + time.tm_mday
+AttributeError: 'module' object has no attribute 'tm_mday'
+
+01/30/2014 02:07:05 PM Script Started!
+01/30/2014 02:07:05 PM Connected to Broker.
+01/30/2014 02:07:05 PM Message: 1 published
+01/30/2014 02:07:05 PM Subscribe with mid 2 received.
+01/30/2014 02:07:17 PM integer argument expected, got float
+01/30/2014 02:07:17 PM Traceback (most recent call last):
+  File "/Users/davidwrigley/Dropbox/Summer/Gumball/Mirror USB/for Pi/shell/Python/door.py", line 209, in <module>
+    mqttc.loop_forever()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1115, in loop_forever
+    rc = self.loop(timeout, max_packets)
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 721, in loop
+    rc = self.loop_read(max_packets)
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 902, in loop_read
+    rc = self._packet_read()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1292, in _packet_read
+    rc = self._packet_handle()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1684, in _packet_handle
+    return self._handle_publish()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1798, in _handle_publish
+    self.on_message(self, self._userdata, message)
+  File "/Users/davidwrigley/Dropbox/Summer/Gumball/Mirror USB/for Pi/shell/Python/door.py", line 151, in on_message
+    print "current Day: " + datetime.date(time.time())
+TypeError: integer argument expected, got float
+
+01/30/2014 02:08:23 PM Script Started!
+01/30/2014 02:08:23 PM Connected to Broker.
+01/30/2014 02:08:23 PM Message: 1 published
+01/30/2014 02:08:23 PM Subscribe with mid 2 received.
+01/30/2014 02:08:31 PM cannot concatenate 'str' and 'datetime.date' objects
+01/30/2014 02:08:31 PM Traceback (most recent call last):
+  File "/Users/davidwrigley/Dropbox/Summer/Gumball/Mirror USB/for Pi/shell/Python/door.py", line 209, in <module>
+    mqttc.loop_forever()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1115, in loop_forever
+    rc = self.loop(timeout, max_packets)
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 721, in loop
+    rc = self.loop_read(max_packets)
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 902, in loop_read
+    rc = self._packet_read()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1292, in _packet_read
+    rc = self._packet_handle()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1684, in _packet_handle
+    return self._handle_publish()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1798, in _handle_publish
+    self.on_message(self, self._userdata, message)
+  File "/Users/davidwrigley/Dropbox/Summer/Gumball/Mirror USB/for Pi/shell/Python/door.py", line 151, in on_message
+    print "current Day: " + datetime.date.fromtimestamp(time.time())
+TypeError: cannot concatenate 'str' and 'datetime.date' objects
+
+01/30/2014 02:10:02 PM Script Started!
+01/30/2014 02:10:02 PM Connected to Broker.
+01/30/2014 02:10:02 PM Message: 1 published
+01/30/2014 02:10:02 PM Subscribe with mid 2 received.
+01/30/2014 02:10:09 PM unsupported operand type(s) for /: 'str' and 'int'
+01/30/2014 02:10:09 PM Traceback (most recent call last):
+  File "/Users/davidwrigley/Dropbox/Summer/Gumball/Mirror USB/for Pi/shell/Python/door.py", line 209, in <module>
+    mqttc.loop_forever()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1115, in loop_forever
+    rc = self.loop(timeout, max_packets)
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 721, in loop
+    rc = self.loop_read(max_packets)
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 902, in loop_read
+    rc = self._packet_read()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1292, in _packet_read
+    rc = self._packet_handle()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1684, in _packet_handle
+    return self._handle_publish()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1798, in _handle_publish
+    self.on_message(self, self._userdata, message)
+  File "/Users/davidwrigley/Dropbox/Summer/Gumball/Mirror USB/for Pi/shell/Python/door.py", line 152, in on_message
+    print "Sign Day: " + str(datetime.date.fromtimestamp(key/1000).day)
+TypeError: unsupported operand type(s) for /: 'str' and 'int'
+
+01/30/2014 02:11:23 PM Script Started!
+01/30/2014 02:11:23 PM Connected to Broker.
+01/30/2014 02:11:23 PM Message: 1 published
+01/30/2014 02:11:23 PM Subscribe with mid 2 received.
+01/30/2014 02:11:27 PM 'float' object has no attribute 'tm_mday'
+01/30/2014 02:11:27 PM Traceback (most recent call last):
+  File "/Users/davidwrigley/Dropbox/Summer/Gumball/Mirror USB/for Pi/shell/Python/door.py", line 209, in <module>
+    mqttc.loop_forever()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1115, in loop_forever
+    rc = self.loop(timeout, max_packets)
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 721, in loop
+    rc = self.loop_read(max_packets)
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 902, in loop_read
+    rc = self._packet_read()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1292, in _packet_read
+    rc = self._packet_handle()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1684, in _packet_handle
+    return self._handle_publish()
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 1798, in _handle_publish
+    self.on_message(self, self._userdata, message)
+  File "/Users/davidwrigley/Dropbox/Summer/Gumball/Mirror USB/for Pi/shell/Python/door.py", line 153, in on_message
+    if(time.time().tm_mday == time.localtime(key/1000).tm_mday):
+AttributeError: 'float' object has no attribute 'tm_mday'
+
+01/30/2014 02:16:56 PM Script Started!
+01/30/2014 02:16:56 PM Connected to Broker.
+01/30/2014 02:16:56 PM Message: 1 published
+01/30/2014 02:16:56 PM Subscribe with mid 2 received.
+01/30/2014 02:17:58 PM Same Day Rules
+01/30/2014 02:17:58 PM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+30-01-2014 14:17:58
+ACCESS!
+
+01/30/2014 02:17:58 PM Message: 3 published
+01/30/2014 02:18:17 PM Same Day Rules
+01/30/2014 02:18:17 PM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+30-01-2014 14:18:17
+ACCESS!
+
+01/30/2014 02:18:17 PM Message: 4 published
+01/30/2014 02:18:27 PM Same Day Rules
+01/30/2014 02:18:28 PM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+30-01-2014 14:18:27
+ACCESS!
+
+01/30/2014 02:18:28 PM Message: 5 published
+01/30/2014 02:26:04 PM Script Started!
+01/30/2014 02:26:04 PM name 'mqttc' is not defined
+01/30/2014 02:26:04 PM Traceback (most recent call last):
+  File "/Users/davidwrigley/Dropbox/Summer/Gumball/Mirror USB/for Pi/shell/Python/door.py", line 204, in <module>
+    mqttc.loop_forever()
+NameError: name 'mqttc' is not defined
+
+01/30/2014 02:26:10 PM Same Day Rules
+01/30/2014 02:26:10 PM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+30-01-2014 14:26:10
+ACCESS!
+
+01/30/2014 02:26:10 PM Message: 6 published
+01/30/2014 02:26:59 PM Script Started!
+01/30/2014 02:26:59 PM Connected to Broker.
+01/30/2014 02:26:59 PM Message: 1 published
+01/30/2014 02:26:59 PM Subscribe with mid 2 received.
+01/30/2014 02:27:04 PM Same Day Rules
+01/30/2014 02:27:04 PM Same Day Rules
+01/30/2014 02:27:04 PM Card: edffe939fd
+Registered!
+Hello: David
+Signing In
+30-01-2014 14:27:04
+ACCESS!
+
+01/30/2014 02:27:04 PM Message: 7 published
+01/30/2014 02:27:04 PM Card: edffe939fd
+Registered!
+Hello: David
+Signing Out
+30-01-2014 14:27:04
+ACCESS!
+
+01/30/2014 02:27:04 PM Message: 3 published
+01/30/2014 02:33:30 PM Script Started!
+01/30/2014 02:33:30 PM name 'client' is not defined
+01/30/2014 02:33:30 PM Traceback (most recent call last):
+  File "/Users/davidwrigley/Dropbox/Summer/Gumball/Mirror USB/for Pi/shell/Python/door.py", line 204, in <module>
+    while(client.loop() == 0):
+NameError: name 'client' is not defined
+
+01/30/2014 02:34:09 PM Script Started!
+01/30/2014 02:34:09 PM Connected to Broker.
+01/30/2014 02:34:09 PM Message: 1 published
+01/30/2014 02:34:09 PM Subscribe with mid 2 received.
+01/30/2014 02:34:45 PM Script Started!
+01/30/2014 02:34:45 PM Connected to Broker.
+01/30/2014 02:34:45 PM Message: 1 published
+01/30/2014 02:34:45 PM Subscribe with mid 2 received.
+01/30/2014 02:36:35 PM Script Started!
+01/30/2014 02:36:35 PM Invalid timeout.
+01/30/2014 02:36:35 PM Traceback (most recent call last):
+  File "/Users/davidwrigley/Dropbox/Summer/Gumball/Mirror USB/for Pi/shell/Python/door.py", line 204, in <module>
+    while(mqttc.loop(-1) == 0):
+  File "/Library/Python/2.7/site-packages/mosquitto.py", line 699, in loop
+    raise ValueError('Invalid timeout.')
+ValueError: Invalid timeout.
+

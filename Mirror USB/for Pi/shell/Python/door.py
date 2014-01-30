@@ -13,11 +13,9 @@ import textwrap
 import json
 import traceback
 import logging
-import threading
  
 # globals  
 global debug
-global mqttc
 global run
 global r_server
 
@@ -29,16 +27,14 @@ screenTopic = "doorscreen"
 
 # connect
 def connect():
-	global mqttc
 	global r_server
 
 	# connect to mqtt
-	mqttc = mosquitto.Mosquitto(client_uniq)
+	mqttc.on_disconnect = on_disconnect
 	mqttc.on_message = on_message
 	mqttc.on_publish = on_publish
 	mqttc.on_subscribe = on_subscribe
 	mqttc.on_connect = on_connect
-	mqttc.on_disconnect = on_disconnect
 	mqttc.connect(broker, port)
 	
 	# connect to Redis
@@ -64,7 +60,6 @@ def on_publish(mosq, obj, mid):
 # callback
 def on_message(mosq, obj, msg):
 
-	global mqttc
 	global debug
 	global r_server
 
@@ -145,17 +140,24 @@ def on_message(mosq, obj, msg):
 				sorted_signins = sorted(current_signin.iterkeys())
 				key = sorted_signins[-1]
 				value = current_signin[key]
-				
-				if(value == '1'):
-					temp_str = "\nSigning Out\n"
-					r_server.hset(my_str, int(ts), 0)
-				elif(value == '0'):
-					temp_str = "\nSigning In\n"
-					r_server.hset(my_str, int(ts), 1)
+
+				# check if the last sing event is on the same day as now.
+				# if it is, the follow the rules below.
+				currentDay = datetime.date.fromtimestamp(time.time()).day
+				singOnDay = datetime.date.fromtimestamp(int(key)/1000).day
+				if(currentDay == singOnDay):
+					logging.info("Same Day Rules")
+					if(value == '1'):
+						temp_str = "\nSigning Out\n"
+						r_server.hset(my_str, int(ts), 0)
+					elif(value == '0'):
+						temp_str = "\nSigning In\n"
+						r_server.hset(my_str, int(ts), 1)
+				# else, the user did not sign out correctly.
 				else:
-					temp_str = "\nSign Out Next Time\n"
+					logging.info("Next Day Rules")
+					temp_str = "\nSigning Out Next Time\n"
 					r_server.hset(my_str, int(ts), 1)
-				
 
 			# reset the string
 			my_str = ""
@@ -192,16 +194,19 @@ try:
 	client_uniq = "pubclient_"+str(mypid)
 
 	# connect mqtt
+	mqttc = mosquitto.Mosquitto(client_uniq)
 	connect()
 
 	# start a thread to constantly subscribe to topic
 	 
 	# remain connected and publish
-	mqttc.loop_forever()
+	# mqttc.loop_forever()
+	while(mqttc.loop() == 0):
+		pass
 
 	# bad
-	logger.info("Dropped out of the loop, Exiting")
-	time.sleep(2)
+	logger.info("Dropped out of the loop, network connection dropped. Exiting")
+	time.sleep(1)
 	sys.exit(1)
 
 except Exception, e:

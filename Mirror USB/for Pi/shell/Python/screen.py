@@ -47,7 +47,6 @@ def on_connect(mosq, obj, rc):
 		d.display_text_on_line(3, "Ready", False, TextAlignment.CENTRE, TextColours.CYAN)
 		mqttc.publish("gumballlog", "Screen Re-Connected")
 		mqttc.subscribe(screenTopic, 0)
-		mqttc.subscribe("rfid", 0)
 	else:
 		logging.error("Connection to Broker Failed.")
 

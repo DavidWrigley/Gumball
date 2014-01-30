@@ -773,50 +773,100 @@ function fillEvents(buildString, count, Keys, KeysDict, callback) {
         start: new Date(y, m, d+1, 19, 0),
         end: new Date(y, m, d+1, 22, 30),
         allDay: false
-    }, (only when next exists) 
+    }, (only when next exists)
      */
     console.log("fillEvents: " + count);
 
-    // did user sign in
+    // what is the currently checked value
     if(KeysDict[Keys[count]] == "1") {
-        console.log("is signed in!");
-
-        var DateObj = new Date(parseInt(Keys[count],10));
-
-        buildString += "{\n"
-        buildString += "\ttitle: \'Work\',\n";
-        buildString += ("\tstart: new Date(" + DateObj.getFullYear()
-                + ", " + DateObj.getMonth() + ", " + DateObj.getDate()
-                + ", " + DateObj.getHours() + ", " + DateObj.getMinutes() + "),\n");
         try {
             // if the next key is a sign out
             if(KeysDict[Keys[count+1]] == "0") {
-                // matched, return a regular count
-                DateObj = new Date(parseInt(Keys[count+1],10));
-                buildString += ("\tend: new Date(" + DateObj.getFullYear() 
-                        + ", " + DateObj.getMonth() + ", " + DateObj.getDate() 
-                        + ", " + DateObj.getHours() + ", " + DateObj.getMinutes() + "),\n");
-                buildString += ("\tallDay: false\n");
-                buildString += "}"
-                callback(buildString, count, 0);
+                console.log("Correct Sign In!");
+                // matched fill start
+                var DateObj = new Date(parseInt(Keys[count],10));
+                buildString += "{\n"
+                buildString += "\ttitle: \'Work\',\n";
+                buildString += ("\tstart: new Date(" + DateObj.getFullYear()
+                        + ", " + DateObj.getMonth() + ", " + DateObj.getDate()
+                        + ", " + DateObj.getHours() + ", " + DateObj.getMinutes() + ", " + DateObj.getSeconds() + "),\n");
+
+                // matched fill end
+                // is there enough time between the two entries, need atleast a minute
+                if((Keys[count+1] - Keys[count]) < 60000) {
+                    console.log("Not enough time different");
+                    DateObj = new Date(parseInt(Keys[count+1],10));
+                    buildString += ("\tend: new Date(" + DateObj.getFullYear() 
+                            + ", " + DateObj.getMonth() + ", " + DateObj.getDate() 
+                            + ", " + DateObj.getHours() + ", " + (DateObj.getMinutes() + 1) + ", " + DateObj.getSeconds() + "),\n");
+                    buildString += ("\tallDay: false\n");
+                    buildString += "}"
+                } else {
+                    DateObj = new Date(parseInt(Keys[count+1],10));
+                    buildString += ("\tend: new Date(" + DateObj.getFullYear() 
+                            + ", " + DateObj.getMonth() + ", " + DateObj.getDate() 
+                            + ", " + DateObj.getHours() + ", " + DateObj.getMinutes() + ", " + DateObj.getSeconds() + "),\n");
+                    buildString += ("\tallDay: false\n");
+                    buildString += "}"
+                }
+                // next element to check is 2 onward. 0 in callback represents no error
+                callback(buildString, count+2, 0);
             }
-            // the next key is a sign in
+            // the next key is a sign in and on a different day.
             // meaning that they did not sign out correctly.
-            // send it to 12 PM
+            // send it to 12 PM, need to check here for the next sign in on that day
             else if(KeysDict[Keys[count + 1]] == "1") {
-                // return a differnt count, so it only shifts 1
-                DateObj = new Date(parseInt(Keys[count],10));
-                buildString += ("\tend: new Date(" + DateObj.getFullYear() 
-                        + ", " + DateObj.getMonth() + ", " + DateObj.getDate() 
-                        + ", 24" + ", 0" + "),\n");
-                buildString += ("\tallDay: false\n");
-                buildString += "}"
-                callback(buildString, count, 1);
+                var StartDay = new Date(parseInt(Keys[count],10));
+                var EndDay = new Date(parseInt(Keys[count + 1],10));
+                // if the date is not the same.
+                if(StartDay.getDate() != EndDay.getDate()) {
+                    console.log("User did not sign out!")
+                
+                    // fill start
+                    var DateObj = new Date(parseInt(Keys[count],10));
+                    buildString += "{\n"
+                    buildString += "\ttitle: \'Work\',\n";
+                    buildString += ("\tstart: new Date(" + DateObj.getFullYear()
+                            + ", " + DateObj.getMonth() + ", " + DateObj.getDate()
+                            + ", " + DateObj.getHours() + ", " + DateObj.getMinutes() + ", " + DateObj.getSeconds() + "),\n");
+
+                    // return a differnt count, so it only shifts 1
+                    DateObj = new Date(parseInt(Keys[count],10));
+                    buildString += ("\tend: new Date(" + DateObj.getFullYear() 
+                            + ", " + DateObj.getMonth() + ", " + DateObj.getDate() 
+                            + ", 23" + ", 0" + "),\n");
+                    buildString += ("\tallDay: false\n");
+                    buildString += "}"
+                    // as the next element is a sign in, only move 1 ahead, 1 in the callback
+                    // represents a warning
+                    callback(buildString, count+1, 1);
+                }
+                // the date is the same, bug, for now just end at that time
+                else {
+                    // if there is not enough distance between the two times ignore.
+                    try {
+                        // eject the entry from the list.
+                        var index = Keys.indexOf(Keys[count+1]);
+                        if (index > -1) {
+                            Keys.splice(index, 1);
+                        }
+                    } catch(err) {
+                        console.log("error");
+                    }
+
+                    // as the next element is a sign in, only move 1 ahead, 1 in the callback
+                    // represents an error
+                    callback(buildString, count, 2);
+                }
             }
             
         } catch(err) {
             console.log("Error: " + err);
         }
+    } else {
+        console.log("Something went funky")
+        // 2 in callback represents error
+        callback(buildString, count+1, 2)
     }
 }
 
@@ -843,21 +893,27 @@ function buildCalendar(Hash, buildString, req, res, callback) {
                 buildString = buildString.replace("%NAME%", Hue);
                 // start building the string full of events.
                 var replaceString = "";
-                for(var i = 0; i < SortedKeys.length+2; i += 2) {
-                    fillEvents(replaceString, i, SortedKeys, Result, function(Hue,currentcount,balance) {
-                        console.log("CurrentCount: " + currentcount + " vs: " + SortedKeys.length);
-                        i -= balance;
-                        if(Hue != null) {
-                            replaceString = Hue;
-                        }
-                        if(currentcount >= (SortedKeys.length - 2)) {
-                            // do callback
-                            replaceString += "\n";
-                            buildString = buildString.replace("%REPLACE%", replaceString);
-                            console.log("done with val: " + buildString);
-                            callback(buildString);
-                        } else {
-                            replaceString += ",\n";
+                var counter = 0;
+                console.log("Array Length: " + SortedKeys.length);
+                while(counter < (SortedKeys.length+1)) {
+                    console.log("Checking: " + counter);
+                    fillEvents(replaceString, counter, SortedKeys, Result, function(Hue,next,error) {
+                        counter = next;
+                        // if error is not 2
+                        if(error != 2) {
+                            if(Hue != null) {
+                                replaceString = Hue;
+                            }
+                            if(counter >= (SortedKeys.length-1)) {
+                                // do callback
+                                replaceString += "\n";
+                                buildString = buildString.replace("%REPLACE%", replaceString);
+                                //console.log("done with val: " + buildString);
+                                callback(buildString);
+                                counter += 10;
+                            } else {
+                                replaceString += ",\n";
+                            }
                         }
                     });
                 }
@@ -1138,7 +1194,6 @@ function requestHandler(req, res) {
                 if(!err){
                     if(rfidTag != null) {
                         buildCalendar(rfidTag, contents.toString(), req, res, function(Hue) {
-                            console.log("finished with: " + Hue);
                             res.end(Hue);
                         }); 
                     } else {
