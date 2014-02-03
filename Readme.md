@@ -6,13 +6,13 @@ My brief was simple. To get a previous summer students project operational, it c
 
 After getting the basic functionality working i just kinda kept implementing different things.
 
-	- New gumball machine firmware using MQTT and new motor driver code to drive an Archimedes screw.
-	- Node.js web server to allow user to register and select permissions for different devices that i tie into the system.
-	- Management system incorporated into the web server to allow a person with elevated permissions to change other users details or delete them.
-	- Python shell script hybrid for scanning and publishing the **hashed** user RFID Card ID to be used by all components of the system.
-	- Generic python scripts to grab the published MQTT data and perform an action on it, depending if it is register or unregisters.
-	- Python script to control a 3.2 inch LED screen to give feedback to users.
-	- An automated time sheet system, so users who scan can see the hours they spend in that building.
+- New gumball machine firmware using MQTT and new motor driver code to drive an Archimedes screw.
+- Node.js web server to allow user to register and select permissions for different devices that i tie into the system.
+- Management system incorporated into the web server to allow a person with elevated permissions to change other users details or delete them.
+- Python shell script hybrid for scanning and publishing the **hashed** user RFID Card ID to be used by all components of the system.
+- Generic python scripts to grab the published MQTT data and perform an action on it, depending if it is register or unregisters.
+- Python script to control a 3.2 inch LED screen to give feedback to users.
+- An automated time sheet system, so users who scan can see the hours they spend in that building.
 
 ## Motivation
 
@@ -22,48 +22,53 @@ The reason behind this project is because RFID is really cool, and i wanted to s
 
 You will need.
 
-	## Server Computer
-	1) A MQTT Server
-	```
-	(Debian) sudo apt-get install mosquitto.
-	(Mac) brew install mosquitto
-	```
-	2) A redis Server
-	```
-	wget http://download.redis.io/releases/redis-2.8.4.tar.gz
-	tar xzf redis-2.8.4.tar.gz
-	cd redis-2.8.4
-	make
-	./src/redis-server
-	```
-	3) Node.js
-	```
-	(Debian) sudo apt-get install node
-	(Mac) http://nodejs.org/dist/v0.10.25/node-v0.10.25.pkg
-	```
-		3.1 Node Dependencies
-			```
-			sudo npm install path
-			sudo npm install http
-			sudo npm install fs
-			sudo npm install querystring
-			sudo npm install redis
-			```
-	
-	## Raspberry Pi's
-	4) Python PIP
-	```
-	https://raw.github.com/pypa/pip/master/contrib/get-pip.py
-	sudo python ./get-pip.py
-	```
-	sudo python 
-		4.1 Python Dependencies
-			```
-			sudo pip install mosquitto
-			sudo pip install redis
-			pylcdsysinfo (dangardner)
-			https://github.com/dangardner/pylcdsysinfo
-			```
+A Server Computer with
+
+A MQTT Server
+```
+(Debian) sudo apt-get install mosquitto.
+(Mac) brew install mosquitto
+```
+
+A Redis Server
+```
+wget http://download.redis.io/releases/redis-2.8.4.tar.gz
+tar xzf redis-2.8.4.tar.gz
+cd redis-2.8.4
+make
+./src/redis-server
+```
+
+Node.js
+```
+(Debian) sudo apt-get install node
+(Mac) http://nodejs.org/dist/v0.10.25/node-v0.10.25.pkg
+```
+
+3.1 Node Dependencies
+```
+sudo npm install path
+sudo npm install http
+sudo npm install fs
+sudo npm install querystring
+sudo npm install redis
+```
+
+Each Scanner requires a Raspberry Pi with
+
+Python and PIP
+```
+https://raw.github.com/pypa/pip/master/contrib/get-pip.py
+sudo python ./get-pip.py
+```
+
+4.1 Python Dependencies
+```
+sudo pip install mosquitto
+sudo pip install redis
+pylcdsysinfo (dangardner)
+https://github.com/dangardner/pylcdsysinfo
+```
 
 ## Tests
 
