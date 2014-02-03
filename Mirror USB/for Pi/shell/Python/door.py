@@ -156,7 +156,7 @@ def on_message(mosq, obj, msg):
 				# else, the user did not sign out correctly.
 				else:
 					logging.info("Next Day Rules")
-					temp_str = "\nSigning Out Next Time\n"
+					temp_str = "\nSign Out Next Time\n"
 					r_server.hset(my_str, int(ts), 1)
 
 			# reset the string

@@ -555,7 +555,7 @@
 			"file": "/Users/davidwrigley/Dropbox/Summer/Gumball/nodestuff/public/fullcalendar-1.6.4/demos/agenda-views.html",
 			"settings":
 			{
-				"buffer_size": 1024,
+				"buffer_size": 1023,
 				"line_ending": "Windows"
 			}
 		},
@@ -563,7 +563,7 @@
 			"file": "/Users/davidwrigley/Dropbox/Summer/Gumball/Mirror USB/for Pi/shell/Python/door.py",
 			"settings":
 			{
-				"buffer_size": 6241,
+				"buffer_size": 6238,
 				"line_ending": "Unix"
 			}
 		},
@@ -692,6 +692,7 @@
 	},
 	"file_history":
 	[
+		"/Users/davidwrigley/Library/Containers/com.apple.mail/Data/Library/Mail Downloads/C630CD01-D0E4-4587-8F46-CFFC4CC02CB8/Mail Attachment.ics",
 		"/Users/davidwrigley/Dropbox/Summer/Gumball/nodestuff/public/table.css",
 		"/Users/davidwrigley/Dropbox/Summer/Gumball/nodestuff/public/table_round.html",
 		"/Users/davidwrigley/Dropbox/Summer/Gumball/Mirror USB/for Pi/shell/Python/door.log",
@@ -745,6 +746,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"%g",
+			"replace",
 			"print",
 			"logging",
 			"logger",
@@ -823,7 +826,7 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -838,8 +841,8 @@
 						"selection":
 						[
 							[
-								27291,
-								27291
+								30832,
+								30832
 							]
 						],
 						"settings":
@@ -953,7 +956,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 19341.0,
+						"translation.y": 19908.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1148,15 +1151,15 @@
 					"file": "/Users/davidwrigley/Dropbox/Summer/Gumball/nodestuff/public/fullcalendar-1.6.4/demos/agenda-views.html",
 					"settings":
 					{
-						"buffer_size": 1024,
+						"buffer_size": 1023,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								703,
-								703
+								655,
+								655
 							]
 						],
 						"settings":
@@ -1165,7 +1168,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1175,15 +1178,15 @@
 					"file": "/Users/davidwrigley/Dropbox/Summer/Gumball/Mirror USB/for Pi/shell/Python/door.py",
 					"settings":
 					{
-						"buffer_size": 6241,
+						"buffer_size": 6238,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5938,
-								5938
+								4667,
+								4667
 							]
 						],
 						"settings":
@@ -1192,7 +1195,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 625.0,
+						"translation.y": 665.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1247,7 +1250,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 6102.0,
+						"translation.y": 20.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
