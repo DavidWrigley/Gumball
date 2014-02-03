@@ -70,19 +70,21 @@ pylcdsysinfo (dangardner)
 https://github.com/dangardner/pylcdsysinfo
 ```
 
-**Chipkit Uno used for Gumball machine**
+**Chipkit Uno and regular Arduino used for Gumball machine**
+
+Make sure you have them.
 
 ## Tests
 
 - Flash the firmware in /Gumball/mqqt stuff/mqtt_gum_ball to the Chipkit Uno.
 - Flash the firmware in /Gumball/motor/MotorTest to an Arduino.
 - Connect the Chipkit and Arduino grounds together and the Chipkit's SWITCH_PIN (default 2) to the Arduino's SWITCH_PIN (default 2) 
-- Start all the Mosquitto and Redis servers on the server machine.
+- Start the Mosquitto and Redis servers on the server machine.
 - Connect the Violet Mirror RFID Card scanner to the raspberry pi (it may change its name in /dev depending on what else is currently plugged in, check this before proceeding).
 - Navigate to /Gumball/Mirror\ USB/for\ Pi/shell/ run mirror_osx.sh then scan a card. if the Mirror makes a sound and a string is printed, your golden, you should also use ia92 to check that the message is publishing correctly to "rfid".
 - Navigate to /Gumball/Mirror\ USB/for\ Pi/shell/Python/ run all the python scripts to test dependencies.
-- Set these scripts to run automatically using Supervisord (Google it)
-- Navigate to /Gumball/nodestuff run node ./app.js (you should get a message that the server is now listening on port 55671)
+- Set these scripts to run automatically using Supervisord (Google it) Gumball/Mirror USB/for Pi/supervisord config/ is the location of my old script.
+- Navigate to /Gumball/nodestuff run node ./app.js (you should get a message that the server is now listening on port 55671) there is also a init.d script located in the root director called rfidRegNode
 - Use a web browser to navigate to "Server IP:55671/index.html" (you should see the CEIT RFID Tag main page)
 
 ## Contributors
