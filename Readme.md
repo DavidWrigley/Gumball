@@ -22,7 +22,7 @@ The reason behind this project is because RFID is really cool, and i wanted to s
 
 You will need.
 
-A Server Computer with
+**A Server with**
 
 A MQTT Server
 ```
@@ -54,7 +54,7 @@ sudo npm install querystring
 sudo npm install redis
 ```
 
-Each Scanner requires a Raspberry Pi with
+**Each Scanner requires a Raspberry Pi with**
 
 Python and PIP
 ```
@@ -70,8 +70,13 @@ pylcdsysinfo (dangardner)
 https://github.com/dangardner/pylcdsysinfo
 ```
 
+**Chipkit Uno used for Gumball machine**
+
 ## Tests
 
+- Flash the firmware in /Gumball/mqqt stuff/mqtt_gum_ball to the Chipkit Uno.
+- Flash the firmware in /Gumball/motor/MotorTest to an Arduino.
+- Connect the Chipkit and Arduino grounds together and the Chipkit's SWITCH_PIN (default 2) to the Arduino's SWITCH_PIN (default 2) 
 - Start all the Mosquitto and Redis servers on the server machine.
 - Connect the Violet Mirror RFID Card scanner to the raspberry pi (it may change its name in /dev depending on what else is currently plugged in, check this before proceeding).
 - Navigate to /Gumball/Mirror\ USB/for\ Pi/shell/ run mirror_osx.sh then scan a card. if the Mirror makes a sound and a string is printed, your golden, you should also use ia92 to check that the message is publishing correctly to "rfid".
